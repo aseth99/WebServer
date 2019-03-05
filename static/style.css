@@ -1,0 +1,22 @@
+body{
+	background: gray;
+	color: white;
+}
+
+h2{
+	/*color: red;*/
+	text-align: center;
+	text-decoration: underline;
+	text-transform: uppercase;
+	text-shadow: 3px 2px black;
+}
+p{
+	/*color: red;*/
+	text-align: center;
+	/*text-decoration: underline;*/
+	text-transform: uppercase;
+	/*text-shadow: 3px 2px black;	*/
+}
+img{
+	align-self: center;
+}
