@@ -18,14 +18,17 @@
 p {
   text-align: left;
 }
+h2 {
+  text-align: left;
+}
 body {
   margin: 0;
   font-family: Lato, Montserrat;
 }
 .button {
-  background-color: white; /* Green */
-  border: none;
-  color: black;
+  background-color: green; /* Green */
+  border: 1px solid green;;
+  color: white;
   padding: 20px;
   text-align: center;
   text-decoration: none;
@@ -37,12 +40,23 @@ body {
   border: 2px solid #4CAF50;
   border-radius: 50%;
   float: left;
+  /*width: 150px*/
+
 
 }
 
 .button:hover {
-  background-color: #4CAF50;
-  color: white;
+  background-color: darkblue;
+  color: grey;
+  /*width: 100px*/
+
+}
+
+.button:active {
+  background-color: #3e8e41;
+  /*box-shadow: 0 5px #666;*/
+  transform: translateY(4px);
+  /*width: 200px;*/
 }
 
 /* Style the content */
@@ -73,8 +87,86 @@ body {
 
 <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">Python Web Server: Scraper Function</h1>
-  <p>Scrapers for first project</p>
+
+  <h2>KKM Client</h2>
+
+  <p>Website Scrapers</p>
   
+  <form action="/ranACMscraper1/" method="post">
+    <button class="button" name="forwardBtn1" type="submit">ACM</button>
+  </form> 
+  
+  <form action="/ranBAKKERSscraper2/" method="post">
+    <button class="button" name="forwardBtn2" type="submit">Bakkers</button>
+  </form> 
+
+  <form action="/ranBAKKERSWERELDscraper3/" method="post">
+    <button class="button" name="forwardBtn3" type="submit">Bakkerswereld</button>
+  </form> 
+  
+  <form action="/ranCERESscraper4/" method="post">
+    <button class="button" name="forwardBtn4" type="submit">Ceres</button>
+  </form> 
+  <form action="/ranDOSSCHEscraper5/" method="post">
+    <button class="button" name="forwardBtn5" type="submit">Dossche</button>
+  </form> 
+  <form action="/ranSOUFFLETscraper6/" method="post">
+    <button class="button" name="forwardBtn6" type="submit">Soufflet</button>
+  </form> 
+  <form action="/ranTIJDscraper7/" method="post">
+    <button class="button" name="forwardBtn7" type="submit">TIJD</button>
+  </form> 
+  <form action="/ranALLscrapers/" method="post">
+    <button class="button" name="forwardBtn8" type="submit">Run All Scrapers</button>
+  </form> 
+  <br>
+  <br>
+  <br>
+  <br>
+  <p>Twitter Scrapers</p> 
+  
+  <form action="/syncTwitterKeys/" method="post">
+    <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
+  </form> 
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <form action="/ranTwitter1/" method="post">
+    <button class="button" name="forwardBtn9" type="submit">@bakkerswereldnl</button>
+  </form> 
+  
+  <form action="/ranTwitter2/" method="post">
+    <button class="button" name="forwardBtn10" type="submit">@bakkersinb</button>
+  </form> 
+
+  <form action="/ranTwitter3/" method="post">
+    <button class="button" name="forwardBtn11" type="submit">@bakkerijcentrum</button>
+  </form> 
+  
+  <form action="/ranTwitter4/" method="post">
+    <button class="button" name="forwardBtn12" type="submit">@bakerynext</button>
+  </form> 
+   <form action="/ranTwitter5/" method="post">
+    <button class="button" name="forwardBtn13" type="submit">@dossche_mills</button>
+  </form>  
+  <form action="/ranTwitter6/" method="post">
+    <button class="button" name="forwardBtn14" type="submit">@groupesoufflet</button>
+  </form> 
+  <form action="/ranTwitter7/" method="post">
+    <button class="button" name="forwardBtn15" type="submit">Run All Twitter Scrapers</button>
+  </form> 
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  <h2>CSK Client</h2>
+  <p>Website Scrapers</p>
   <form action="/ranscraper1/" method="post">
     <button class="button" name="forwardBtn1" type="submit">ACM Scraper</button>
   </form> 
@@ -91,34 +183,39 @@ body {
     <button class="button" name="forwardBtn4" type="submit">Run Scraper 4</button>
   </form> 
   <form action="/ranscraper5/" method="post">
-    <button class="button" name="forwardBtn5" type="submit">Run Scraper 5</button>
+    <button class="button" name="forwardBtn5" type="submit">Run All Scrapers</button>
   </form> 
-  
-  <form action="/ranscraper6/" method="post">
-    <button class="button" name="forwardBtn6" type="submit">Run Scraper 6</button>
+  <br>
+  <br>
+  <br>
+  <br>
+  <p>Twitter Scrapers</p> 
+  <form action="/syncTwitterKeys/" method="post">
+    <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
   </form> 
-  <p  style="clear:both" ><br>Scrapers for second project</p>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <form action="/ranscraper1/" method="post">
-    <button class="button" name="forwardBtn1" type="submit">¯\_(ツ)_/¯</button>
+    <button class="button" name="forwardBtn1" type="submit">Twitter Account 1</button>
   </form> 
   
   <form action="/ranscraper2/" method="post">
-    <button class="button" name="forwardBtn2" type="submit">Run Scraper 2</button>
+    <button class="button" name="forwardBtn2" type="submit">Twitter Account 2</button>
   </form> 
 
   <form action="/ranscraper3/" method="post">
-    <button class="button" name="forwardBtn3" type="submit">Run Scraper 3</button>
+    <button class="button" name="forwardBtn3" type="submit">Twitter Account 3</button>
   </form> 
   
   <form action="/ranscraper4/" method="post">
-    <button class="button" name="forwardBtn4" type="submit">Run Scraper 4</button>
+    <button class="button" name="forwardBtn4" type="submit">Twitter Account 4</button>
   </form> 
   <form action="/ranscraper5/" method="post">
-    <button class="button" name="forwardBtn5" type="submit">Run Scraper 5</button>
-  </form> 
-  
-  <form action="/ranscraper6/" method="post">
-    <button class="button" name="forwardBtn6" type="submit">Run Scraper 6</button>
+    <button class="button" name="forwardBtn5" type="submit">Run All Twitter Scrapers</button>
   </form> 
 
 </header>
