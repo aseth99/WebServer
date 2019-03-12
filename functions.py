@@ -16,10 +16,7 @@ def get_twitter_auth():
     #return: tweepy.OAuthHandler object
 
     try:
-        consumer_key = "8CIVupeWXf5UAgAXg8Cypn7xx"
-        consumer_secret = "npUXHMjtyq2DFXvNIlRMFs0XYT3bGVh4rfWGyMa2nVdrkl86uS"
-        access_token = "1105030145491062785-OSc0pJ76qrK7LMIRDOKfDUWRQOb1ZK"
-        access_secret = "DB5cHfDXmcwQVymz1fc3gPJ468azv9BPj845a8eoMP2Hd"
+        
     except KeyError:
         sys.stderr.write("TWITTER_* env vars not set\n")
         sys.exit(1)
