@@ -16,7 +16,10 @@ def get_twitter_auth():
     #return: tweepy.OAuthHandler object
 
     try:
-        
+        consumer_key = "8CIVupeWXf5UAgAXg8Cypn7xx"
+        consumer_secret = "npUXHMjtyq2DFXvNIlRMFs0XYT3bGVh4rfWGyMa2nVdrkl86uS"
+        access_token = "1105030145491062785-OSc0pJ76qrK7LMIRDOKfDUWRQOb1ZK"
+        access_secret = "DB5cHfDXmcwQVymz1fc3gPJ468azv9BPj845a8eoMP2Hd"
     except KeyError:
         sys.stderr.write("TWITTER_* env vars not set\n")
         sys.exit(1)
@@ -282,9 +285,9 @@ def scrape_bakkerswereld(previousUrls):
                 link.a.get('href')
                 links.append("https://www.bakkerswereld.nl"+link.a.get("href"))
             except:
-                print(link)
+                # print(link)
                 print("\ndoesnt have a link")
-            print(links)
+            # print(links)
         return links
 
     previousUrls = []
@@ -384,7 +387,7 @@ def scrape_ceres(previousUrls):
             linkWithDate.append('https://www.ceres.be'+link.get('href'))
             linksContent.append(linkWithDate)
         return linksContent
-
+    # math.help
     previousUrls = []
     with open('ScrapeLog.txt','r', encoding='utf-8') as log:
         for line in log:
@@ -731,34 +734,61 @@ def allFunctionsRan():
     scrapeDate = dt.strftime('%y%m%d')
     
     data = []
-    fileScrapeResults = 'ResultsACM' + scrapeDate + '.json'
-    with open(fileScrapeResults) as f:
-        for line in f:
-            data.append(json.loads(line))
-    fileScrapeResults = 'ResultsBakkers' + scrapeDate + '.json'
-    with open(fileScrapeResults) as f:
-        for line in f:
-            data.append(json.loads(line))
-    fileScrapeResults = 'ResultsBakkerswereld' + scrapeDate + '.json'
-    with open(fileScrapeResults) as f:
-        for line in f:
-            data.append(json.loads(line))
-    fileScrapeResults = 'ResultsCeres' + scrapeDate + '.json'
-    with open(fileScrapeResults) as f:
-        for line in f:
-            data.append(json.loads(line))
-    fileScrapeResults = 'ResultsDossche' + scrapeDate + '.json'
-    with open(fileScrapeResults) as f:
-        for line in f:
-            data.append(json.loads(line))
-    fileScrapeResults = 'ResultsSoufflet' + scrapeDate + '.json'
-    with open(fileScrapeResults) as f:
-        for line in f:
-            data.append(json.loads(line))
-    fileScrapeResults = 'ResultsTijd' + scrapeDate + '.json'
-    with open(fileScrapeResults) as f:
-        for line in f:
-            data.append(json.loads(line))
+    try:
+        fileScrapeResults = 'ResultsACM' + scrapeDate + '.json'
+        with open(fileScrapeResults) as f:
+            for line in f:
+                data.append(json.loads(line))
+    except:
+        print("no new ACM results")
+
+    try:
+        fileScrapeResults = 'ResultsBakkers' + scrapeDate + '.json'
+        with open(fileScrapeResults) as f:
+            for line in f:
+                data.append(json.loads(line))
+    except:
+        print("no new Bakkers results")
+
+    try:
+        fileScrapeResults = 'ResultsBakkerswereld' + scrapeDate + '.json'
+        with open(fileScrapeResults) as f:
+            for line in f:
+                data.append(json.loads(line))
+    except:
+        print("no new Bakkerswereld results")
+
+    try:
+        fileScrapeResults = 'ResultsCeres' + scrapeDate + '.json'
+        with open(fileScrapeResults) as f:
+            for line in f:
+                data.append(json.loads(line))
+    except:
+        print("no new Ceres results")
+
+    try:
+        fileScrapeResults = 'ResultsDossche' + scrapeDate + '.json'
+        with open(fileScrapeResults) as f:
+            for line in f:
+                data.append(json.loads(line))
+    except:
+        print("no new Dossche results")
+
+    try:
+        fileScrapeResults = 'ResultsSoufflet' + scrapeDate + '.json'
+        with open(fileScrapeResults) as f:
+            for line in f:
+                data.append(json.loads(line))
+    except:
+        print("no new Soufflet results")
+
+    try:
+        fileScrapeResults = 'ResultsTijd' + scrapeDate + '.json'
+        with open(fileScrapeResults) as f:
+            for line in f:
+                data.append(json.loads(line))
+    except:
+        print("no new Tijd results")
     
 
     jsonToCSV1('All' + scrapeDate)

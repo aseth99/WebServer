@@ -25,6 +25,16 @@ body {
   margin: 0;
   font-family: Lato, Montserrat;
 }
+input[type=text] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #3CBC8D;
+  color: white;
+  float: left;
+}
 .button {
   background-color: green; /* Green */
   border: 1px solid green;;
@@ -46,8 +56,8 @@ body {
 }
 
 .button:hover {
-  background-color: darkblue;
-  color: grey;
+  background-color: darkgreen;
+  color: lightgrey;
   /*width: 100px*/
 
 }
@@ -125,7 +135,7 @@ body {
   <br>
   <p>Twitter Scrapers</p> 
   
-  <form action="/syncTwitterKeys/" method="post">
+<!--   <form action="/syncTwitterKeys/" method="post">
     <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
   </form> 
   <br>
@@ -133,7 +143,7 @@ body {
   <br>
   <br>
   <br>
-  <br>
+  <br> -->
 
   <form action="/ranTwitter1/" method="post">
     <button class="button" name="forwardBtn9" type="submit">@bakkerswereldnl</button>
@@ -168,29 +178,32 @@ body {
   <h2>CSK Client</h2>
   <p>Website Scrapers</p>
   <form action="/ranscraper1/" method="post">
-    <button class="button" name="forwardBtn1" type="submit">ACM Scraper</button>
+    <button class="button" name="forwardBtn1" type="submit">Food Ingredients First</button>
   </form> 
   
   <form action="/ranscraper2/" method="post">
-    <button class="button" name="forwardBtn2" type="submit">Run Scraper 2</button>
+    <button class="button" name="forwardBtn2" type="submit">Food Navigator</button>
   </form> 
 
   <form action="/ranscraper3/" method="post">
-    <button class="button" name="forwardBtn3" type="submit">Run Scraper 3</button>
+    <button class="button" name="forwardBtn3" type="submit">Dairy Reporter</button>
   </form> 
   
   <form action="/ranscraper4/" method="post">
-    <button class="button" name="forwardBtn4" type="submit">Run Scraper 4</button>
+    <button class="button" name="forwardBtn4" type="submit">Bakery and Snacks</button>
   </form> 
   <form action="/ranscraper5/" method="post">
-    <button class="button" name="forwardBtn5" type="submit">Run All Scrapers</button>
+    <button class="button" name="forwardBtn5" type="submit">Boerderij</button>
+  </form> 
+  <form action="/ranscraper6/" method="post">
+    <button class="button" name="forwardBtn6" type="submit">Run All Scrapers</button>
   </form> 
   <br>
   <br>
   <br>
   <br>
   <p>Twitter Scrapers</p> 
-  <form action="/syncTwitterKeys/" method="post">
+<!--   <form action="/syncTwitterKeys/" method="post">
     <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
   </form> 
   <br>
@@ -198,7 +211,7 @@ body {
   <br>
   <br>
   <br>
-  <br>
+  <br> -->
   <form action="/ranscraper1/" method="post">
     <button class="button" name="forwardBtn1" type="submit">Twitter Account 1</button>
   </form> 
@@ -217,7 +230,22 @@ body {
   <form action="/ranscraper5/" method="post">
     <button class="button" name="forwardBtn5" type="submit">Run All Twitter Scrapers</button>
   </form> 
-
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  <h2>Extra: Twitter Scraper</h2>
+  <br>
+  <form  action="/runfilter/" method="post">
+  <p>Account name:</p>
+  <input type="text" id="keyword1" placeholder="type in handle @______">
+  <br>
+  <br>
+  <br>
+  <button class="button" name="filterbtn" type="submit">Find those tweets...</button>
+</form>
 </header>
 
 <div class="footer">
