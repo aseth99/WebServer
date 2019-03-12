@@ -2,3 +2,4 @@
 *.csv
 *.txt
 ClickHereTwitter.sh
+twitter_scraper_client.py

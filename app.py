@@ -1,5 +1,6 @@
 from flask import Flask, render_template
-from functions import *
+from functions_KKM import *
+from functions_twitter import *
 import os
 app = Flask(__name__)
 

@@ -7,29 +7,6 @@ from bs4 import BeautifulSoup
 import json
 
 import sys
-from tweepy import API
-from tweepy import OAuthHandler
-from tweepy import Cursor
-
-def get_twitter_auth():
-    #setup twitter authentication
-    #return: tweepy.OAuthHandler object
-
-    try:
-        
-    except KeyError:
-        sys.stderr.write("TWITTER_* env vars not set\n")
-        sys.exit(1)
-    auth = OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_secret)
-    return auth
-
-def get_twitter_client():
-    #setup twitter API client
-    #return tweepy.API object
-    auth = get_twitter_auth()
-    client = API(auth)
-    return client
 
 def jsonToCSV1(name):
     chooseName = name
@@ -70,13 +47,13 @@ def acm_scrape_run():
 
     if len(currentUrls) !=0:
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = 'ResultsACM' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsACM' + '.json'
         output_file = open(fileScrapeResults,'a')
-        jsonToCSV1('acm' + scrapeDate)
+        jsonToCSV1(scrapeDate + 'acm')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV('acm' + scrapeDate, x)
+            jsonToCSV(scrapeDate + 'acm', x)
 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
@@ -144,7 +121,8 @@ def scrape_acm(previousUrls):
                     
     return documents, linksArr
 
-def bakkers_scrape_run():# https://www.bakkersinbedrijf.nl/nieuws?bib_nieuwspagina-page=1
+def bakkers_scrape_run():
+    # https://www.bakkersinbedrijf.nl/nieuws?bib_nieuwspagina-page=1
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
     scrapeTime = dt.strftime('%H%M%S')
@@ -160,13 +138,13 @@ def bakkers_scrape_run():# https://www.bakkersinbedrijf.nl/nieuws?bib_nieuwspagi
 
     if len(currentUrls) !=0:
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = 'ResultsBakkers' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsBakkers' + '.json'
         output_file = open(fileScrapeResults,'a')
-        jsonToCSV1('bakkers' + scrapeDate)
+        jsonToCSV1(scrapeDate + 'bakkers')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV('bakkers' + scrapeDate, x)
+            jsonToCSV(scrapeDate + 'bakkers', x)
 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
@@ -254,13 +232,13 @@ def bakkerswereld_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = 'ResultsBakkerswereld' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsBakkerswereld' + '.json'
         output_file = open(fileScrapeResults,'a')
-        jsonToCSV1('bakkerswereld' + scrapeDate)
+        jsonToCSV1(scrapeDate + 'bakkerswereld')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV('bakkerswereld' + scrapeDate, x)
+            jsonToCSV(scrapeDate + 'bakkerswereld', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -281,6 +259,7 @@ def scrape_bakkerswereld(previousUrls):
             try:
                 link.a.get('href')
                 links.append("https://www.bakkerswereld.nl"+link.a.get("href"))
+                # print("https://www.bakkerswereld.nl"+link.a.get("href"))
             except:
                 # print(link)
                 print("\ndoesnt have a link")
@@ -306,6 +285,7 @@ def scrape_bakkerswereld(previousUrls):
         
         if len(allLinks) != 0:
             for link in allLinks:
+                print(link)
                 try:
                     r = requests.get(link)
                     articlesoup = BeautifulSoup(r.content, 'html.parser')
@@ -353,13 +333,13 @@ def ceres_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = 'ResultsCeres' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsCeres' + '.json'
         output_file = open(fileScrapeResults,'a')
-        jsonToCSV1('ceres' + scrapeDate)
+        jsonToCSV1(scrapeDate + 'ceres')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV('ceres' + scrapeDate, x)
+            jsonToCSV(scrapeDate + 'ceres', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -461,13 +441,13 @@ def dossche_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = 'ResultsDossche' + scrapeDate +'.json'
+        fileScrapeResults = scrapeDate + 'ResultsDossche' + '.json'
         output_file = open(fileScrapeResults,'a')
-        jsonToCSV1('dossche' + scrapeDate)
+        jsonToCSV1(scrapeDate + 'dossche')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV('dossche' + scrapeDate, x)
+            jsonToCSV(scrapeDate + 'dossche', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -566,13 +546,13 @@ def soufflet_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = 'ResultsSoufflet' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsSoufflet' + '.json'
         output_file = open(fileScrapeResults,'a')
-        jsonToCSV1('soufflet' + scrapeDate)
+        jsonToCSV1(scrapeDate + 'soufflet')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV('soufflet' + scrapeDate, x)
+            jsonToCSV(scrapeDate + 'soufflet', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -663,13 +643,13 @@ def tijd_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = 'ResultsTijd' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsTijd' + '.json'
         output_file = open(fileScrapeResults,'a')
-        jsonToCSV1('tijd' + scrapeDate)
+        jsonToCSV1(scrapeDate + 'tijd')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV('tijd' + scrapeDate, x)
+            jsonToCSV(scrapeDate + 'tijd', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
@@ -702,6 +682,7 @@ def scrape_tijd(previousUrls):
     #For each URL, scrape the full artcle, store in dict and append to list of dicts
     if len(allLinks) != 0:
         for link in allLinks:
+            print(link)
             try:
                 r = requests.get(link)
                 articlesoup = BeautifulSoup(r.content, 'html.parser')
@@ -732,7 +713,7 @@ def allFunctionsRan():
     
     data = []
     try:
-        fileScrapeResults = 'ResultsACM' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsACM' + '.json'
         with open(fileScrapeResults) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -740,7 +721,7 @@ def allFunctionsRan():
         print("no new ACM results")
 
     try:
-        fileScrapeResults = 'ResultsBakkers' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsBakkers' + '.json'
         with open(fileScrapeResults) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -748,7 +729,7 @@ def allFunctionsRan():
         print("no new Bakkers results")
 
     try:
-        fileScrapeResults = 'ResultsBakkerswereld' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsBakkerswereld' + '.json'
         with open(fileScrapeResults) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -756,7 +737,7 @@ def allFunctionsRan():
         print("no new Bakkerswereld results")
 
     try:
-        fileScrapeResults = 'ResultsCeres' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsCeres' + '.json'
         with open(fileScrapeResults) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -764,7 +745,7 @@ def allFunctionsRan():
         print("no new Ceres results")
 
     try:
-        fileScrapeResults = 'ResultsDossche' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsDossche' + '.json'
         with open(fileScrapeResults) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -772,7 +753,7 @@ def allFunctionsRan():
         print("no new Dossche results")
 
     try:
-        fileScrapeResults = 'ResultsSoufflet' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsSoufflet' + '.json'
         with open(fileScrapeResults) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -780,7 +761,7 @@ def allFunctionsRan():
         print("no new Soufflet results")
 
     try:
-        fileScrapeResults = 'ResultsTijd' + scrapeDate + '.json'
+        fileScrapeResults = scrapeDate + 'ResultsTijd' + '.json'
         with open(fileScrapeResults) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -788,122 +769,6 @@ def allFunctionsRan():
         print("no new Tijd results")
     
 
-    jsonToCSV1('All' + scrapeDate)
+    jsonToCSV1(scrapeDate + 'All')
     for x in data:
-        jsonToCSV('ALL' + scrapeDate, x)
-
-def twitterFunction(handle):
-    dt = datetime.now()
-    scrapeDate = dt.strftime('%y%m%d')
-    # userArr = ["bakkerswereldnl", "BakkersinB", "BakkerijCentrum", "BakeryNext", "dossche_mills", "GroupeSoufflet"]
-    fname = handle + scrapeDate + ".json"
-    client = get_twitter_client()
-
-    print("scraping {}".format(handle))
-    with open(fname, 'a') as f:
-        for page in Cursor(client.user_timeline, screen_name=handle, count=200).pages(2):
-            for status in page:
-                f.write(json.dumps(status._json)+"\n")
-
-    chooseName = handle + scrapeDate
-    csvFileName = "{}.csv".format(chooseName)
-    csv_out = open(csvFileName, mode='a') #opens csv file
-    writer = csv.writer(csv_out) #create the csv writer object
-
-    fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
-    writer.writerow(fields) #writes field
-
-    tweets = []
-
-    jsonFileToBeOpened = fname
-    for line in open(jsonFileToBeOpened, 'r'):
-        tweets.append(json.loads(line))
-
-    for line in tweets:
-        
-        urlvar = line.get('entities').get('urls')
-        if(urlvar):
-            urlvar = urlvar[0].get('expanded_url')
-        else:
-            urlvar = "no external urls in this tweet"
-
-        hashtagsVar = line.get('entities').get('hashtags')
-        tempHashList = []
-        if not hashtagsVar:
-            hashtagsVar = "no hashtags in this tweet"
-        else:
-            for i in hashtagsVar:
-                tempHashList.append(i['text'])
-            hashtagsVar = tempHashList
-
-        writer.writerow([line.get('user').get('screen_name')+" , "+line.get('user').get('name'),
-            line.get('text').encode('unicode_escape'), #unicode escape to fix emoji issue
-            urlvar,
-            hashtagsVar,
-            line.get('created_at'),
-            line.get('user').get('followers_count'),
-            line.get('user').get('friends_count'),
-            line.get('retweet_count'),
-            line.get('favorite_count')])
-         
-    csv_out.close()
-    return True
-
-def twitterFunctionAll():
-    dt = datetime.now()
-    scrapeDate = dt.strftime('%y%m%d')
-   
-    userArr = ["bakkerswereldnl", "BakkersinB", "BakkerijCentrum", "BakeryNext", "dossche_mills", "GroupeSoufflet"]
-    fname = "AllTwitter" + scrapeDate + ".json"
-    client = get_twitter_client()
-
-    for user in userArr:
-        print("scraping {}".format(user))
-        with open(fname, 'a') as f:
-            for page in Cursor(client.user_timeline, screen_name=user, count=200).pages(2):
-                for status in page:
-                    f.write(json.dumps(status._json)+"\n")
-
-    chooseName = "AllTwitter" + scrapeDate
-    csvFileName = "{}.csv".format(chooseName)
-    csv_out = open(csvFileName, mode='a') #opens csv file
-    writer = csv.writer(csv_out) #create the csv writer object
-
-    fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
-    writer.writerow(fields) #writes field
-
-    tweets = []
-
-    jsonFileToBeOpened = fname
-    for line in open(jsonFileToBeOpened, 'r'):
-        tweets.append(json.loads(line))
-
-    for line in tweets:
-        
-        urlvar = line.get('entities').get('urls')
-        if(urlvar):
-            urlvar = urlvar[0].get('expanded_url')
-        else:
-            urlvar = "no external urls in this tweet"
-
-        hashtagsVar = line.get('entities').get('hashtags')
-        tempHashList = []
-        if not hashtagsVar:
-            hashtagsVar = "no hashtags in this tweet"
-        else:
-            for i in hashtagsVar:
-                tempHashList.append(i['text'])
-            hashtagsVar = tempHashList
-
-        writer.writerow([line.get('user').get('screen_name')+" , "+line.get('user').get('name'),
-            line.get('text').encode('unicode_escape'), #unicode escape to fix emoji issue
-            urlvar,
-            hashtagsVar,
-            line.get('created_at'),
-            line.get('user').get('followers_count'),
-            line.get('user').get('friends_count'),
-            line.get('retweet_count'),
-            line.get('favorite_count')])
-         
-    csv_out.close()
-    return True
+        jsonToCSV(scrapeDate + 'ALL', x)
