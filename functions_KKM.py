@@ -9,25 +9,55 @@ import json
 import sys
 
 def jsonToCSV1(name):
-    chooseName = name
-    csvFileName = "{}.csv".format(chooseName)
-    csv_out = open(csvFileName, mode='a') #opens csv file
+    dt = datetime.now()
+    scrapeDate = dt.strftime('%y%m%d')
+    name = name + ".csv"
+    directoryName = os.path.join(scrapeDate,name)
+    directoryName2 = os.path.join("allTime",name)
+
+    os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+    os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+    csv_out = open(directoryName, mode='a') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
 
     fields = ['Title', 'URL', 'Text', 'Publication Date', 'Source'] #field names
     writer.writerow(fields) #writes field
     csv_out.close()
+
+    csv_out = open(directoryName2, mode='a') #opens csv file
+    writer = csv.writer(csv_out) #create the csv writer object
+
+    fields = ['Title', 'URL', 'Text', 'Publication Date', 'Source'] #field names
+    writer.writerow(fields) #writes field
+    csv_out.close()
+
     return
 
 def jsonToCSV(name, line):
-    chooseName = name
-    csvFileName = "{}.csv".format(chooseName)
-    csv_out = open(csvFileName, mode='a') #opens csv file
+    dt = datetime.now()
+    scrapeDate = dt.strftime('%y%m%d')
+    name = name + ".csv"
+    directoryName = os.path.join(scrapeDate,name)
+    directoryName2 = os.path.join("allTime",name)
+
+    os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+    os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+    csv_out = open(directoryName, mode='a') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
 
     urlvar = line.get('url')
     writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
     csv_out.close()
+
+    csv_out = open(directoryName2, mode='a') #opens csv file
+    writer = csv.writer(csv_out) #create the csv writer object
+
+    urlvar = line.get('url')
+    writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
+    csv_out.close()
+
     return
 
 def acm_scrape_run():
@@ -47,13 +77,14 @@ def acm_scrape_run():
 
     if len(currentUrls) !=0:
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = scrapeDate + 'ResultsACM' + '.json'
-        output_file = open(fileScrapeResults,'a')
-        jsonToCSV1(scrapeDate + 'acm')
+        fileScrapeResults = 'ResultsACM' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        output_file = open(directoryName,'a')
+        jsonToCSV1('acm')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV(scrapeDate + 'acm', x)
+            jsonToCSV('acm', x)
 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
@@ -138,13 +169,14 @@ def bakkers_scrape_run():
 
     if len(currentUrls) !=0:
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = scrapeDate + 'ResultsBakkers' + '.json'
-        output_file = open(fileScrapeResults,'a')
-        jsonToCSV1(scrapeDate + 'bakkers')
+        fileScrapeResults = 'ResultsBakkers' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        output_file = open(directoryName,'a')
+        jsonToCSV1('bakkers')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV(scrapeDate + 'bakkers', x)
+            jsonToCSV('bakkers', x)
 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
@@ -232,13 +264,14 @@ def bakkerswereld_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = scrapeDate + 'ResultsBakkerswereld' + '.json'
-        output_file = open(fileScrapeResults,'a')
-        jsonToCSV1(scrapeDate + 'bakkerswereld')
+        fileScrapeResults = 'ResultsBakkerswereld' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        output_file = open(directoryName,'a')
+        jsonToCSV1('bakkerswereld')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV(scrapeDate + 'bakkerswereld', x)
+            jsonToCSV('bakkerswereld', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -333,13 +366,14 @@ def ceres_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = scrapeDate + 'ResultsCeres' + '.json'
-        output_file = open(fileScrapeResults,'a')
-        jsonToCSV1(scrapeDate + 'ceres')
+        fileScrapeResults = 'ResultsCeres' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        output_file = open(directoryName,'a')
+        jsonToCSV1('ceres')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV(scrapeDate + 'ceres', x)
+            jsonToCSV('ceres', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -441,13 +475,14 @@ def dossche_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = scrapeDate + 'ResultsDossche' + '.json'
-        output_file = open(fileScrapeResults,'a')
-        jsonToCSV1(scrapeDate + 'dossche')
+        fileScrapeResults = 'ResultsDossche' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        output_file = open(directoryName,'a')
+        jsonToCSV1('dossche')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV(scrapeDate + 'dossche', x)
+            jsonToCSV('dossche', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -546,13 +581,14 @@ def soufflet_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = scrapeDate + 'ResultsSoufflet' + '.json'
-        output_file = open(fileScrapeResults,'a')
-        jsonToCSV1(scrapeDate + 'soufflet')
+        fileScrapeResults = 'ResultsSoufflet' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        output_file = open(directoryName,'a')
+        jsonToCSV1('soufflet')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV(scrapeDate + 'soufflet', x)
+            jsonToCSV('soufflet', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -643,13 +679,14 @@ def tijd_scrape_run():
     if len(currentUrls) !=0:
         
         # Write scrape results to file in JSON format as backup for database
-        fileScrapeResults = scrapeDate + 'ResultsTijd' + '.json'
-        output_file = open(fileScrapeResults,'a')
-        jsonToCSV1(scrapeDate + 'tijd')
+        fileScrapeResults = 'ResultsTijd' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        output_file = open(directoryName,'a')
+        jsonToCSV1('tijd')
         for x in documents:
             json.dump(x, output_file)
             output_file.write("\n")
-            jsonToCSV(scrapeDate + 'tijd', x)
+            jsonToCSV('tijd', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
@@ -713,62 +750,69 @@ def allFunctionsRan():
     
     data = []
     try:
-        fileScrapeResults = scrapeDate + 'ResultsACM' + '.json'
-        with open(fileScrapeResults) as f:
+        fileScrapeResults = 'ResultsACM' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
     except:
         print("no new ACM results")
 
     try:
-        fileScrapeResults = scrapeDate + 'ResultsBakkers' + '.json'
-        with open(fileScrapeResults) as f:
+        fileScrapeResults = 'ResultsBakkers' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
     except:
         print("no new Bakkers results")
 
     try:
-        fileScrapeResults = scrapeDate + 'ResultsBakkerswereld' + '.json'
-        with open(fileScrapeResults) as f:
+        fileScrapeResults = 'ResultsBakkerswereld' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
     except:
         print("no new Bakkerswereld results")
 
     try:
-        fileScrapeResults = scrapeDate + 'ResultsCeres' + '.json'
-        with open(fileScrapeResults) as f:
+        fileScrapeResults = 'ResultsCeres' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
     except:
         print("no new Ceres results")
 
     try:
-        fileScrapeResults = scrapeDate + 'ResultsDossche' + '.json'
-        with open(fileScrapeResults) as f:
+        fileScrapeResults = 'ResultsDossche' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
     except:
         print("no new Dossche results")
 
     try:
-        fileScrapeResults = scrapeDate + 'ResultsSoufflet' + '.json'
-        with open(fileScrapeResults) as f:
+        fileScrapeResults = 'ResultsSoufflet' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
     except:
         print("no new Soufflet results")
 
     try:
-        fileScrapeResults = scrapeDate + 'ResultsTijd' + '.json'
-        with open(fileScrapeResults) as f:
+        fileScrapeResults = 'ResultsTijd' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
     except:
         print("no new Tijd results")
     
 
-    jsonToCSV1(scrapeDate + 'All')
+    jsonToCSV1('All')
     for x in data:
-        jsonToCSV(scrapeDate + 'ALL', x)
+        jsonToCSV('ALL', x)

@@ -229,7 +229,7 @@ input[type=text] {
   </form> 
   <form action="/ranscraper5/" method="post">
     <button class="button" name="forwardBtn5" type="submit">Run All Twitter Scrapers</button>
-  </form> 
+  </form>
   <br>
   <br>
   <br>
@@ -238,14 +238,17 @@ input[type=text] {
   
   <h2>Extra: Twitter Scraper</h2>
   <br>
-  <form  action="/runfilter/" method="post">
   <p>Account name:</p>
-  <input type="text" id="keyword1" placeholder="type in handle @______">
+  <form action="{{ url_for('handle_data') }}" method="post">
+    <input type="text" id="keyword1" placeholder="type in handle @______" name="projectFilepath">
+    <br>
+    <br>
+    <br>  
+    <button class="button" name="filterbtn" type="submit">Find those tweets...</button>
+  </form>
   <br>
   <br>
   <br>
-  <button class="button" name="filterbtn" type="submit">Find those tweets...</button>
-</form>
 </header>
 
 <div class="footer">

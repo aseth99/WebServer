@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from functions_KKM import *
 from functions_twitter import *
 import os
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -21,11 +22,11 @@ def scraper():
 	# scrape_run()
 	return render_template('scraper.html')
 
-#run the twitter keys so we can run twitter scrapers
-@app.route("/syncTwitterKeys/", methods=['POST'])
-def osFunction():
-	os.system('./ClickHereTwitter.sh')
-	return render_template('scraper.html');
+# #run the twitter keys so we can run twitter scrapers
+# @app.route("/syncTwitterKeys/", methods=['POST'])
+# def osFunction():
+# 	os.system('./ClickHereTwitter.sh')
+# 	return render_template('scraper.html');
 
 
 # running scrapers......
@@ -131,6 +132,13 @@ def twitter6():
 def twitter7():
 	twitterFunctionAll()
 	return render_template('scraper.html');
+
+#for manually typing a twitter handle
+@app.route('/handle_data', methods=['POST'])
+def handle_data():
+	projectpath = request.form['projectFilepath']
+	twitterFunction(str(projectpath))
+	return render_template('scraper.html')
 
 
 
