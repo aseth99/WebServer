@@ -36,7 +36,7 @@ input[type=text] {
   float: left;
 }
 .button {
-  background-color: green; /* Green */
+  background-color: #009900; /* Green */
   border: 1px solid green;;
   color: white;
   padding: 20px;
@@ -100,40 +100,40 @@ input[type=text] {
 
   <h2>KKM Client</h2>
 
-  <p>Website Scrapers</p>
+  <p id="test">Website Scrapers</p>
   
   <form action="/ranACMscraper1/" method="post">
-    <button class="button" name="forwardBtn1" type="submit">ACM</button>
+    <button class="button" name="forwardBtn1" type="submit" onclick='document.getElementById("test").innerHTML = "hang tight... scraping...!"'>ACM</button>
   </form> 
   
   <form action="/ranBAKKERSscraper2/" method="post">
-    <button class="button" name="forwardBtn2" type="submit">Bakkers</button>
+    <button class="button" name="forwardBtn2" type="submit" onclick='document.getElementById("test").innerHTML = "hang tight... scraping...!"'>Bakkers</button>
   </form> 
 
   <form action="/ranBAKKERSWERELDscraper3/" method="post">
-    <button class="button" name="forwardBtn3" type="submit">Bakkerswereld</button>
+    <button class="button" name="forwardBtn3" type="submit" onclick='document.getElementById("test").innerHTML = "hang tight... scraping...!"'>Bakkerswereld</button>
   </form> 
   
   <form action="/ranCERESscraper4/" method="post">
-    <button class="button" name="forwardBtn4" type="submit">Ceres</button>
+    <button class="button" name="forwardBtn4" type="submit" onclick='document.getElementById("test").innerHTML = "hang tight... scraping...!"'>Ceres</button>
   </form> 
   <form action="/ranDOSSCHEscraper5/" method="post">
-    <button class="button" name="forwardBtn5" type="submit">Dossche</button>
+    <button class="button" name="forwardBtn5" type="submit" onclick='document.getElementById("test").innerHTML = "hang tight... scraping...!"'>Dossche</button>
   </form> 
   <form action="/ranSOUFFLETscraper6/" method="post">
-    <button class="button" name="forwardBtn6" type="submit">Soufflet</button>
+    <button class="button" name="forwardBtn6" type="submit" onclick='document.getElementById("test").innerHTML = "hang tight... scraping...!"'>Soufflet</button>
   </form> 
   <form action="/ranTIJDscraper7/" method="post">
-    <button class="button" name="forwardBtn7" type="submit">TIJD</button>
+    <button class="button" name="forwardBtn7" type="submit" onclick='document.getElementById("test").innerHTML = "hang tight... scraping...!"'>TIJD</button>
   </form> 
   <form action="/ranALLscrapers/" method="post">
-    <button class="button" name="forwardBtn8" type="submit">Run All Scrapers</button>
+    <button class="button" name="forwardBtn8" type="submit" onclick='document.getElementById("test").innerHTML = "hang tight... scraping...!"'>Run All Scrapers</button>
   </form> 
   <br>
   <br>
   <br>
   <br>
-  <p>Twitter Scrapers</p> 
+  <p id="test0">Twitter Scrapers</p> 
   
 <!--   <form action="/syncTwitterKeys/" method="post">
     <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
@@ -146,28 +146,28 @@ input[type=text] {
   <br> -->
 
   <form action="/ranTwitter1/" method="post">
-    <button class="button" name="forwardBtn9" type="submit">@bakkerswereldnl</button>
+    <button class="button" name="forwardBtn9" type="submit" onclick='document.getElementById("test0").innerHTML = "hang tight... scraping...!"'>@bakkerswereldnl</button>
   </form> 
   
   <form action="/ranTwitter2/" method="post">
-    <button class="button" name="forwardBtn10" type="submit">@bakkersinb</button>
+    <button class="button" name="forwardBtn10" type="submit" onclick='document.getElementById("test0").innerHTML = "hang tight... scraping...!"'>@bakkersinb</button>
   </form> 
 
   <form action="/ranTwitter3/" method="post">
-    <button class="button" name="forwardBtn11" type="submit">@bakkerijcentrum</button>
+    <button class="button" name="forwardBtn11" type="submit" onclick='document.getElementById("test0").innerHTML = "hang tight... scraping...!"'>@bakkerijcentrum</button>
   </form> 
   
   <form action="/ranTwitter4/" method="post">
-    <button class="button" name="forwardBtn12" type="submit">@bakerynext</button>
+    <button class="button" name="forwardBtn12" type="submit" onclick='document.getElementById("test0").innerHTML = "hang tight... scraping...!"'>@bakerynext</button>
   </form> 
    <form action="/ranTwitter5/" method="post">
-    <button class="button" name="forwardBtn13" type="submit">@dossche_mills</button>
+    <button class="button" name="forwardBtn13" type="submit" onclick='document.getElementById("test0").innerHTML = "hang tight... scraping...!"'>@dossche_mills</button>
   </form>  
   <form action="/ranTwitter6/" method="post">
-    <button class="button" name="forwardBtn14" type="submit">@groupesoufflet</button>
+    <button class="button" name="forwardBtn14" type="submit" onclick='document.getElementById("test0").innerHTML = "hang tight... scraping...!"'>@groupesoufflet</button>
   </form> 
   <form action="/ranTwitter7/" method="post">
-    <button class="button" name="forwardBtn15" type="submit">Run All Twitter Scrapers</button>
+    <button class="button" name="forwardBtn15" type="submit" onclick='document.getElementById("test0").innerHTML = "hang tight... scraping...!"'>Run All Twitter Scrapers</button>
   </form> 
   <br>
   <br>
@@ -176,7 +176,7 @@ input[type=text] {
   <br>
   
   <h2>CSK Client</h2>
-  <p>Website Scrapers</p>
+  <p id="test1">Website Scrapers</p>
   <form action="/ranscraper1/" method="post">
     <button class="button" name="forwardBtn1" type="submit">Food Ingredients First</button>
   </form> 
@@ -202,7 +202,7 @@ input[type=text] {
   <br>
   <br>
   <br>
-  <p>Twitter Scrapers</p> 
+  <p id="test2">Twitter Scrapers</p> 
 <!--   <form action="/syncTwitterKeys/" method="post">
     <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
   </form> 
@@ -217,7 +217,7 @@ input[type=text] {
   </form> 
   
   <form action="/ranscraper2/" method="post">
-    <button class="button" name="forwardBtn2" type="submit">Twitter Account 2</button>
+    <button class="button" name="forwardBtn2" type="submit" onclick='document.getElementById("test2").innerHTML = "hang tight... scraping...!"'>Twitter Account 2</button>
   </form> 
 
   <form action="/ranscraper3/" method="post">

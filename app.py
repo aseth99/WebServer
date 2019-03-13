@@ -137,10 +137,13 @@ def twitter7():
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
 	projectpath = request.form['projectFilepath']
+
 	twitterFunction(str(projectpath))
 	return render_template('scraper.html')
 
-
+@app.route("/ranscraper2/", methods=['POST'])
+def twitter79():
+	return render_template('scraper.html');
 
 @app.route("/runfilter/", methods=['POST'])
 def move_forward10():

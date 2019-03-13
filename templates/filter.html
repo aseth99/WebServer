@@ -87,9 +87,47 @@ body {
 <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">Python Web Server: Filter Function</h1>
   <p>Goal is to run the in house filter projects I've built.</p>
-</header>
 
-<form  action="/runfilter/" method="post">
+  <form  action="/runfilter/" method="post" id="test" style="display: none">
+    <h2>Filter Twitter Keywords:</h2>
+    <input type="text" id="keyword1" placeholder="keyword">
+    <input type="text" id="keyword2" placeholder="keyword">
+    <input type="text" id="keyword3" placeholder="keyword">
+    <input type="text" id="keyword4" placeholder="keyword">
+    
+    <select id="source" name="source">
+    <option value="au">Source 1</option>
+    <option value="ca">Source 2</option>
+    <option value="usa">Source 3</option>
+    </select>
+    <p>
+    </p>
+    <button class="button" name="filterbtn" type="submit">Run Filter</button>
+  </form>
+
+  <form  action="/runfilter/" method="post" id="test1" style="display: none">
+    <h2>Filter Webscraper Keywords:</h2>
+    <input type="text" id="keyword1" placeholder="keyword">
+    <input type="text" id="keyword2" placeholder="keyword">
+    <input type="text" id="keyword3" placeholder="keyword">
+    <input type="text" id="keyword4" placeholder="keyword">
+    
+    <select id="source" name="source">
+    <option value="au">Source 1</option>
+    <option value="ca">Source 2</option>
+    <option value="usa">Source 3</option>
+    </select>
+    <p>
+    </p>
+    <button class="button" name="filterbtn" type="submit">Run Filter</button>
+  </form>
+  <button class="button" type="button" onclick="document.getElementById('test').style.display='block'">Twitter Scraper?</button>
+  <button class="button" type="button" onclick="document.getElementById('test1').style.display='block'">Web Scraper?</button>
+
+
+
+</header>
+<!-- <form  action="/runfilter/" method="post">
   <h1>Filter Keywords:</h1>
   <input type="text" id="keyword1" placeholder="keyword">
   <input type="text" id="keyword2" placeholder="keyword">
@@ -104,7 +142,7 @@ body {
   <p>
   </p>
   <button class="button" name="filterbtn" type="submit">Run Filter</button>
-</form>
+</form> -->
 
 <div class="footer">
   <p>Still in progress...</p>
