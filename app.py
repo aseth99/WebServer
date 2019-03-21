@@ -1,9 +1,48 @@
 from flask import Flask, render_template, request
 from functions_KKM import *
 from functions_twitter import *
+from functionsFilter import *
 import os
 
 app = Flask(__name__)
+
+@app.route("/filter", methods=['POST'])
+def filterTweets():
+
+	if request.form['filterbtn'] == 'input':
+		account = request.form['projectFilepath']
+		words = []
+		word1 = request.form['keyword1']
+		if word1 != '':
+			words.append(word1)
+		word2 = request.form['keyword2']
+		if word2 != '':
+			words.append(word2)
+		word3 = request.form['keyword3']
+		if word3 != '':
+			words.append(word3)
+		word4 = request.form['keyword4']
+		if word4 != '':
+			words.append(word4)
+
+		if not words:
+			return render_template('testing.html')
+		if account == '':
+			return render_template('testing.html')
+			
+		handleFilter(account, words)
+	
+	elif request.form['filterbtn'] == 'KKM':
+		return render_template('testing.html')
+
+	elif request.form['filterbtn'] == 'CSK':
+		return render_template('testing.html')
+    
+
+
+
+	return render_template('filter.html')
+
 
 @app.route("/")
 def main():
@@ -21,6 +60,11 @@ def explain():
 def scraper():
 	# scrape_run()
 	return render_template('scraper.html')
+
+@app.route("/testing")
+def testing():
+	# scrape_run()
+	return render_template('testing.html')
 
 # #run the twitter keys so we can run twitter scrapers
 # @app.route("/syncTwitterKeys/", methods=['POST'])

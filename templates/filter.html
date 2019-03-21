@@ -9,7 +9,194 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 
+<!-- <link rel="stylesheet" href="/css/styleFilter.css"/> -->
+
 <style>
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+}
+
+span {
+    font-size: 12px;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid #ff4b2b;
+    background-color: red;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+
+form {
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    text-align: center;
+}
+
+input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+
+    max-width: 100%;
+    min-height: 700px;
+}
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.sign-up-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.right-panel-active .sign-in-container {
+    transform: translateX(100%);
+}
+
+.container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+}
+
+@keyframes show {
+    0%,
+    49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.overlay {
+    background: lightblue;
+    /*background: -webkit-linear-gradient(to right, lightblue, red);*/
+    /*background: linear-gradient(to right, lightblue, red);*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #ffffff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+    transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
+
+
 select {
   width: 50%;
   padding: 16px 20px;
@@ -27,30 +214,18 @@ input[type=text] {
   background-color: #3CBC8D;
   color: white;
 }
-.button {
-  background-color: white; /* Green */
-  border: none;
-  color: black;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s; /* Safari */
-  cursor: pointer;
-  border: 2px solid #4CAF50;
-  border-radius: 50%
-}
 
 .button:hover {
-  background-color: #4CAF50;
+  background-color: darkorange;
   color: white;
 }
+
 * {
   box-sizing: border-box;
   font-family: Lato, Montserrat;
   text-align: center;
+  align-content: center;
+  align-items: center;
 }
 
 body {
@@ -58,14 +233,6 @@ body {
   font-family: Lato, Montserrat;
 }
 
-/* Style the content */
-.content {
-  background-color: #ddd;
-  padding: 10px;
-  height: 200px; /* Should be removed. Only for demonstration */
-}
-
-/* Style the footer */
 .footer {
   background-color: #f1f1f1;
   padding: 10px;
@@ -88,61 +255,58 @@ body {
   <h1 class="w3-margin w3-jumbo">Python Web Server: Filter Function</h1>
   <p>Goal is to run the in house filter projects I've built.</p>
 
-  <form  action="/runfilter/" method="post" id="test" style="display: none">
-    <h2>Filter Twitter Keywords:</h2>
-    <input type="text" id="keyword1" placeholder="keyword">
-    <input type="text" id="keyword2" placeholder="keyword">
-    <input type="text" id="keyword3" placeholder="keyword">
-    <input type="text" id="keyword4" placeholder="keyword">
-    
-    <select id="source" name="source">
-    <option value="au">Source 1</option>
-    <option value="ca">Source 2</option>
-    <option value="usa">Source 3</option>
-    </select>
-    <p>
-    </p>
-    <button class="button" name="filterbtn" type="submit">Run Filter</button>
-  </form>
+  <div class="container" id="container" align="center">
+    <div class="form-container sign-up-container" align="center">
+      <form action="#" method="post" id="test1">
+          <h1>Filter Webscraper Keywords:</h1>
+          <input type="text" id="keyword1" placeholder="keyword">
+          <input type="text" id="keyword2" placeholder="keyword">
+          <input type="text" id="keyword3" placeholder="keyword">
+          <input type="text" id="keyword4" placeholder="keyword">
+          
+          <select id="source" name="source">
+            <option value="au">Source 1</option>
+            <option value="ca">Source 2</option>
+            <option value="usa">Source 3</option>
+          </select>
+          <br>
+          <button class="button">Run Filter</button>
+      </form>
+    </div>
+    <div class="form-container sign-in-container" align="center">
+      <form action="{{ url_for('filterTweets') }}" method="post" id="test2">
+          <h1>Filter Twitter Keywords</h1>
+          <input type="text" name="keyword1" placeholder="keyword">
+          <input type="text" name="keyword2" placeholder="keyword">
+          <input type="text" name="keyword3" placeholder="keyword">
+          <input type="text" name="keyword4" placeholder="keyword">
+          <input type="text" id="handle" placeholder="type in handle @______" name="projectFilepath">
+          <button class="button" name="filterbtn" value="input" type="submit">Run: Filter Tweets: Input Handle</button>
+          <button class="button" name="filterbtn" value="KKM" type="submit">Run: Filter Tweets: KKM</button>
+          <button class="button" name="filterbtn" value="CSK" type="submit">Run: Filter Tweets: CSK</button>
 
-  <form  action="/runfilter/" method="post" id="test1" style="display: none">
-    <h2>Filter Webscraper Keywords:</h2>
-    <input type="text" id="keyword1" placeholder="keyword">
-    <input type="text" id="keyword2" placeholder="keyword">
-    <input type="text" id="keyword3" placeholder="keyword">
-    <input type="text" id="keyword4" placeholder="keyword">
-    
-    <select id="source" name="source">
-    <option value="au">Source 1</option>
-    <option value="ca">Source 2</option>
-    <option value="usa">Source 3</option>
-    </select>
-    <p>
-    </p>
-    <button class="button" name="filterbtn" type="submit">Run Filter</button>
-  </form>
-  <button class="button" type="button" onclick="document.getElementById('test').style.display='block'">Twitter Scraper?</button>
-  <button class="button" type="button" onclick="document.getElementById('test1').style.display='block'">Web Scraper?</button>
+      </form>
+    </div>
 
+    <div class="overlay-container" align="center">
+      <div class="overlay">
+          <div class="overlay-panel overlay-left">
+              <h1>Want to Run The Twitter Scrapers?</h1>
+              <!-- <p>
+                  To keep connected with us please login with your personal info
+              </p> -->
+              <button class="button" id= "twitScrapers" type="button" onclick="document.getElementById('container').classList.remove('right-panel-active')">Click Me!</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+              <h1>Want to Run The Website Scrapers?</h1>
+              <button class="button" id="webScrapers" type="button" onclick="document.getElementById('container').classList.add('right-panel-active')">Click Me!</button>
+          </div>
+      </div>
+    </div>
+  </div>
 
 
 </header>
-<!-- <form  action="/runfilter/" method="post">
-  <h1>Filter Keywords:</h1>
-  <input type="text" id="keyword1" placeholder="keyword">
-  <input type="text" id="keyword2" placeholder="keyword">
-  <input type="text" id="keyword3" placeholder="keyword">
-  <input type="text" id="keyword4" placeholder="keyword">
-  
-  <select id="source" name="source">
-  <option value="au">Source 1</option>
-  <option value="ca">Source 2</option>
-  <option value="usa">Source 3</option>
-  </select>
-  <p>
-  </p>
-  <button class="button" name="filterbtn" type="submit">Run Filter</button>
-</form> -->
 
 <div class="footer">
   <p>Still in progress...</p>
