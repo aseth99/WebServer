@@ -66,12 +66,16 @@ def acm_scrape_run():
     scrapeDate = dt.strftime('%y%m%d')
     scrapeTime = dt.strftime('%H%M%S')
     previousUrls = []
+
+
     with open('ScrapeLog.txt','r', encoding='utf-8') as log:
         for line in log:
             previousUrls.append(line.rstrip('\n'))
     currentUrls = []
     documents = []
+    print("got to here")
     docs, urls = scrape_acm(previousUrls)
+    print("got to here2")
     documents += docs
     currentUrls += urls
 
@@ -79,6 +83,8 @@ def acm_scrape_run():
         # Write scrape results to file in JSON format as backup for database
         fileScrapeResults = 'ResultsACM' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+
         output_file = open(directoryName,'a')
         jsonToCSV1('acm')
         for x in documents:
@@ -135,7 +141,7 @@ def scrape_acm(previousUrls):
                     dateTime = articlesoup.find("span", attrs={"class":"date date-fix"})
                     bodyText = articlesoup.find("div", attrs={"class":"text--paragraph editable--colors no-padding"})
 
-
+                    print("got to here 3")
                     dict = {}
                     dict['title'] = header.text
                     dict['url'] = link
@@ -171,6 +177,7 @@ def bakkers_scrape_run():
         # Write scrape results to file in JSON format as backup for database
         fileScrapeResults = 'ResultsBakkers' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         output_file = open(directoryName,'a')
         jsonToCSV1('bakkers')
         for x in documents:
@@ -266,6 +273,7 @@ def bakkerswereld_scrape_run():
         # Write scrape results to file in JSON format as backup for database
         fileScrapeResults = 'ResultsBakkerswereld' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         output_file = open(directoryName,'a')
         jsonToCSV1('bakkerswereld')
         for x in documents:
@@ -368,6 +376,7 @@ def ceres_scrape_run():
         # Write scrape results to file in JSON format as backup for database
         fileScrapeResults = 'ResultsCeres' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         output_file = open(directoryName,'a')
         jsonToCSV1('ceres')
         for x in documents:
@@ -477,6 +486,7 @@ def dossche_scrape_run():
         # Write scrape results to file in JSON format as backup for database
         fileScrapeResults = 'ResultsDossche' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         output_file = open(directoryName,'a')
         jsonToCSV1('dossche')
         for x in documents:
@@ -583,6 +593,7 @@ def soufflet_scrape_run():
         # Write scrape results to file in JSON format as backup for database
         fileScrapeResults = 'ResultsSoufflet' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         output_file = open(directoryName,'a')
         jsonToCSV1('soufflet')
         for x in documents:
@@ -681,6 +692,7 @@ def tijd_scrape_run():
         # Write scrape results to file in JSON format as backup for database
         fileScrapeResults = 'ResultsTijd' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         output_file = open(directoryName,'a')
         jsonToCSV1('tijd')
         for x in documents:
@@ -752,6 +764,7 @@ def allFunctionsRan():
     try:
         fileScrapeResults = 'ResultsACM' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -761,6 +774,7 @@ def allFunctionsRan():
     try:
         fileScrapeResults = 'ResultsBakkers' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -770,6 +784,7 @@ def allFunctionsRan():
     try:
         fileScrapeResults = 'ResultsBakkerswereld' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -779,6 +794,7 @@ def allFunctionsRan():
     try:
         fileScrapeResults = 'ResultsCeres' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -788,6 +804,7 @@ def allFunctionsRan():
     try:
         fileScrapeResults = 'ResultsDossche' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -797,6 +814,7 @@ def allFunctionsRan():
     try:
         fileScrapeResults = 'ResultsSoufflet' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
@@ -806,6 +824,7 @@ def allFunctionsRan():
     try:
         fileScrapeResults = 'ResultsTijd' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
