@@ -276,12 +276,17 @@ body {
     <div class="form-container sign-in-container" align="center">
       <form action="{{ url_for('filterTweets') }}" method="post" id="test2">
           <h1>Filter Twitter Keywords</h1>
+          <div class="alert">
+    {% for message in get_flashed_messages() %}
+       {{ message }}
+    {% endfor %}
+        </div>
           <input type="text" name="keyword1" placeholder="keyword">
           <input type="text" name="keyword2" placeholder="keyword">
           <input type="text" name="keyword3" placeholder="keyword">
           <input type="text" name="keyword4" placeholder="keyword">
           <input type="text" id="handle" placeholder="type in handle @______" name="projectFilepath">
-          <button class="button" name="filterbtn" value="input" type="submit">Run: Filter Tweets: Input Handle</button>
+          <button class="button" name="filterbtn" value="input" type="submit">Run: Filter Tweets: Input Handle (Please make sure you have already scraped this handle!)</button>
           <button class="button" name="filterbtn" value="KKM" type="submit">Run: Filter Tweets: KKM</button>
           <button class="button" name="filterbtn" value="CSK" type="submit">Run: Filter Tweets: CSK</button>
 

@@ -1,45 +1,51 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from functions_KKM import *
 from functions_twitter import *
 from functionsFilter import *
 import os
 
 app = Flask(__name__)
+app.secret_key = 'random string'
 
 @app.route("/filter", methods=['POST'])
 def filterTweets():
+	words = []	
+	word1 = request.form['keyword1']
+	if word1 != '':
+		words.append(word1)
+	word2 = request.form['keyword2']
+	if word2 != '':
+		words.append(word2)
+	word3 = request.form['keyword3']
+	if word3 != '':
+		words.append(word3)
+	word4 = request.form['keyword4']
+	if word4 != '':
+		words.append(word4)
 
+	if not words:
+		
+		flash("no words specified!! no filter ran")
+		return render_template('filter.html')
+	
 	if request.form['filterbtn'] == 'input':
 		account = request.form['projectFilepath']
-		words = []
-		word1 = request.form['keyword1']
-		if word1 != '':
-			words.append(word1)
-		word2 = request.form['keyword2']
-		if word2 != '':
-			words.append(word2)
-		word3 = request.form['keyword3']
-		if word3 != '':
-			words.append(word3)
-		word4 = request.form['keyword4']
-		if word4 != '':
-			words.append(word4)
-
-		if not words:
-			return render_template('testing.html')
+		
 		if account == '':
-			return render_template('testing.html')
-			
+			error = "hehe wassup"
+			return render_template('testing.html', error = error)
+	
 		handleFilter(account, words)
 	
 	elif request.form['filterbtn'] == 'KKM':
-		return render_template('testing.html')
+		error = "hehe wassup"
+		return render_template('testing.html', error = error)
+	
 
 	elif request.form['filterbtn'] == 'CSK':
-		return render_template('testing.html')
-    
-
-
+		error = "hehe wassup"
+		flash("heheheh")
+		return render_template('testing.html', error = error)
 
 	return render_template('filter.html')
 
