@@ -8,9 +8,33 @@ import json
 
 import sys
 
+# def getCSVinfo(csvFileName):
+# 	dt = datetime.now()
+# 	scrapeDate = dt.strftime('%y%m%d')
+	
+# 	# scrapeDateFileName = os.path.join(scrapeDate,csvFileName)
+# 	fileToBeOpened = str(scrapeDate) + '/' + csvFileName
+# 	rows = []
+# 	fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
+
+# 	# directoryName = os.path.join(scrapeDate,scrapeDateFileName)
+
+# 	# os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+# 	csv_out = open(fileToBeOpened, mode='r') #opens csv file
+# 	reader = csv.reader(csv_out)
+
+# 	iterReader = iter(reader)
+# 	next(iterReader)
+# 	for row in iterReader:
+# 		rows.append(row)
+
+# 	return fields, rows
+
+
 def handleFilter(handle, words):
 	dt = datetime.now()
 	scrapeDate = dt.strftime('%y%m%d')
+	scrapeTime = dt.strftime('%H%M%S')
 
 	fname =  "@" + handle +".json"
 
@@ -19,7 +43,7 @@ def handleFilter(handle, words):
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
 
-	chooseName = "filterTwitter" + handle + "_" + scrapeDate
+	chooseName = "filterTwitter_@" + handle + "_" + scrapeDate #+ '_' + scrapeTime
 
 
 	csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
@@ -62,7 +86,7 @@ def handleFilter(handle, words):
 		if any(x in line.get('text') for x in filterArray):
 
 			writer.writerow([line.get('user').get('screen_name')+" , "+line.get('user').get('name'), 
-			line.get('text').encode('unicode_escape'), #unicode escape to fix emoji issue
+			line.get('text'), #unicode escape to fix emoji issue
 			urlvar,
 			hashtagsVar,
 			filterArray,
@@ -74,4 +98,14 @@ def handleFilter(handle, words):
 
 			print("got here..")
 	csv_out.close()
-	return
+
+	csv_out = open(csvFileName, mode='r') #opens csv file
+	reader = csv.reader(csv_out)
+	rows = []
+	iterReader = iter(reader)
+	next(iterReader)
+	row_count = 0
+	for row in iterReader:
+		row_count = row_count + 1
+		rows.append(row)
+	return row_count, chooseName, fields, rows

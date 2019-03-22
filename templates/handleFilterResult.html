@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Python Web Server</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: Lato, Montserrat;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  font-family: Lato, Montserrat;
+}
+
+input[type=text] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+}
+
+span {
+    font-size: 12px;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid #ff4b2b;
+    background-color: red;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    margin: 10px;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: ridge;
+}
+
+/* Style the content */
+.content {
+  background-color: #ddd;
+  padding: 10px;
+  height: 200px; /* Should be removed. Only for demonstration */
+}
+
+/* Style the footer */
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+}
+</style>
+</head>
+<body>
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-card w3-left-align w3-large">
+    <a href="{{url_for('main')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Home Page</a>
+    <a href="{{url_for('explain')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Explanation</a>
+    <a href="{{url_for('scraper')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Scraper</a>
+    <a href="{{url_for('filter')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Filter</a>
+    <a href="{{url_for('about')}}" class="w3-bar-item w3-button w3-padding-large w3-white">About Page</a>
+  </div>
+</div>
+
+
+<header class="w3-container w3-blue w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo">
+    {% if account %}
+      Account Scraped: {{ account }}
+    {% else %}
+      No results passed... you shouldnt even be here
+    {% endif %}
+  </h1>
+<br>
+  <h2>
+    {% if account %}
+      Keywords used:
+      {% for word in words %}
+        {{word}},
+      {% endfor %}
+    {% endif %}
+  </h2>
+<br>
+  <h2>
+    {% if numLines %}
+      Number of results:
+      {{numLines}}
+    {% endif %}
+    <br>
+    <br>
+    {% if csvFileName %}
+    
+      File is currently saved as
+      {{csvFileName}}
+      in your computer
+      {% endif %}
+      <br>
+      Preview:
+  </h2>
+<br>
+  {% if csvFileName %}
+
+  <button onclick="document.getElementById('table1').style.display='block'" class="button" id="help" name="decisionBtn" value="preview">Preview Results</button>
+
+  <button class="button" name="decisionBtn" value="deleteFile" type="submit">Delete File</button>
+    
+
+<!--   <script>
+    function testFunction(){
+      document.getElementById("table1").style.display="visibile";
+    }
+  </script>
+ -->
+
+
+  <table id="table1" style="display: none">
+    <tr>
+        {% for value in header %}
+        <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+    {% for row in rows %}
+    <tr>
+        {% for value in row %}
+        <td>{{ value }}</td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+
+</header>
+
+<div class="footer">
+  <p>Still in progress...</p>
+  <a href="https://facebook.com">Facebook</a>
+  <a href="https://twitter.com/">Twitter</a>
+  <a href="https://www.linkedin.com/">LinkedIn</a>
+</div>
+
+</body>
+</html>

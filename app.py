@@ -3,9 +3,15 @@ from functions_KKM import *
 from functions_twitter import *
 from functionsFilter import *
 import os
+import tablib
+
 
 app = Flask(__name__)
 app.secret_key = 'random string'
+
+dataset = tablib.Dataset()
+
+
 
 @app.route("/filter", methods=['POST'])
 def filterTweets():
@@ -35,7 +41,9 @@ def filterTweets():
 			error = "hehe wassup"
 			return render_template('testing.html', error = error)
 	
-		handleFilter(account, words)
+		numLines, csvFileName, header, rows = handleFilter(account, words)
+
+		return render_template('handleFilterResult.html', account=account, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
 	
 	elif request.form['filterbtn'] == 'KKM':
 		error = "hehe wassup"
@@ -48,6 +56,12 @@ def filterTweets():
 		return render_template('testing.html', error = error)
 
 	return render_template('filter.html')
+
+
+@app.route("/handleFilterResult")
+def handleFilterResult():
+	return render_template('handleFilterResult.html')
+
 
 
 @app.route("/")
