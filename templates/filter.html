@@ -40,16 +40,52 @@
           <input type="text" id="keyword2" placeholder="keyword">
           <input type="text" id="keyword3" placeholder="keyword">
           <input type="text" id="keyword4" placeholder="keyword">
+
+          <label class="label">
+            <div class="label-text">OR</div>
+            <div class="toggle">
+              <input class="toggle-state" type="checkbox" name="andOr"/>
+              <div class="toggle-inner">
+                 <div class="indicator"></div>
+              </div>
+              <div class="active-bg"></div>
+            </div>
+            <div class="label-text">AND</div>
+          </label>
+
+          <label class="label">
+            <div class="label-text">Today</div>
+            <div class="toggle">
+              <input class="toggle-state" type="checkbox" name="todayAllTime"/>
+              <div class="toggle-inner">
+                 <div class="indicator"></div>
+              </div>
+              <div class="active-bg"></div>
+            </div>
+            <div class="label-text">All Time</div>
+          </label>
           
           <select id="source" name="source">
-            <option value="au">Source 1</option>
-            <option value="ca">Source 2</option>
-            <option value="usa">Source 3</option>
+
+            <option value="acm">ACM</option>
+            <option value="bakkers">Bakkers</option>
+            <option value="bwereld">BakkersWereld</option>
+            <option value="ceres">Ceres</option>
+            <option value="tijd">Tijd</option>
+            <option value="kkm">All KKM</option>
+            
+            <option value="fif">Food Ingredients First</option>
+            <option value="fnav">Food Navigator</option>
+            <option value="drep">Dairy Reporter</option>
+            <option value="bns">Bakery & Snacks</option>
+            <option value="boer">Boerderij</option>
+            <option value="csk">All CSK</option>
           </select>
           <br>
           <button class="button">Run Filter</button>
       </form>
     </div>
+
     <div class="form-container sign-in-container" align="center">
       <form action="{{ url_for('filterTweets') }}" method="post" id="test2">
           <h1>Filter Twitter Keywords</h1>
@@ -64,20 +100,40 @@
           <input type="text" name="keyword2" placeholder="keyword">
           <input type="text" name="keyword3" placeholder="keyword">
           <input type="text" name="keyword4" placeholder="keyword">
+          
           <label class="label">
+            <div class="label-text">OR</div>
             <div class="toggle">
-              <input class="toggle-state" type="checkbox" name="check"/>
+              <input class="toggle-state" type="checkbox" name="andOr"/>
               <div class="toggle-inner">
                  <div class="indicator"></div>
               </div>
               <div class="active-bg"></div>
             </div>
-            <div class="label-text">"AND" Functionality for Keywords</div>
-          </label>          
+            <div class="label-text">AND</div>
+          </label>
+
+          <label class="label"> 
+            <div class="label-text">Today</div>
+            <div class="toggle">
+              <input class="toggle-state" type="checkbox" name="todayAllTime"/>
+              <div class="toggle-inner">
+                 <div class="indicator"></div>
+              </div>
+              <div class="active-bg"></div>
+            </div>
+            <div class="label-text">All Time</div>
+          </label>  
+          <br>
           <input type="text" id="handle" placeholder="type in handle @______" name="projectFilepath">
-          <button class="btn btn-primary" name="filterbtn" value="input" title="Please make sure you have already scraped this handle!"type="submit">Run: Filter Tweets: Input Handle</button>
-          <button class="btn btn-success" name="filterbtn" value="KKM" type="button">Run: Filter Tweets: KKM</button>
-          <button class="btn btn-success" name="filterbtn" value="CSK" type="button">Run: Filter Tweets: CSK</button>
+          <button class="btn btn-primary" name="filterbtn" value="input" title="Please make sure you have already scraped this handle!"type="submit">Run Filter by Input Handle</button>
+          or
+          <select id="source" name="source">
+            <option value="kkm">KKM</option>
+            <option value="csk">CSK</option>
+          </select>
+          <button class="btn btn-success" name="filterbtn" value="KKMorCSK" type="button">Run Filter by Group</button>
+          <!-- <button class="btn btn-success" name="filterbtn" value="CSK" type="button">Run: Filter Tweets: CSK</button> -->
 
       </form>
     </div>

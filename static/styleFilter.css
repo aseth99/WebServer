@@ -11,13 +11,13 @@
 }
 
 .label-text {
-  margin: 8px auto;
+  /*margin: 8px auto;*/
   color: lightgrey;
 }
 
 .toggle {
   isolation: isolate;
-  position: relative;
+  position: center;
   height: 24px;
   width: 48px;
   border-radius: 15px;
@@ -27,7 +27,7 @@
 
 .toggle-inner {
   z-index: 2;
-  position: absolute;
+  position: center;
   top: 1px;
   left: 1px;
   height: 22px;
@@ -37,7 +37,7 @@
 }
 
 .active-bg {
-  position: absolute;
+  position: center;
   top: 0;
   left: 0;
   height: 100%;
@@ -154,7 +154,7 @@ input {
     width: 90%;
     margin: 0 auto;
     max-width: 100%;
-    min-height: 700px;
+    min-height: 1000px;
 }
 
 .form-container {

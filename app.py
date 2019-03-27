@@ -21,7 +21,7 @@ def move_forward10():
 
 @app.route("/filter", methods=['POST'])
 def filterTweets():
-	if(request.form.get('check')):
+	if(request.form.get('andOr')):
 		andVar = True
 	else:
 		andVar = False 
