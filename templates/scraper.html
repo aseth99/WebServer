@@ -16,10 +16,12 @@
   text-align: center;
 }
 p {
-  text-align: left;
+  text-align: center;
+  color: lightgrey;
 }
 h2 {
-  text-align: left;
+  text-align: center;
+  color: lightgrey;
 }
 body {
   margin: 0;
@@ -28,15 +30,15 @@ body {
 input[type=text] {
   width: 50%;
   padding: 12px 20px;
-  margin: 8px 0;
+  margin: 8px auto;
   box-sizing: border-box;
   border: none;
   background-color: #3CBC8D;
   color: white;
-  float: left;
+  /*float: left;*/
 }
-.button {
-  background-color: #009900; /* Green */
+/*.button {
+  background-color: #009900;
   border: 1px solid green;;
   color: white;
   padding: 20px;
@@ -45,29 +47,48 @@ input[type=text] {
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
-  transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s; 
   cursor: pointer;
   border: 2px solid #4CAF50;
   border-radius: 50%;
   float: left;
-  /*width: 150px*/
-
-
+}*/
+button {
+    border-radius: 20px;
+    border: 1px solid #ff4b2b;
+    background-color: #ff4b2b;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 20px 45px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
 }
 
-.button:hover {
-  background-color: darkgreen;
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+button.ghost {
+    background-color: transparent;
+    border-color: #ffffff;
+}
+button:hover {
+  background-color: red;
   color: lightgrey;
-  /*width: 100px*/
-
+ 
 }
-
+/*
 .button:active {
   background-color: #3e8e41;
-  /*box-shadow: 0 5px #666;*/
   transform: translateY(4px);
-  /*width: 200px;*/
-}
+}*/
 
 /* Style the content */
 .content {

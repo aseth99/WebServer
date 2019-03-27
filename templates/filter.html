@@ -44,13 +44,17 @@ button {
 }
 
 button:active {
-    transform: scale(0.95);
+    transform: scale(0.90);
 }
 
 button:focus {
-    outline: none;
+    outline: black;
 }
-
+button:hover {
+  background-color: darkred;
+/*  color: lightgrey;
+*/ 
+}
 
 form {
     background-color: lightgray;
@@ -79,7 +83,7 @@ input {
     position: relative;
     overflow: hidden;
     width: 90%;
-
+    margin: 0 auto;
     max-width: 100%;
     min-height: 700px;
 }
