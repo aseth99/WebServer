@@ -7,35 +7,23 @@ from bs4 import BeautifulSoup
 import json
 
 import sys
+dt = datetime.now()
+scrapeDate = dt.strftime('%y%m%d')
+scrapeTime = dt.strftime('%H%M%S')
 
-# def getCSVinfo(csvFileName):
-# 	dt = datetime.now()
-# 	scrapeDate = dt.strftime('%y%m%d')
-	
-# 	# scrapeDateFileName = os.path.join(scrapeDate,csvFileName)
-# 	fileToBeOpened = str(scrapeDate) + '/' + csvFileName
-# 	rows = []
-# 	fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
+def deleteFile(fileName):
+	directoryName = os.path.join(scrapeDate,fileName)
 
-# 	# directoryName = os.path.join(scrapeDate,scrapeDateFileName)
-
-# 	# os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-# 	csv_out = open(fileToBeOpened, mode='r') #opens csv file
-# 	reader = csv.reader(csv_out)
-
-# 	iterReader = iter(reader)
-# 	next(iterReader)
-# 	for row in iterReader:
-# 		rows.append(row)
-
-# 	return fields, rows
-
+	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+	# for root, dirs, files in os.walk("."):  
+	# 	print(root)
+	# 	print(dirs)
+		# for filename in files:
+		# 	print(filename)
+	os.remove(directoryName + '.csv')
 
 def handleFilter(handle, words):
-	dt = datetime.now()
-	scrapeDate = dt.strftime('%y%m%d')
-	scrapeTime = dt.strftime('%H%M%S')
-
+	
 	fname =  "@" + handle +".json"
 
 	directoryName = os.path.join(scrapeDate,fname)

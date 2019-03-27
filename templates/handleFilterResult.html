@@ -76,7 +76,9 @@ button:focus {
   padding: 10px;
   height: 200px; /* Should be removed. Only for demonstration */
 }
-
+.error {
+    color: red
+}
 /* Style the footer */
 .footer {
   background-color: #f1f1f1;
@@ -98,11 +100,17 @@ button:focus {
 
 <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">
+  {% if deletedFile %}
+      File Deleted: {{ deletedFile }}
+    
+  {% else %}
     {% if account %}
       Account Scraped: {{ account }}
     {% else %}
-      No results passed... you shouldnt even be here
+      No results passed...
     {% endif %}
+  {% endif %}
+    
   </h1>
 <br>
   <h2>
@@ -128,24 +136,12 @@ button:focus {
       in your computer
       {% endif %}
       <br>
-      Preview:
   </h2>
 <br>
   {% if csvFileName %}
 
   <button onclick="document.getElementById('table1').style.display='block'" class="button" id="help" name="decisionBtn" value="preview">Preview Results</button>
-
-  <button class="button" name="decisionBtn" value="deleteFile" type="submit">Delete File</button>
-    
-
-<!--   <script>
-    function testFunction(){
-      document.getElementById("table1").style.display="visibile";
-    }
-  </script>
- -->
-
-
+ 
   <table id="table1" style="display: none">
     <tr>
         {% for value in header %}
@@ -161,6 +157,30 @@ button:focus {
     {% endfor %}
   </table>
   {% endif %}
+
+
+ {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+
+  {% if deletedFile %}
+      Specified file has been deleted
+    
+  {% else %}
+  <form action="{{ url_for('deleteBtnFilter') }}" method="post" id="test2">
+    <button class="btn btn-primary" name="deleteBtn" value="{{csvFileName}}" title="Delete?"type="submit">Delete File</button>
+  </form>
+  {% endif %}
+    
+
+<!--   <script>
+    function testFunction(){
+      document.getElementById("table1").style.display="visibile";
+    }
+  </script>
+ -->
 
 
 </header>

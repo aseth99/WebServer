@@ -12,7 +12,7 @@ app.secret_key = 'random string'
 dataset = tablib.Dataset()
 
 
-
+#filter functions
 @app.route("/filter", methods=['POST'])
 def filterTweets():
 	words = []	
@@ -31,15 +31,15 @@ def filterTweets():
 
 	if not words:
 		
-		flash("no words specified!! no filter ran")
+		flash("no words specified!! no filter ran", "error")
 		return render_template('filter.html')
 	
 	if request.form['filterbtn'] == 'input':
 		account = request.form['projectFilepath']
 		
 		if account == '':
-			error = "hehe wassup"
-			return render_template('testing.html', error = error)
+			flash("please input a twitter handle that you've previously scraped", "error")
+			return render_template('filter.html')
 	
 		numLines, csvFileName, header, rows = handleFilter(account, words)
 
@@ -62,8 +62,16 @@ def filterTweets():
 def handleFilterResult():
 	return render_template('handleFilterResult.html')
 
+@app.route("/handleFilterResult", methods=['POST'])
+def deleteBtnFilter():
+	# deleteFunction()
+	varTextFileName = request.form['deleteBtn']
+	deleteFile(varTextFileName)
+	return render_template('handleFilterResult.html', deletedFile=varTextFileName)
 
 
+
+#main page functions
 @app.route("/")
 def main():
 	return render_template('index.html')
@@ -86,14 +94,7 @@ def testing():
 	# scrape_run()
 	return render_template('testing.html')
 
-# #run the twitter keys so we can run twitter scrapers
-# @app.route("/syncTwitterKeys/", methods=['POST'])
-# def osFunction():
-# 	os.system('./ClickHereTwitter.sh')
-# 	return render_template('scraper.html');
-
-
-# running scrapers......
+# scraper functions...
 @app.route("/ranACMscraper1/", methods=['POST'])
 def move_forward1():
 	try:
