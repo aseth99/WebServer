@@ -9,89 +9,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 
-<style>
-* {
-  box-sizing: border-box;
-  font-family: Lato, Montserrat;
-  text-align: center;
-}
+<link rel="stylesheet" href="{{ url_for('static', filename='styleFilterResult.css') }}"/> 
 
-body {
-  margin: 0;
-  font-family: Lato, Montserrat;
-  width: 100%;
-}
 
-input[type=text] {
-  width: 50%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: none;
-  background-color: #3CBC8D;
-  color: white;
-}
-
-table{
-  display: none;
-  text-align: center;
-  padding: 12px 20px;
-  margin: 0px auto;
-}
-h1 {
-    font-weight: bold;
-    margin: 0;
-}
-
-p {
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 20px;
-    letter-spacing: 0.5px;
-    margin: 20px 0 30px;
-}
-
-span {
-    font-size: 12px;
-}
-
-button {
-    border-radius: 20px;
-    border: 1px solid #ff4b2b;
-    background-color: red;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-    margin: 10px;
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-button:focus {
-    outline: ridge;
-}
-
-/* Style the content */
-.content {
-  background-color: #ddd;
-  padding: 10px;
-  height: 200px; /* Should be removed. Only for demonstration */
-}
-.error {
-    color: red
-}
-/* Style the footer */
-.footer {
-  background-color: #f1f1f1;
-  padding: 10px;
-}
-</style>
 </head>
 <body>
 <div class="w3-top">
