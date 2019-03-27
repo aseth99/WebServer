@@ -832,6 +832,6 @@ def allFunctionsRan():
         print("no new Tijd results")
     
 
-    jsonToCSV1('All')
+    jsonToCSV1('AllKKM')
     for x in data:
-        jsonToCSV('ALL', x)
+        jsonToCSV('ALLKKM', x)

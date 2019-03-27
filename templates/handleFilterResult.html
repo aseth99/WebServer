@@ -19,6 +19,7 @@
 body {
   margin: 0;
   font-family: Lato, Montserrat;
+  width: 100%;
 }
 
 input[type=text] {
@@ -31,6 +32,12 @@ input[type=text] {
   color: white;
 }
 
+table{
+  display: none;
+  text-align: center;
+  padding: 12px 20px;
+  margin: 0px auto;
+}
 h1 {
     font-weight: bold;
     margin: 0;
@@ -142,7 +149,7 @@ button:focus {
 
   <button onclick="document.getElementById('table1').style.display='block'" class="button" id="help" name="decisionBtn" value="preview">Preview Results</button>
  
-  <table id="table1" style="display: none">
+  <table id="table1">
     <tr>
         {% for value in header %}
         <td>{{ value }}</td>

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash
 from functions_KKM import *
 from functions_twitter import *
-from functionsFilter import *
+from functions_twitter_filter import *
 import os
 import tablib
 
@@ -13,8 +13,19 @@ dataset = tablib.Dataset()
 
 
 #filter functions
+
+@app.route("/runfilter/", methods=['POST'])
+def move_forward10():
+	forward_message = "Running Filter..."
+	return render_template('filter.html');
+
 @app.route("/filter", methods=['POST'])
 def filterTweets():
+	if(request.form.get('check')):
+		andVar = True
+	else:
+		andVar = False 
+
 	words = []	
 	word1 = request.form['keyword1']
 	if word1 != '':
@@ -41,7 +52,7 @@ def filterTweets():
 			flash("please input a twitter handle that you've previously scraped", "error")
 			return render_template('filter.html')
 	
-		numLines, csvFileName, header, rows = handleFilter(account, words)
+		numLines, csvFileName, header, rows = handleFilter(account, words, andVar)
 
 		return render_template('handleFilterResult.html', account=account, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
 	
@@ -70,6 +81,50 @@ def deleteBtnFilter():
 	return render_template('handleFilterResult.html', deletedFile=varTextFileName)
 
 
+#TWITTER
+@app.route("/ranTwitter1/", methods=['POST'])
+def twitter1():
+	twitterFunction("bakkerswereldnl")
+	return render_template('scraper.html');
+
+@app.route("/ranTwitter2/", methods=['POST'])
+def twitter2():
+	twitterFunction("bakkersinb")
+	return render_template('scraper.html');
+@app.route("/ranTwitter3/", methods=['POST'])
+def twitter3():
+	twitterFunction("bakkerijcentrum")
+	return render_template('scraper.html');
+@app.route("/ranTwitter4/", methods=['POST'])
+def twitter4():
+	twitterFunction("bakerynext")
+	return render_template('scraper.html');
+@app.route("/ranTwitter5/", methods=['POST'])
+def twitter5():
+	twitterFunction("dossche_mills")
+	return render_template('scraper.html');
+@app.route("/ranTwitter6/", methods=['POST'])
+def twitter6():
+	twitterFunction("groupesoufflet")
+	return render_template('scraper.html');
+@app.route("/ranTwitter7/", methods=['POST'])
+def twitter7():
+	twitterFunctionAll()
+	return render_template('scraper.html');
+
+#for manually typing a twitter handle
+@app.route('/handle_data', methods=['POST'])
+def handle_data():
+	projectpath = request.form['projectFilepath']
+
+	twitterFunction(str(projectpath))
+	return render_template('scraper.html')
+
+@app.route("/ranscraper2/", methods=['POST'])
+def twitter79():
+	return render_template('scraper.html');
+
+
 
 #main page functions
 @app.route("/")
@@ -88,6 +143,10 @@ def explain():
 def scraper():
 	# scrape_run()
 	return render_template('scraper.html')
+
+@app.route("/filter")
+def filter():
+	return render_template('filter.html')
 
 @app.route("/testing")
 def testing():
@@ -167,57 +226,6 @@ def move_forward8():
 		print("one of the scrapers is broken")
 	return render_template('scraper.html');
 
-#TWITTER
-@app.route("/ranTwitter1/", methods=['POST'])
-def twitter1():
-	twitterFunction("bakkerswereldnl")
-	return render_template('scraper.html');
-
-@app.route("/ranTwitter2/", methods=['POST'])
-def twitter2():
-	twitterFunction("bakkersinb")
-	return render_template('scraper.html');
-@app.route("/ranTwitter3/", methods=['POST'])
-def twitter3():
-	twitterFunction("bakkerijcentrum")
-	return render_template('scraper.html');
-@app.route("/ranTwitter4/", methods=['POST'])
-def twitter4():
-	twitterFunction("bakerynext")
-	return render_template('scraper.html');
-@app.route("/ranTwitter5/", methods=['POST'])
-def twitter5():
-	twitterFunction("dossche_mills")
-	return render_template('scraper.html');
-@app.route("/ranTwitter6/", methods=['POST'])
-def twitter6():
-	twitterFunction("groupesoufflet")
-	return render_template('scraper.html');
-@app.route("/ranTwitter7/", methods=['POST'])
-def twitter7():
-	twitterFunctionAll()
-	return render_template('scraper.html');
-
-#for manually typing a twitter handle
-@app.route('/handle_data', methods=['POST'])
-def handle_data():
-	projectpath = request.form['projectFilepath']
-
-	twitterFunction(str(projectpath))
-	return render_template('scraper.html')
-
-@app.route("/ranscraper2/", methods=['POST'])
-def twitter79():
-	return render_template('scraper.html');
-
-@app.route("/runfilter/", methods=['POST'])
-def move_forward10():
-	forward_message = "Running Filter..."
-	return render_template('filter.html');
-
-@app.route("/filter")
-def filter():
-	return render_template('filter.html')
 
 @app.route("/test")
 def test():

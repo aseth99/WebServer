@@ -22,7 +22,7 @@ def deleteFile(fileName):
 		# 	print(filename)
 	os.remove(directoryName + '.csv')
 
-def handleFilter(handle, words):
+def handleFilter(handle, words, andVar):
 	
 	fname =  "@" + handle +".json"
 
@@ -38,7 +38,7 @@ def handleFilter(handle, words):
 	csv_out = open(csvFileName, mode='w') #opens csv file
 	writer = csv.writer(csv_out) #create the csv writer object
 
-	fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
+	fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'keywords', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
 	writer.writerow(fields) #writes field
 	filterArray = words
 
@@ -59,32 +59,55 @@ def handleFilter(handle, words):
 		if(urlvar):
 			urlvar = urlvar[0].get('expanded_url')
 		else:
-			urlvar = "no external urls in this tweet"
+			urlvar = "no external urls"
 
 		hashtagsVar = line.get('entities').get('hashtags')
 		tempHashList = []
 		if not hashtagsVar:
-			hashtagsVar = "no hashtags in this tweet"
+			hashtagsVar = "no hashtags"
 		else:
 			for i in hashtagsVar:
 				tempHashList.append(i['text'])
 			hashtagsVar = tempHashList
 
 
-		if any(x in line.get('text') for x in filterArray):
+		if len(line.get('text')) > 50:
+			textVar = line.get('text')[0:50] + "..."
+		else:
+			textVar = line.get('text') + "..."
+ 
+		#And search
+		if(andVar):
+			if all(x in line.get('text') for x in filterArray):
 
-			writer.writerow([line.get('user').get('screen_name')+" , "+line.get('user').get('name'), 
-			line.get('text'), #unicode escape to fix emoji issue
-			urlvar,
-			hashtagsVar,
-			filterArray,
-			inputDate,
-			line.get('user').get('followers_count'),
-			line.get('user').get('friends_count'),
-			line.get('retweet_count'),
-			line.get('favorite_count')])
+				writer.writerow([line.get('user').get('screen_name')+" , "+line.get('user').get('name'), 
+				textVar, #unicode escape to fix emoji issue
+				urlvar,
+				hashtagsVar,
+				filterArray,
+				inputDate,
+				line.get('user').get('followers_count'),
+				line.get('user').get('friends_count'),
+				line.get('retweet_count'),
+				line.get('favorite_count')])
 
-			print("got here..")
+				print("and....got here..")
+		#or search
+		else:
+			if any(x in line.get('text') for x in filterArray):
+
+				writer.writerow([line.get('user').get('screen_name')+" , "+line.get('user').get('name'), 
+				textVar,
+				urlvar,
+				hashtagsVar,
+				filterArray,
+				inputDate,
+				line.get('user').get('followers_count'),
+				line.get('user').get('friends_count'),
+				line.get('retweet_count'),
+				line.get('favorite_count')])
+
+				print("or....got here..")
 	csv_out.close()
 
 	csv_out = open(csvFileName, mode='r') #opens csv file

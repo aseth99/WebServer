@@ -12,6 +12,89 @@
 <!-- <link rel="stylesheet" href="/css/styleFilter.css"/> -->
 
 <style>
+.label {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px auto;
+  box-sizing: border-box;
+  border: none;
+  background-color: #3CBC8D;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.label-text {
+  margin: 8px auto;
+  color: lightgrey;
+}
+
+.toggle {
+  isolation: isolate;
+  position: relative;
+  height: 24px;
+  width: 48px;
+  border-radius: 15px;
+  background: lightblue;
+  overflow: hidden;
+}
+
+.toggle-inner {
+  z-index: 2;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  height: 22px;
+  width: 46px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.active-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200%;
+  background: #003dda;
+  transform: translate3d(-100%, 0, 0);
+  transition: transform 0.05s linear 0.17s;
+}
+
+.toggle-state {
+  display: none;
+}
+
+.indicator {
+  height: 100%;
+  width: 200%;
+  background: white;
+  border-radius: 13px;
+  transform: translate3d(-75%, 0, 0);
+  transition: transform 0.35s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+}
+
+.toggle-state:checked ~ .active-bg {
+   transform: translate3d(-50%, 0, 0);
+}
+
+.toggle-state:checked ~ .toggle-inner .indicator {
+   transform: translate3d(25%, 0, 0);
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
 
 h1 {
     font-weight: bold;
@@ -293,6 +376,16 @@ body {
           <input type="text" name="keyword2" placeholder="keyword">
           <input type="text" name="keyword3" placeholder="keyword">
           <input type="text" name="keyword4" placeholder="keyword">
+          <label class="label">
+            <div class="toggle">
+              <input class="toggle-state" type="checkbox" name="check"/>
+              <div class="toggle-inner">
+                 <div class="indicator"></div>
+              </div>
+              <div class="active-bg"></div>
+            </div>
+            <div class="label-text">"AND" Functionality for Keywords</div>
+          </label>          
           <input type="text" id="handle" placeholder="type in handle @______" name="projectFilepath">
           <button class="btn btn-primary" name="filterbtn" value="input" title="Please make sure you have already scraped this handle!"type="submit">Run: Filter Tweets: Input Handle</button>
           <button class="btn btn-success" name="filterbtn" value="KKM" type="button">Run: Filter Tweets: KKM</button>
