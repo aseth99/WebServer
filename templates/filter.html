@@ -17,7 +17,6 @@
  -->
 </head>
 <body>
-
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card w3-left-align w3-large">
     <a href="{{url_for('main')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Home Page</a>
@@ -34,12 +33,20 @@
 
   <div class="container" id="container" align="center">
     <div class="form-container sign-up-container" align="center">
-      <form action="#" method="post" id="test1">
+      <form action="{{ url_for('filterTweets') }}" method="post" id="test1">
           <h1>Filter Webscraper Keywords:</h1>
-          <input type="text" id="keyword1" placeholder="keyword">
-          <input type="text" id="keyword2" placeholder="keyword">
-          <input type="text" id="keyword3" placeholder="keyword">
-          <input type="text" id="keyword4" placeholder="keyword">
+          <div class="alert">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <div class="{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endwith %}
+        </div>
+
+          <input type="text" name="keyword5" placeholder="keyword">
+          <input type="text" name="keyword6" placeholder="keyword">
+          <input type="text" name="keyword7" placeholder="keyword">
+          <input type="text" name="keyword8" placeholder="keyword">
 
           <label class="label">
             <div class="label-text">OR</div>
@@ -82,7 +89,7 @@
             <option value="csk">All CSK</option>
           </select>
           <br>
-          <button class="button">Run Filter</button>
+          <button class="btn btn-success" name="filterbtn" value="webFilterBtn" type="submit">Run Filter</button>
       </form>
     </div>
 
@@ -132,7 +139,7 @@
             <option value="kkm">KKM</option>
             <option value="csk">CSK</option>
           </select>
-          <button class="btn btn-success" name="filterbtn" value="KKMorCSK" type="button">Run Filter by Group</button>
+          <button class="btn btn-success" name="filterbtn" value="KKMorCSK" type="submit">Run Filter by Group</button>
           <!-- <button class="btn btn-success" name="filterbtn" value="CSK" type="button">Run: Filter Tweets: CSK</button> -->
 
       </form>
@@ -150,6 +157,14 @@
           <div class="overlay-panel overlay-right">
               <h1>Want to Run The Website Scrapers?</h1>
               <button class="button" id="webScrapers" type="button" onclick="document.getElementById('container').classList.add('right-panel-active')">Click Me!</button>
+              {% if websiteFunction %} 
+                 YOOOOO
+                 <script>
+                  document.getElementById('webScrapers').click();
+                </script>
+                 {% endif %}
+
+
           </div>
       </div>
     </div>

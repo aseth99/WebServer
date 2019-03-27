@@ -14,13 +14,85 @@ dataset = tablib.Dataset()
 
 #filter functions
 
-@app.route("/runfilter/", methods=['POST'])
-def move_forward10():
-	forward_message = "Running Filter..."
-	return render_template('filter.html');
-
 @app.route("/filter", methods=['POST'])
 def filterTweets():
+	if request.form['filterbtn'] == 'webFilterBtn':
+		websiteFunction = "testing"
+		if(request.form.get('andOr')):
+			andVar = True
+		else:
+			andVar = False 
+
+		words = []	
+		word1 = request.form['keyword5']
+		if word1 != '':
+			words.append(word1)
+
+		word2 = request.form['keyword6']
+		if word2 != '':
+			words.append(word2)
+		word3 = request.form['keyword7']
+		if word3 != '':
+			words.append(word3)
+		word4 = request.form['keyword8']
+		if word4 != '':
+			words.append(word4)
+
+		if not words:
+			
+			flash("no words specified (webscraper)!! no filter ran", "error")
+			return render_template('filter.html', websiteFunction=websiteFunction)
+			
+	else:
+		if(request.form.get('andOr')):
+			andVar = True
+		else:
+			andVar = False 
+
+		words = []	
+		word1 = request.form['keyword1']
+		if word1 != '':
+			words.append(word1)
+		word2 = request.form['keyword2']
+		if word2 != '':
+			words.append(word2)
+		word3 = request.form['keyword3']
+		if word3 != '':
+			words.append(word3)
+		word4 = request.form['keyword4']
+		if word4 != '':
+			words.append(word4)
+
+		if not words:
+			
+			flash("no words specified (twitter)!! no filter ran", "error")
+			return render_template('filter.html')
+		
+		if request.form['filterbtn'] == 'input':
+			account = request.form['projectFilepath']
+			
+			if account == '':
+				flash("please input a twitter handle that you've previously scraped", "error")
+				return render_template('filter.html')
+		
+			numLines, csvFileName, header, rows = handleFilter(account, words, andVar)
+
+			return render_template('handleFilterResult.html', account=account, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
+		
+		elif request.form['filterbtn'] == 'KKM':
+			error = "hehe wassup"
+			return render_template('testing.html', error = error)
+		
+
+		elif request.form['filterbtn'] == 'CSK':
+			error = "hehe wassup"
+			flash("heheheh")
+			return render_template('testing.html', error = error)
+
+	return render_template('filter.html')
+
+def filterWebsites():
+	websiteFunction = "testing"
 	if(request.form.get('andOr')):
 		andVar = True
 	else:
@@ -30,6 +102,7 @@ def filterTweets():
 	word1 = request.form['keyword1']
 	if word1 != '':
 		words.append(word1)
+
 	word2 = request.form['keyword2']
 	if word2 != '':
 		words.append(word2)
@@ -43,30 +116,37 @@ def filterTweets():
 	if not words:
 		
 		flash("no words specified!! no filter ran", "error")
-		return render_template('filter.html')
+		return render_template('filter.html', websiteFunction=websiteFunction)
 	
-	if request.form['filterbtn'] == 'input':
-		account = request.form['projectFilepath']
+	# if request.form['filterbtn'] == 'input':
+	# 	account = request.form['projectFilepath']
 		
-		if account == '':
-			flash("please input a twitter handle that you've previously scraped", "error")
-			return render_template('filter.html')
+	# 	if account == '':
+	# 		flash("please input a twitter handle that you've previously scraped", "error")
+	# 		return render_template('filter.html')
 	
-		numLines, csvFileName, header, rows = handleFilter(account, words, andVar)
+	# 	numLines, csvFileName, header, rows = handleFilter(account, words, andVar)
 
-		return render_template('handleFilterResult.html', account=account, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
+	# 	return render_template('handleFilterResult.html', account=account, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
 	
-	elif request.form['filterbtn'] == 'KKM':
-		error = "hehe wassup"
-		return render_template('testing.html', error = error)
+	# elif request.form['filterbtn'] == 'KKM':
+	# 	error = "hehe wassup"
+	# 	return render_template('testing.html', error = error)
 	
 
-	elif request.form['filterbtn'] == 'CSK':
-		error = "hehe wassup"
-		flash("heheheh")
-		return render_template('testing.html', error = error)
+	# elif request.form['filterbtn'] == 'CSK':
+	# 	error = "hehe wassup"
+	# 	flash("heheheh")
+	# 	return render_template('testing.html', error = error)
 
-	return render_template('filter.html')
+	return render_template('filter.html', websiteFunction=websiteFunction)
+
+
+@app.route("/runfilter/", methods=['POST'])
+def move_forward10():
+	forward_message = "Running Filter..."
+	return render_template('filter.html');
+
 
 
 @app.route("/handleFilterResult")
