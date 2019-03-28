@@ -27,9 +27,10 @@ def filterFunction():
 			andVar = False 
 
 		if(request.form.get('todayAllTime')):
-			todayVar = True
+			#true means theyve turned it to all time
+			todayVar = False
 		else:
-			todayVar = False 
+			todayVar = True 
 
 		words = []	
 		word1 = request.form['keyword5']
@@ -70,9 +71,9 @@ def filterFunction():
 			andVar = False 
 
 		if(request.form.get('todayAllTime')):
-			todayVar = True
+			todayVar = False
 		else:
-			todayVar = False 
+			todayVar = True 
 
 		words = []	
 		word1 = request.form['keyword1']
@@ -100,7 +101,7 @@ def filterFunction():
 				flash("please input a twitter handle that you've previously scraped", "error")
 				return render_template('filter.html')
 		
-			numLines, csvFileName, header, rows = handleFilter(account, words, andVar)
+			numLines, csvFileName, header, rows = handleFilter(account, words, andVar, todayVar)
 
 			return render_template('handleFilterResult.html', account=account, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
 		

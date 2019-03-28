@@ -22,11 +22,14 @@ def deleteFile(fileName):
 		# 	print(filename)
 	os.remove(directoryName + '.csv')
 
-def handleFilter(handle, words, andVar):
+def handleFilter(handle, words, andVar, todayVar):
 	
 	fname =  "@" + handle +".json"
 
-	directoryName = os.path.join(scrapeDate,fname)
+	if todayVar == True:
+		directoryName = os.path.join(scrapeDate,fname)
+	else:
+		directoryName = os.path.join("allTime", fname)
 
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
