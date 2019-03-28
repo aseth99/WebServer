@@ -36,7 +36,7 @@ def twitterFunction(handle):
                 f2.write(json.dumps(status._json)+"\n")
 
 
-    handleSuf = handle + ".csv"
+    handleSuf = "@" + handle + ".csv"
     directoryName3 = os.path.join(scrapeDate,handleSuf)
     #current dates csv file
     csv_out = open(directoryName3, mode='w') #opens csv file
@@ -82,7 +82,7 @@ def twitterFunction(handle):
          
     csv_out.close()
 
-    handleSuf = handle + ".csv"
+    handleSuf = "@" + handle + ".csv"
     directoryName4 = os.path.join("allTime",handleSuf)
    
     #all time csv file, append data here
@@ -158,7 +158,7 @@ def twitterFunctionAllKKM():
                     f2.write(json.dumps(status._json)+"\n")
 
 
-    handleSuf = "KKMallTwitter" + ".csv"
+    handleSuf = "@KKMallTwitter" + ".csv"
     directoryName3 = os.path.join(scrapeDate,handleSuf)
     
     #todays stuff
@@ -208,7 +208,7 @@ def twitterFunctionAllKKM():
          
     csv_out.close()
 
-    handleSuf = "KKMallTwitter" + ".csv"
+    handleSuf = "@KKMallTwitter" + ".csv"
     directoryName4 = os.path.join("allTime",handleSuf)
     
     #all time stuff

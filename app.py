@@ -252,15 +252,40 @@ def move_forward7():
 def move_forward8():
 	try:
 		acm_scrape_run()
+	except:	
+		print("acm scraper is broken")
+
+	try:
 		bakkers_scrape_run()
+	except:	
+		print("bakkers scraper is broken")
+
+	try:
 		bakkerswereld_scrape_run()
+	except:
+		print("bakkerswereld scraper is broken")
+	try:
 		ceres_scrape_run()
+	except:	
+		print("ceres scraper is broken")
+	try:
 		dossche_scrape_run()
+	except:	
+		print("dossche scraper is broken")
+	try:
 		soufflet_scrape_run()
+	except:	
+		print("soufflet scraper is broken")
+	try:
 		tijd_scrape_run()
+	except:	
+		print("tijd scraper is broken")
+
+	try:
 		allFunctionsRan()
 	except:
-		print("one of the scrapers is broken")
+		print("something is broken")
+	
 	return render_template('scraper.html');
 
 

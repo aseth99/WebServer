@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 
-<!-- <link rel="stylesheet" href="{{ url_for('static', filename='styleFilter.css') }}"/>  -->
+<link rel="stylesheet" href="{{ url_for('static', filename='styleFilter.css') }}"/> 
 
 <style>
 .label {
@@ -29,9 +29,10 @@
   color: lightgrey;
 }
 
+
 .toggle {
   isolation: isolate;
-  position: center;
+  position: relative;
   height: 24px;
   width: 48px;
   border-radius: 15px;
@@ -41,7 +42,7 @@
 
 .toggle-inner {
   z-index: 2;
-  position: center;
+  position: absolute;
   top: 1px;
   left: 1px;
   height: 22px;
@@ -51,12 +52,12 @@
 }
 
 .active-bg {
-  position: center;
+  position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 200%;
-  background: #003dda;
+  background: blue;
   transform: translate3d(-100%, 0, 0);
   transition: transform 0.05s linear 0.17s;
 }
@@ -94,68 +95,6 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
-}
-
-h1 {
-    font-weight: bold;
-    margin: 0;
-}
-
-p {
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 20px;
-    letter-spacing: 0.5px;
-    margin: 20px 0 30px;
-}
-
-span {
-    font-size: 12px;
-}
-
-button {
-    border-radius: 20px;
-    border: 1px solid #ff4b2b;
-    background-color: red;
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: transform 80ms ease-in;
-}
-
-button:active {
-    transform: scale(0.90);
-}
-
-button:focus {
-    outline: black;
-}
-button:hover {
-  background-color: darkred;
-/*  color: lightgrey;
-*/ 
-}
-
-form {
-    background-color: lightgray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 50px 20px;
-    height: 100%;
-    text-align: center;
-}
-
-input {
-    background-color: #eee;
-    border: none;
-    padding: 12px 15px;
-    margin: 8px 0;
-    width: 100%;
 }
 
 /*big ass box in the center of page*/
@@ -238,8 +177,7 @@ input {
 
 .overlay {
     background: lightblue;
-    /*background: -webkit-linear-gradient(to right, lightblue, red);*/
-    /*background: linear-gradient(to right, lightblue, red);*/
+
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -289,48 +227,6 @@ input {
 }
 
 
-select {
-  width: 50%;
-  padding: 16px 20px;
-  border: none;
-  border-radius: 4px;
-  background-color: #f1f1f1;
-  text-align: center;
-}
-input[type=text] {
-  width: 50%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: none;
-  background-color: #3CBC8D;
-  color: white;
-}
-
-.button:hover {
-  background-color: darkorange;
-  color: white;
-}
-
-* {
-  box-sizing: border-box;
-  font-family: Lato, Montserrat;
-  text-align: center;
-  align-content: center;
-  align-items: center;
-}
-
-body {
-  margin: 0;
-  font-family: Lato, Montserrat;
-}
-.error {
-    color: red
-}
-.footer {
-  background-color: #f1f1f1;
-  padding: 10px;
-}
 </style>
 
 </head>

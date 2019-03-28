@@ -5,6 +5,8 @@ import csv
 from datetime import datetime
 from bs4 import BeautifulSoup
 import json
+import pandas as pd
+
 
 import sys
 
@@ -18,8 +20,10 @@ def jsonToCSV1(name):
     os.makedirs(os.path.dirname(directoryName), exist_ok=True)
     os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
-    csv_out = open(directoryName, mode='a') #opens csv file
+
+    csv_out = open(directoryName, mode='w') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
+
 
     fields = ['Title', 'URL', 'Text', 'Publication Date', 'Source'] #field names
     writer.writerow(fields) #writes field
@@ -73,9 +77,7 @@ def acm_scrape_run():
             previousUrls.append(line.rstrip('\n'))
     currentUrls = []
     documents = []
-    print("got to here")
     docs, urls = scrape_acm(previousUrls)
-    print("got to here2")
     documents += docs
     currentUrls += urls
 
@@ -85,11 +87,41 @@ def acm_scrape_run():
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
-        output_file = open(directoryName,'a')
-        jsonToCSV1('acm')
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+        
+        dataLine = []
+        jsonFileToBeOpened = directoryName
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine.append(json.loads(line))
+
         for x in documents:
-            json.dump(x, output_file)
-            output_file.write("\n")
+            dataLine.append(x)
+
+        uniqueLine = { each['articleID'] : each for each in dataLine }.values()
+
+        with open(directoryName, 'w') as f:
+            for line in uniqueLine:
+                f.write(json.dumps(line)+"\n")
+
+
+        dataLine2 = []
+        jsonFileToBeOpened = directoryName2
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine2.append(json.loads(line))
+
+        for x in documents:
+            dataLine2.append(x)
+
+        uniqueLine2 = { each['articleID'] : each for each in dataLine2 }.values()
+        
+        with open(directoryName2, 'w') as f2:
+            for line in uniqueLine2:
+                f2.write(json.dumps(line)+"\n")
+
+        jsonToCSV1('acm')
+        for x in uniqueLine:
             jsonToCSV('acm', x)
 
         # Write all urls to log file te check next time which articles have already been scraped
@@ -121,7 +153,7 @@ def scrape_acm(previousUrls):
 
     #Scrape contents of newspage and extract all URLs of complete articles
     for x in range(2):
-        print(x)
+        # print(x)
         if (x == 0):
             r = requests.get('https://www.acm.nl/nl/publicaties/zoeken-in-publicaties?datasource=entity%3Anode&publication_type=1&text=&date%5B0%5D=&date%5B1%5D=&field_subjects=All&field_keywords_single=&sort_by=combined_date&page=0')
         else:
@@ -133,7 +165,7 @@ def scrape_acm(previousUrls):
         #For each URL, scrape the full artcle, store in dict and append to list of dicts
         if len(allLinks) != 0:
             for link in allLinks:
-                print(link)
+                # print(link)
                 try:
                     r = requests.get(link)
                     articlesoup = BeautifulSoup(r.content, 'html.parser')
@@ -141,7 +173,7 @@ def scrape_acm(previousUrls):
                     dateTime = articlesoup.find("span", attrs={"class":"date date-fix"})
                     bodyText = articlesoup.find("div", attrs={"class":"text--paragraph editable--colors no-padding"})
 
-                    print("got to here 3")
+                    # print("got to here 3")
                     dict = {}
                     dict['title'] = header.text
                     dict['url'] = link
@@ -178,11 +210,41 @@ def bakkers_scrape_run():
         fileScrapeResults = 'ResultsBakkers' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-        output_file = open(directoryName,'a')
-        jsonToCSV1('bakkers')
+  
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+        dataLine = []
+        jsonFileToBeOpened = directoryName
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine.append(json.loads(line))
+
         for x in documents:
-            json.dump(x, output_file)
-            output_file.write("\n")
+            dataLine.append(x)
+
+        uniqueLine = { each['articleID'] : each for each in dataLine }.values()
+
+        with open(directoryName, 'w') as f:
+            for line in uniqueLine:
+                f.write(json.dumps(line)+"\n")
+
+
+        dataLine2 = []
+        jsonFileToBeOpened = directoryName2
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine2.append(json.loads(line))
+
+        for x in documents:
+            dataLine2.append(x)
+
+        uniqueLine2 = { each['articleID'] : each for each in dataLine2 }.values()
+        
+        with open(directoryName2, 'w') as f2:
+            for line in uniqueLine2:
+                f2.write(json.dumps(line)+"\n")
+
+        jsonToCSV1('bakkers')
+        for x in uniqueLine:
             jsonToCSV('bakkers', x)
 
         # Write all urls to log file te check next time which articles have already been scraped
@@ -208,13 +270,13 @@ def scrape_bakkersinbedrijf(previousUrls):
     linksArr = []
     
     for x in range(1,5):
-        print(x)
+        # print(x)
         r = requests.get('https://www.bakkersinbedrijf.nl/nieuws?bib_nieuwspagina-page={}'.format(str(x)))
         allLinks = LinkExtractor(r.content)
         allLinks = [link for link in allLinks if link not in previousUrls]
         if len(allLinks) != 0:
             for link in allLinks:
-                print(link)
+                # print(link)
                 try:
                     r = requests.get(link)
 
@@ -274,11 +336,41 @@ def bakkerswereld_scrape_run():
         fileScrapeResults = 'ResultsBakkerswereld' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-        output_file = open(directoryName,'a')
-        jsonToCSV1('bakkerswereld')
+
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+        dataLine = []
+        jsonFileToBeOpened = directoryName
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine.append(json.loads(line))
+
         for x in documents:
-            json.dump(x, output_file)
-            output_file.write("\n")
+            dataLine.append(x)
+
+        uniqueLine = { each['articleID'] : each for each in dataLine }.values()
+
+        with open(directoryName, 'w') as f:
+            for line in uniqueLine:
+                f.write(json.dumps(line)+"\n")
+
+
+        dataLine2 = []
+        jsonFileToBeOpened = directoryName2
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine2.append(json.loads(line))
+
+        for x in documents:
+            dataLine2.append(x)
+
+        uniqueLine2 = { each['articleID'] : each for each in dataLine2 }.values()
+        
+        with open(directoryName2, 'w') as f2:
+            for line in uniqueLine2:
+                f2.write(json.dumps(line)+"\n")
+
+        jsonToCSV1('bakkerswereld')
+        for x in uniqueLine:
             jsonToCSV('bakkerswereld', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
@@ -315,7 +407,7 @@ def scrape_bakkerswereld(previousUrls):
     documents = []
     linksArr = []
     for x in range(5):
-        print(x)
+        # print(x)
         if (x == 0):
             r = requests.get('https://www.bakkerswereld.nl/nieuws')
         else:
@@ -326,7 +418,7 @@ def scrape_bakkerswereld(previousUrls):
         
         if len(allLinks) != 0:
             for link in allLinks:
-                print(link)
+                # print(link)
                 try:
                     r = requests.get(link)
                     articlesoup = BeautifulSoup(r.content, 'html.parser')
@@ -377,11 +469,41 @@ def ceres_scrape_run():
         fileScrapeResults = 'ResultsCeres' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-        output_file = open(directoryName,'a')
-        jsonToCSV1('ceres')
+
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+        dataLine = []
+        jsonFileToBeOpened = directoryName
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine.append(json.loads(line))
+
         for x in documents:
-            json.dump(x, output_file)
-            output_file.write("\n")
+            dataLine.append(x)
+
+        uniqueLine = { each['articleID'] : each for each in dataLine }.values()
+
+        with open(directoryName, 'w') as f:
+            for line in uniqueLine:
+                f.write(json.dumps(line)+"\n")
+
+
+        dataLine2 = []
+        jsonFileToBeOpened = directoryName2
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine2.append(json.loads(line))
+
+        for x in documents:
+            dataLine2.append(x)
+
+        uniqueLine2 = { each['articleID'] : each for each in dataLine2 }.values()
+        
+        with open(directoryName2, 'w') as f2:
+            for line in uniqueLine2:
+                f2.write(json.dumps(line)+"\n")
+
+        jsonToCSV1('ceres')
+        for x in uniqueLine:
             jsonToCSV('ceres', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
@@ -435,7 +557,7 @@ def scrape_ceres(previousUrls):
     if len(allLinks) != 0:
 
         for link in allLinks:
-            print(link[1])
+            # print(link[1])
             try:
                 r = requests.get(link[1])
                 articlesoup = BeautifulSoup(r.content, 'html.parser')
@@ -487,11 +609,41 @@ def dossche_scrape_run():
         fileScrapeResults = 'ResultsDossche' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-        output_file = open(directoryName,'a')
-        jsonToCSV1('dossche')
+
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+        dataLine = []
+        jsonFileToBeOpened = directoryName
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine.append(json.loads(line))
+
         for x in documents:
-            json.dump(x, output_file)
-            output_file.write("\n")
+            dataLine.append(x)
+
+        uniqueLine = { each['articleID'] : each for each in dataLine }.values()
+
+        with open(directoryName, 'w') as f:
+            for line in uniqueLine:
+                f.write(json.dumps(line)+"\n")
+
+
+        dataLine2 = []
+        jsonFileToBeOpened = directoryName2
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine2.append(json.loads(line))
+
+        for x in documents:
+            dataLine2.append(x)
+
+        uniqueLine2 = { each['articleID'] : each for each in dataLine2 }.values()
+        
+        with open(directoryName2, 'w') as f2:
+            for line in uniqueLine2:
+                f2.write(json.dumps(line)+"\n")
+
+        jsonToCSV1('dossche')
+        for x in uniqueLine:
             jsonToCSV('dossche', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
@@ -530,7 +682,7 @@ def scrape_dossche(previousUrls):
         tempLinkDict = []
         tempLinks = []
         tempLinkDate = []
-        print(x)
+        # print(x)
         r = requests.get('https://www.dosschemills.com/nl/over-maalderij-dossche-mills/dossche-news?page={}'.format(str(x)))
         allLinks = LinkExtractor(r.content)
         #Remove URLs that are in the list previousUrls (whch have been scraped before)
@@ -594,11 +746,41 @@ def soufflet_scrape_run():
         fileScrapeResults = 'ResultsSoufflet' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-        output_file = open(directoryName,'a')
-        jsonToCSV1('soufflet')
+
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+        dataLine = []
+        jsonFileToBeOpened = directoryName
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine.append(json.loads(line))
+
         for x in documents:
-            json.dump(x, output_file)
-            output_file.write("\n")
+            dataLine.append(x)
+
+        uniqueLine = { each['articleID'] : each for each in dataLine }.values()
+
+        with open(directoryName, 'w') as f:
+            for line in uniqueLine:
+                f.write(json.dumps(line)+"\n")
+
+
+        dataLine2 = []
+        jsonFileToBeOpened = directoryName2
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine2.append(json.loads(line))
+
+        for x in documents:
+            dataLine2.append(x)
+
+        uniqueLine2 = { each['articleID'] : each for each in dataLine2 }.values()
+        
+        with open(directoryName2, 'w') as f2:
+            for line in uniqueLine2:
+                f2.write(json.dumps(line)+"\n")
+
+        jsonToCSV1('soufflet')
+        for x in uniqueLine:
             jsonToCSV('soufflet', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
@@ -631,7 +813,7 @@ def scrape_soufflet(previousUrls):
 
     #Scrape contents of newspage and extract all URLs of complete articles
     for x in range(3):
-        print(x)
+        # print(x)
         r  = requests.get('https://www.soufflet.com/fr/recherche?s=&f%5B0%5D=content_type%3Anews&page={}'.format(str(x)))
         allLinks = LinkExtractor(r.content)
 
@@ -640,7 +822,7 @@ def scrape_soufflet(previousUrls):
         if len(allLinks) != 0:
 
             for link in allLinks:
-                print(link)
+                # print(link)
                 try:
                     r = requests.get(link)
                     articlesoup = BeautifulSoup(r.content, 'html.parser')
@@ -693,11 +875,41 @@ def tijd_scrape_run():
         fileScrapeResults = 'ResultsTijd' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-        output_file = open(directoryName,'a')
-        jsonToCSV1('tijd')
+
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+        dataLine = []
+        jsonFileToBeOpened = directoryName
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine.append(json.loads(line))
+
         for x in documents:
-            json.dump(x, output_file)
-            output_file.write("\n")
+            dataLine.append(x)
+
+        uniqueLine = { each['articleID'] : each for each in dataLine }.values()
+
+        with open(directoryName, 'w') as f:
+            for line in uniqueLine:
+                f.write(json.dumps(line)+"\n")
+
+
+        dataLine2 = []
+        jsonFileToBeOpened = directoryName2
+        for line in open(jsonFileToBeOpened, 'r'):
+            dataLine2.append(json.loads(line))
+
+        for x in documents:
+            dataLine2.append(x)
+
+        uniqueLine2 = { each['articleID'] : each for each in dataLine2 }.values()
+        
+        with open(directoryName2, 'w') as f2:
+            for line in uniqueLine2:
+                f2.write(json.dumps(line)+"\n")
+
+        jsonToCSV1('tijd')
+        for x in uniqueLine:
             jsonToCSV('tijd', x)
                 
         # Write all urls to log file te check next time which articles have already been scraped
@@ -731,7 +943,7 @@ def scrape_tijd(previousUrls):
     #For each URL, scrape the full artcle, store in dict and append to list of dicts
     if len(allLinks) != 0:
         for link in allLinks:
-            print(link)
+            # print(link)
             try:
                 r = requests.get(link)
                 articlesoup = BeautifulSoup(r.content, 'html.parser')
@@ -761,13 +973,23 @@ def allFunctionsRan():
     scrapeDate = dt.strftime('%y%m%d')
     
     data = []
+    dataAllTime = []
     try:
         fileScrapeResults = 'ResultsACM' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
+
+        with open(directoryName2) as f2:
+            for line in f2:
+                dataAllTime.append(json.loads(line))
+
     except:
         print("no new ACM results")
 
@@ -775,9 +997,16 @@ def allFunctionsRan():
         fileScrapeResults = 'ResultsBakkers' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
+
+        with open(directoryName2) as f2:
+            for line in f2:
+                dataAllTime.append(json.loads(line))
     except:
         print("no new Bakkers results")
 
@@ -785,9 +1014,16 @@ def allFunctionsRan():
         fileScrapeResults = 'ResultsBakkerswereld' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
+
+        with open(directoryName2) as f2:
+            for line in f2:
+                dataAllTime.append(json.loads(line))    
     except:
         print("no new Bakkerswereld results")
 
@@ -795,9 +1031,16 @@ def allFunctionsRan():
         fileScrapeResults = 'ResultsCeres' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
+
+        with open(directoryName2) as f2:
+            for line in f2:
+                dataAllTime.append(json.loads(line))    
     except:
         print("no new Ceres results")
 
@@ -805,9 +1048,16 @@ def allFunctionsRan():
         fileScrapeResults = 'ResultsDossche' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
+
+        with open(directoryName2) as f2:
+            for line in f2:
+                dataAllTime.append(json.loads(line))
     except:
         print("no new Dossche results")
 
@@ -815,9 +1065,16 @@ def allFunctionsRan():
         fileScrapeResults = 'ResultsSoufflet' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
+
+        with open(directoryName2) as f2:
+            for line in f2:
+                dataAllTime.append(json.loads(line))
     except:
         print("no new Soufflet results")
 
@@ -825,13 +1082,97 @@ def allFunctionsRan():
         fileScrapeResults = 'ResultsTijd' + '.json'
         directoryName = os.path.join(scrapeDate,fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
         with open(directoryName) as f:
             for line in f:
                 data.append(json.loads(line))
+        with open(directoryName2) as f2:
+            for line in f2:
+                dataAllTime.append(json.loads(line))
+
     except:
         print("no new Tijd results")
     
+    try:
+        fileScrapeResults = 'ResultsAllKKM' + '.json'
+        directoryName = os.path.join(scrapeDate,fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+        directoryName2 = os.path.join("allTime",fileScrapeResults)
+        os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+        print("got here")
 
-    jsonToCSV1('AllKKM')
-    for x in data:
-        jsonToCSV('ALLKKM', x)
+        jsonToCSV1('AllKKM')
+        print("got here2")
+
+        output_file = open(directoryName,'a')
+        
+        for x in data:
+            jsonToCSVspecial('ALLKKM', x)
+            json.dump(x, output_file)
+            output_file.write("\n")
+
+        output_file2 = open(directoryName2,'a')
+        
+        for x in dataAllTime:
+            jsonToCSVspecial2('ALLKKM', x)
+            json.dump(x, output_file2)
+            output_file2.write("\n")
+    
+    except:
+        print("somethin wrong")
+
+    return
+
+def jsonToCSVspecial(name, line):
+    dt = datetime.now()
+    scrapeDate = dt.strftime('%y%m%d')
+    name = name + ".csv"
+    directoryName = os.path.join(scrapeDate,name)
+    # directoryName2 = os.path.join("allTime",name)
+
+    os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+    # os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+    csv_out = open(directoryName, mode='a') #opens csv file
+    writer = csv.writer(csv_out) #create the csv writer object
+
+    urlvar = line.get('url')
+    writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
+    csv_out.close()
+
+    # csv_out = open(directoryName2, mode='a') #opens csv file
+    # writer = csv.writer(csv_out) #create the csv writer object
+
+    # urlvar = line.get('url')
+    # writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
+    # csv_out.close()
+
+    return
+
+def jsonToCSVspecial2(name, line):
+    dt = datetime.now()
+    scrapeDate = dt.strftime('%y%m%d')
+    name = name + ".csv"
+    # directoryName = os.path.join(scrapeDate,name)
+    directoryName2 = os.path.join("allTime",name)
+
+    # os.makedirs(os.path.dirname(directoryName), exist_ok=True)
+    os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
+
+    # csv_out = open(directoryName, mode='a') #opens csv file
+    # writer = csv.writer(csv_out) #create the csv writer object
+
+    # urlvar = line.get('url')
+    # writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
+    # csv_out.close()
+
+    csv_out = open(directoryName2, mode='a') #opens csv file
+    writer = csv.writer(csv_out) #create the csv writer object
+
+    urlvar = line.get('url')
+    writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
+    csv_out.close()
+
+    return
