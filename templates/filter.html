@@ -9,15 +9,333 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='styleFilter.css') }}"/> 
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='styleFilter.css') }}"/>  -->
 
-<!-- <style>
+<style>
+.label {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px auto;
+  box-sizing: border-box;
+  border: none;
+  background-color: #3CBC8D;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
 
+.label-text {
+  margin: 8px auto;
+  color: lightgrey;
+}
+
+.toggle {
+  isolation: isolate;
+  position: center;
+  height: 24px;
+  width: 48px;
+  border-radius: 15px;
+  background: lightblue;
+  overflow: hidden;
+}
+
+.toggle-inner {
+  z-index: 2;
+  position: center;
+  top: 1px;
+  left: 1px;
+  height: 22px;
+  width: 46px;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.active-bg {
+  position: center;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200%;
+  background: #003dda;
+  transform: translate3d(-100%, 0, 0);
+  transition: transform 0.05s linear 0.17s;
+}
+
+.toggle-state {
+  display: none;
+}
+
+.indicator {
+  height: 100%;
+  width: 200%;
+  background: white;
+  border-radius: 13px;
+  transform: translate3d(-75%, 0, 0);
+  transition: transform 0.35s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+}
+
+.toggle-state:checked ~ .active-bg {
+   transform: translate3d(-50%, 0, 0);
+}
+
+.toggle-state:checked ~ .toggle-inner .indicator {
+   transform: translate3d(25%, 0, 0);
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+h1 {
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 20px 0 30px;
+}
+
+span {
+    font-size: 12px;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid #ff4b2b;
+    background-color: red;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button:active {
+    transform: scale(0.90);
+}
+
+button:focus {
+    outline: black;
+}
+button:hover {
+  background-color: darkred;
+/*  color: lightgrey;
+*/ 
+}
+
+form {
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 50px 20px;
+    height: 100%;
+    text-align: center;
+}
+
+input {
+    background-color: #eee;
+    border: none;
+    padding: 12px 15px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+/*big ass box in the center of page*/
+.container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    position: relative;
+    overflow: hidden;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 100%;
+    min-height: 1000px;
+}
+
+/*these are the forms*/
+.form-container {
+    margin: auto;
+
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+.twitter-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.webscraper-container {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.right-panel-active .twitter-container {
+    transform: translateX(100%);
+}
+
+.container.right-panel-active .webscraper-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: show 0.6s;
+}
+
+@keyframes show {
+    0%,
+    49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+/*the container letting us switch back and forth between the two forms*/
+.overlay-container {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform 0.6s ease-in-out;
+    z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+}
+
+.overlay {
+    background: lightblue;
+    /*background: -webkit-linear-gradient(to right, lightblue, red);*/
+    /*background: linear-gradient(to right, lightblue, red);*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #ffffff;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+    transform: translateX(50%);
+}
+
+.overlay-panel {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    text-align: center;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.overlay-left {
+    transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(20%);
+}
+
+
+select {
+  width: 50%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+  text-align: center;
+}
+input[type=text] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #3CBC8D;
+  color: white;
+}
+
+.button:hover {
+  background-color: darkorange;
+  color: white;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Lato, Montserrat;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+body {
+  margin: 0;
+  font-family: Lato, Montserrat;
+}
+.error {
+    color: red
+}
+.footer {
+  background-color: #f1f1f1;
+  padding: 10px;
+}
 </style>
- -->
+
 </head>
 <body>
-<div class="w3-top">
+<div class="w3-top" position="absolute">
   <div class="w3-bar w3-white w3-card w3-left-align w3-large">
     <a href="{{url_for('main')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Home Page</a>
     <a href="{{url_for('explain')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Explanation</a>
@@ -29,11 +347,11 @@
 
 <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">Python Web Server: Filter Function</h1>
-  <p>Goal is to run the in house filter projects I've built.</p>
+  <h2>Run the <a href="{{url_for('scraper')}}">Scraper Functions</a> Before Filtering!<h2>
 
   <div class="container" id="container" align="center">
-    <div class="form-container sign-up-container" align="center">
-      <form action="{{ url_for('filterTweets') }}" method="post" id="test1">
+    <div class="form-container webscraper-container" align="center">
+      <form action="{{ url_for('filterFunction') }}" method="post" id="test1">
           <h1>Filter Webscraper Keywords:</h1>
           <div class="alert">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -74,6 +392,7 @@
           
           <select id="source" name="source">
 
+            <option value="none">none</option>
             <option value="acm">ACM</option>
             <option value="bakkers">Bakkers</option>
             <option value="bwereld">BakkersWereld</option>
@@ -93,8 +412,8 @@
       </form>
     </div>
 
-    <div class="form-container sign-in-container" align="center">
-      <form action="{{ url_for('filterTweets') }}" method="post" id="test2">
+    <div class="form-container twitter-container" align="center">
+      <form action="{{ url_for('filterFunction') }}" method="post" id="test2">
           <h1>Filter Twitter Keywords</h1>
           <div class="alert">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -158,7 +477,6 @@
               <h1>Want to Run The Website Scrapers?</h1>
               <button class="button" id="webScrapers" type="button" onclick="document.getElementById('container').classList.add('right-panel-active')">Click Me!</button>
               {% if websiteFunction %} 
-                 YOOOOO
                  <script>
                   document.getElementById('webScrapers').click();
                 </script>

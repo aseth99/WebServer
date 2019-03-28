@@ -15,7 +15,7 @@ dataset = tablib.Dataset()
 #filter functions
 
 @app.route("/filter", methods=['POST'])
-def filterTweets():
+def filterFunction():
 	if request.form['filterbtn'] == 'webFilterBtn':
 		websiteFunction = "testing"
 		if(request.form.get('andOr')):
@@ -42,6 +42,12 @@ def filterTweets():
 			
 			flash("no words specified (webscraper)!! no filter ran", "error")
 			return render_template('filter.html', websiteFunction=websiteFunction)
+
+		if request.form['source'] == 'none':
+			flash("no source specified (webscraper)!! no filter ran", "error")
+			return render_template('filter.html', websiteFunction=websiteFunction)
+
+
 			
 	else:
 		if(request.form.get('andOr')):
@@ -91,55 +97,6 @@ def filterTweets():
 
 	return render_template('filter.html')
 
-def filterWebsites():
-	websiteFunction = "testing"
-	if(request.form.get('andOr')):
-		andVar = True
-	else:
-		andVar = False 
-
-	words = []	
-	word1 = request.form['keyword1']
-	if word1 != '':
-		words.append(word1)
-
-	word2 = request.form['keyword2']
-	if word2 != '':
-		words.append(word2)
-	word3 = request.form['keyword3']
-	if word3 != '':
-		words.append(word3)
-	word4 = request.form['keyword4']
-	if word4 != '':
-		words.append(word4)
-
-	if not words:
-		
-		flash("no words specified!! no filter ran", "error")
-		return render_template('filter.html', websiteFunction=websiteFunction)
-	
-	# if request.form['filterbtn'] == 'input':
-	# 	account = request.form['projectFilepath']
-		
-	# 	if account == '':
-	# 		flash("please input a twitter handle that you've previously scraped", "error")
-	# 		return render_template('filter.html')
-	
-	# 	numLines, csvFileName, header, rows = handleFilter(account, words, andVar)
-
-	# 	return render_template('handleFilterResult.html', account=account, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
-	
-	# elif request.form['filterbtn'] == 'KKM':
-	# 	error = "hehe wassup"
-	# 	return render_template('testing.html', error = error)
-	
-
-	# elif request.form['filterbtn'] == 'CSK':
-	# 	error = "hehe wassup"
-	# 	flash("heheheh")
-	# 	return render_template('testing.html', error = error)
-
-	return render_template('filter.html', websiteFunction=websiteFunction)
 
 
 @app.route("/runfilter/", methods=['POST'])
@@ -189,7 +146,7 @@ def twitter6():
 	return render_template('scraper.html');
 @app.route("/ranTwitter7/", methods=['POST'])
 def twitter7():
-	twitterFunctionAll()
+	twitterFunctionAllKKM()
 	return render_template('scraper.html');
 
 #for manually typing a twitter handle
