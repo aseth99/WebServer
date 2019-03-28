@@ -17,6 +17,7 @@ dataset = tablib.Dataset()
 
 @app.route("/filter", methods=['POST'])
 def filterFunction():
+	#filter form for webscrapers was filled out
 	if request.form['filterbtn'] == 'webFilterBtn':
 		websiteFunction = "testing"
 
@@ -61,7 +62,7 @@ def filterFunction():
 			return render_template('handleFilterResult.html', account=sourceVar, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
 
 
-			
+	#filter form for twitter filled out
 	else:
 		if(request.form.get('andOr')):
 			andVar = True

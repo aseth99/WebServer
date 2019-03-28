@@ -68,23 +68,24 @@
   {% if csvFileName %}
 
   <button onclick="document.getElementById('table1').style.display='block'" class="button" id="help" name="decisionBtn" value="preview">Preview Results</button>
- 
-  <table id="table1">
-    <tr>
-        {% for value in header %}
-        <td>{{ value }}</td>
-        {% endfor %}
-    </tr>
-    {% for row in rows %}
-    <tr>
-        {% for value in row %}
-        <td>{{ value }}</td>
-        {% endfor %}
-    </tr>
-    {% endfor %}
-  </table>
-  {% endif %}
 
+  <div class="w3-container w3-cyan">
+    <table id="table1">
+      <tr>
+          {% for value in header %}
+          <td>{{ value }}</td>
+          {% endfor %}
+      </tr>
+      {% for row in rows %}
+      <tr>
+          {% for value in row %}
+          <td>{{ value }}</td>
+          {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </div>
 
  {% with messages = get_flashed_messages(with_categories=true) %}
       {% for category, message in messages %}
