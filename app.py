@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, flash
 from functions_KKM import *
 from functions_twitter import *
 from functions_twitter_filter import *
+from functions_web_filter import *
 import os
 import tablib
 
@@ -18,10 +19,16 @@ dataset = tablib.Dataset()
 def filterFunction():
 	if request.form['filterbtn'] == 'webFilterBtn':
 		websiteFunction = "testing"
+
 		if(request.form.get('andOr')):
 			andVar = True
 		else:
 			andVar = False 
+
+		if(request.form.get('todayAllTime')):
+			todayVar = True
+		else:
+			todayVar = False 
 
 		words = []	
 		word1 = request.form['keyword5']
@@ -47,6 +54,12 @@ def filterFunction():
 			flash("no source specified (webscraper)!! no filter ran", "error")
 			return render_template('filter.html', websiteFunction=websiteFunction)
 
+		else:
+			sourceVar = request.form['source']
+			numLines, csvFileName, header, rows = webFilterFunction(andVar, todayVar, sourceVar, words)
+
+			return render_template('handleFilterResult.html', account=sourceVar, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
+
 
 			
 	else:
@@ -54,6 +67,11 @@ def filterFunction():
 			andVar = True
 		else:
 			andVar = False 
+
+		if(request.form.get('todayAllTime')):
+			todayVar = True
+		else:
+			todayVar = False 
 
 		words = []	
 		word1 = request.form['keyword1']
