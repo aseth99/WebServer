@@ -63,16 +63,29 @@ def webFilterFunction(andVar, todayVar, sourceVar, words):
 	    #writes a row and gets the fields from the (now pyton) dict
 	    
 	#     # if any(x in (line.get('text')).lower() for x in filterArray):
-	    for x in filterArray:
-	        if x in (line.get('text')).lower():
-	            if any(x in (line.get('title')).lower() for x in filterArray):
-	                writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title & text'])
-	            else:
-	                writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'text'])     
-	        
+	# if(andVar):
 
-	        elif x in (line.get('title')).lower():
-	            writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title'])
+	# 	if all(x in line.get('title').lower() for x in filterArray):
+			
+	# 	for x in filterArray:
+	# 		if x in (line.get('text')).lower():
+	# 			if any(x in (line.get('title')).lower() for x in filterArray):
+	# 				writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title & text'])
+	# 			else:
+	# 				writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'text'])     
+
+	# 		elif x in (line.get('title')).lower():
+	# 			writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title'])
+	# else:
+		for x in filterArray:
+			if x in (line.get('text')).lower():
+				if any(x in (line.get('title')).lower() for x in filterArray):
+					writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title & text'])
+				else:
+					writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'text'])     
+
+			elif x in (line.get('title')).lower():
+				writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title'])
 
 	csv_out.close()
 

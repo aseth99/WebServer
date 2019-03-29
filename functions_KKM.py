@@ -93,8 +93,11 @@ def acm_scrape_run():
         
         dataLine = []
         jsonFileToBeOpened = directoryName
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine.append(json.loads(line))
+        except:
+            print("no acm results file yet")
 
         for x in documents:
             dataLine.append(x)
@@ -216,9 +219,11 @@ def bakkers_scrape_run():
 
         dataLine = []
         jsonFileToBeOpened = directoryName
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine.append(json.loads(line))
-
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine.append(json.loads(line))
+        except:
+            print("no bakkers results file yet")
         for x in documents:
             dataLine.append(x)
 
@@ -342,8 +347,11 @@ def bakkerswereld_scrape_run():
 
         dataLine = []
         jsonFileToBeOpened = directoryName
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine.append(json.loads(line))
+        except:
+            print("no Bakkerswereld results file yet")
 
         for x in documents:
             dataLine.append(x)
@@ -475,8 +483,11 @@ def ceres_scrape_run():
 
         dataLine = []
         jsonFileToBeOpened = directoryName
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine.append(json.loads(line))
+        except:
+            print("no Ceres results file yet")
 
         for x in documents:
             dataLine.append(x)
@@ -615,8 +626,11 @@ def dossche_scrape_run():
 
         dataLine = []
         jsonFileToBeOpened = directoryName
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine.append(json.loads(line))
+        except:
+            print("no Dossche results file yet")
 
         for x in documents:
             dataLine.append(x)
@@ -752,8 +766,11 @@ def soufflet_scrape_run():
 
         dataLine = []
         jsonFileToBeOpened = directoryName
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine.append(json.loads(line))
+        except:
+            print("no Soufflet results file yet")
 
         for x in documents:
             dataLine.append(x)
@@ -881,8 +898,11 @@ def tijd_scrape_run():
 
         dataLine = []
         jsonFileToBeOpened = directoryName
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine.append(json.loads(line))
+        except:
+            print("no Tijd results file yet")
 
         for x in documents:
             dataLine.append(x)
@@ -982,13 +1002,19 @@ def allFunctionsRan():
         directoryName2 = os.path.join("allTime",fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
-        with open(directoryName) as f:
-            for line in f:
-                data.append(json.loads(line))
+        try:
+            with open(directoryName) as f:
+                for line in f:
+                    data.append(json.loads(line))
+        except:
+            print("no scraped files today")
 
-        with open(directoryName2) as f2:
-            for line in f2:
-                dataAllTime.append(json.loads(line))
+        try:
+            with open(directoryName2) as f2:
+                for line in f2:
+                    dataAllTime.append(json.loads(line))
+        except:
+            print("no scraped files all time yet")
 
     except:
         print("no new ACM results")
@@ -1000,13 +1026,19 @@ def allFunctionsRan():
         directoryName2 = os.path.join("allTime",fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
-        with open(directoryName) as f:
-            for line in f:
-                data.append(json.loads(line))
+        try:
+            with open(directoryName) as f:
+                for line in f:
+                    data.append(json.loads(line))
+        except:
+            print("no scraped files today")
 
-        with open(directoryName2) as f2:
-            for line in f2:
-                dataAllTime.append(json.loads(line))
+        try:
+            with open(directoryName2) as f2:
+                for line in f2:
+                    dataAllTime.append(json.loads(line))
+        except:
+            print("no scraped files all time yet")
     except:
         print("no new Bakkers results")
 
@@ -1017,13 +1049,19 @@ def allFunctionsRan():
         directoryName2 = os.path.join("allTime",fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
-        with open(directoryName) as f:
-            for line in f:
-                data.append(json.loads(line))
+        try:
+            with open(directoryName) as f:
+                for line in f:
+                    data.append(json.loads(line))
+        except:
+            print("no scraped files today")
 
-        with open(directoryName2) as f2:
-            for line in f2:
-                dataAllTime.append(json.loads(line))    
+        try:
+            with open(directoryName2) as f2:
+                for line in f2:
+                    dataAllTime.append(json.loads(line))
+        except:
+            print("no scraped files all time yet")    
     except:
         print("no new Bakkerswereld results")
 
@@ -1034,13 +1072,19 @@ def allFunctionsRan():
         directoryName2 = os.path.join("allTime",fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
-        with open(directoryName) as f:
-            for line in f:
-                data.append(json.loads(line))
+        try:
+            with open(directoryName) as f:
+                for line in f:
+                    data.append(json.loads(line))
+        except:
+            print("no scraped files today")
 
-        with open(directoryName2) as f2:
-            for line in f2:
-                dataAllTime.append(json.loads(line))    
+        try:
+            with open(directoryName2) as f2:
+                for line in f2:
+                    dataAllTime.append(json.loads(line))
+        except:
+            print("no scraped files all time yet")    
     except:
         print("no new Ceres results")
 
@@ -1051,13 +1095,20 @@ def allFunctionsRan():
         directoryName2 = os.path.join("allTime",fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
-        with open(directoryName) as f:
-            for line in f:
-                data.append(json.loads(line))
+        try:
+            with open(directoryName) as f:
+                for line in f:
+                    data.append(json.loads(line))
+        except:
+            print("no scraped files today")
 
-        with open(directoryName2) as f2:
-            for line in f2:
-                dataAllTime.append(json.loads(line))
+        try:
+            with open(directoryName2) as f2:
+                for line in f2:
+                    dataAllTime.append(json.loads(line))
+        except:
+            print("no scraped files all time yet")
+            
     except:
         print("no new Dossche results")
 
@@ -1068,13 +1119,19 @@ def allFunctionsRan():
         directoryName2 = os.path.join("allTime",fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
-        with open(directoryName) as f:
-            for line in f:
-                data.append(json.loads(line))
+        try:
+            with open(directoryName) as f:
+                for line in f:
+                    data.append(json.loads(line))
+        except:
+            print("no scraped files today")
 
-        with open(directoryName2) as f2:
-            for line in f2:
-                dataAllTime.append(json.loads(line))
+        try:
+            with open(directoryName2) as f2:
+                for line in f2:
+                    dataAllTime.append(json.loads(line))
+        except:
+            print("no scraped files all time yet")
     except:
         print("no new Soufflet results")
 
@@ -1085,12 +1142,19 @@ def allFunctionsRan():
         directoryName2 = os.path.join("allTime",fileScrapeResults)
         os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
-        with open(directoryName) as f:
-            for line in f:
-                data.append(json.loads(line))
-        with open(directoryName2) as f2:
-            for line in f2:
-                dataAllTime.append(json.loads(line))
+        try:
+            with open(directoryName) as f:
+                for line in f:
+                    data.append(json.loads(line))
+        except:
+            print("no scraped files today")
+
+        try:
+            with open(directoryName2) as f2:
+                for line in f2:
+                    dataAllTime.append(json.loads(line))
+        except:
+            print("no scraped files all time yet")
 
     except:
         print("no new Tijd results")
