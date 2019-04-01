@@ -110,8 +110,12 @@ def acm_scrape_run():
 
         dataLine2 = []
         jsonFileToBeOpened = directoryName2
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine2.append(json.loads(line))
+        
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine2.append(json.loads(line))
+        except:
+            print("no acm results file yet")
 
         for x in documents:
             dataLine2.append(x)
@@ -235,8 +239,11 @@ def bakkers_scrape_run():
 
         dataLine2 = []
         jsonFileToBeOpened = directoryName2
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine2.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine2.append(json.loads(line))
+        except:
+            print("no bakkers results file yet")
 
         for x in documents:
             dataLine2.append(x)
@@ -373,8 +380,11 @@ def bakkerswereld_scrape_run():
 
         dataLine2 = []
         jsonFileToBeOpened = directoryName2
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine2.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine2.append(json.loads(line))
+        except:
+            print("no Bakkerswereld results file yet")
 
         for x in documents:
             dataLine2.append(x)
@@ -509,8 +519,11 @@ def ceres_scrape_run():
 
         dataLine2 = []
         jsonFileToBeOpened = directoryName2
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine2.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine2.append(json.loads(line))
+        except:
+            print("no Ceres results file yet")
 
         for x in documents:
             dataLine2.append(x)
@@ -652,8 +665,11 @@ def dossche_scrape_run():
 
         dataLine2 = []
         jsonFileToBeOpened = directoryName2
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine2.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine2.append(json.loads(line))
+        except:
+            print("no Dossche results file yet")
 
         for x in documents:
             dataLine2.append(x)
@@ -792,8 +808,11 @@ def soufflet_scrape_run():
 
         dataLine2 = []
         jsonFileToBeOpened = directoryName2
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine2.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine2.append(json.loads(line))
+        except:
+            print("no Soufflet results file yet")
 
         for x in documents:
             dataLine2.append(x)
@@ -924,8 +943,11 @@ def tijd_scrape_run():
 
         dataLine2 = []
         jsonFileToBeOpened = directoryName2
-        for line in open(jsonFileToBeOpened, 'r'):
-            dataLine2.append(json.loads(line))
+        try:
+            for line in open(jsonFileToBeOpened, 'r'):
+                dataLine2.append(json.loads(line))
+        except:
+            print("no Tijd results file yet")
 
         for x in documents:
             dataLine2.append(x)

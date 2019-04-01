@@ -29,11 +29,12 @@ def twitterFunction(handle):
     client = get_twitter_client()
 
     print("scraping {}".format(handle))
-    with open(directoryName, 'w') as f, open(directoryName2, 'a') as f2:
+    # , open(directoryName2, 'a') as f2
+    with open(directoryName, 'w') as f:
         for page in Cursor(client.user_timeline, screen_name=handle, count=200).pages(8):
             for status in page:
                 f.write(json.dumps(status._json)+"\n")
-                f2.write(json.dumps(status._json)+"\n")
+                # f2.write(json.dumps(status._json)+"\n")
 
 
     handleSuf = "@" + handle + ".csv"
@@ -53,7 +54,27 @@ def twitterFunction(handle):
 
     uniqueTweets = { each['id'] : each for each in tweets }.values()
 
+    tweets2 = []
+    #only appending new stuff, thus open new json file
+    jsonFileToBeOpened = directoryName2
+    for line in open(jsonFileToBeOpened, 'r'):
+        tweets2.append(json.loads(line))
+
+    uniqueTweets2 = { each['id'] : each for each in tweets2 }.values()
+
+    newTweets = []
     for line in uniqueTweets:
+        checkVar = False
+        for line2 in uniqueTweets2:
+            if line.get('id') == line2.get('id'):
+                checkVar = True
+        if checkVar:
+            continue
+        else:
+            newTweets.append(line)
+
+    for line in newTweets:
+        
         
         urlvar = line.get('entities').get('urls')
         if(urlvar):
@@ -82,6 +103,12 @@ def twitterFunction(handle):
          
     csv_out.close()
 
+    with open(directoryName, 'w') as f:
+        for line in newTweets:
+            f.write(json.dumps(line)+"\n")
+
+
+
     handleSuf = "@" + handle + ".csv"
     directoryName4 = os.path.join("allTime",handleSuf)
    
@@ -94,16 +121,20 @@ def twitterFunction(handle):
     fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
     writer.writerow(fields) #writes field
 
-    tweets = []
-    #only appending new stuff, thus open new json file
-    jsonFileToBeOpened = directoryName2
-    for line in open(jsonFileToBeOpened, 'r'):
-        tweets.append(json.loads(line))
+    # tweets = []
+    # #only appending new stuff, thus open new json file
+    # jsonFileToBeOpened = directoryName2
+    # for line in open(jsonFileToBeOpened, 'r'):
+    #     tweets.append(json.loads(line))
+    for newLine in newTweets:
+        tweets2.append(newLine)
 
-    uniqueTweets = { each['id'] : each for each in tweets }.values()
+    uniqueTweets2 = { each['id'] : each for each in tweets2 }.values()
+    # uniqueTweets = { each['id'] : each for each in tweets }.values()
+
     with open(directoryName2, 'w') as f2:
 
-        for line in uniqueTweets:
+        for line in uniqueTweets2:
             f2.write(json.dumps(line)+"\n")
             urlvar = line.get('entities').get('urls')
             if(urlvar):
