@@ -26,11 +26,16 @@ def filterFunction():
 		else:
 			andVar = False 
 
-		# if(request.form.get('todayAllTime')):
-		# 	#true means theyve turned it to all time
-		# 	todayVar = False
-		# else:
-		# 	todayVar = True 
+		if(request.form.get('dateS')):
+			if(request.form.get('dateE')):
+				startDate = request.form.get('dateS')
+				endDate = request.form.get('dateE')
+				filterDate = True
+			else:
+				filterDate = False
+		else:
+			filterDate = False
+
 
 		words = []	
 		word1 = request.form['keyword5']
@@ -58,7 +63,11 @@ def filterFunction():
 
 		else:
 			sourceVar = request.form['source']
-			numLines, csvFileName, header, rows = webFilterFunction(andVar, todayVar, sourceVar, words)
+
+			if(filterDate):
+				numLines, csvFileName, header, rows = webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate)
+			else:
+				numLines, csvFileName, header, rows = webFilterFunction(andVar, sourceVar, words)
 
 			return render_template('handleFilterResult.html', account=sourceVar, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
 

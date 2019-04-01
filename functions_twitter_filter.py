@@ -59,33 +59,33 @@ def handleFilter(handle, words, andVar):
 		dayofTweet = dateOfTweet[8:10]
 		inputDate = dayofTweet + '-' + monthOfTweet + '-' + yearOfTweet
 
-		if monthOfTweet == "Jan":
-			numMonth = "01"
-		elif monthOfTweet == "Feb":
-			numMonth = "02"
-		elif monthOfTweet == "Mar":
-			numMonth = "03"
-		elif monthOfTweet == "Apr":
-			numMonth = "04"
-		elif monthOfTweet == "May":
-			numMonth = "05"
-		elif monthOfTweet == "Jun":
-			numMonth = "06"
-		elif monthOfTweet == "July":
-			numMonth = "07"
-		elif monthOfTweet == "Aug":
-			numMonth = "08"
-		elif monthOfTweet == "Sep":
-			numMonth = "09"
-		elif monthOfTweet == "Oct":
-			numMonth = "10"
-		elif monthOfTweet == "Nov":
-			numMonth = "11"
-		elif monthOfTweet == "Dec":
-			numMonth = "12"
+		# if monthOfTweet == "Jan":
+		# 	numMonth = "01"
+		# elif monthOfTweet == "Feb":
+		# 	numMonth = "02"
+		# elif monthOfTweet == "Mar":
+		# 	numMonth = "03"
+		# elif monthOfTweet == "Apr":
+		# 	numMonth = "04"
+		# elif monthOfTweet == "May":
+		# 	numMonth = "05"
+		# elif monthOfTweet == "Jun":
+		# 	numMonth = "06"
+		# elif monthOfTweet == "July":
+		# 	numMonth = "07"
+		# elif monthOfTweet == "Aug":
+		# 	numMonth = "08"
+		# elif monthOfTweet == "Sep":
+		# 	numMonth = "09"
+		# elif monthOfTweet == "Oct":
+		# 	numMonth = "10"
+		# elif monthOfTweet == "Nov":
+		# 	numMonth = "11"
+		# elif monthOfTweet == "Dec":
+		# 	numMonth = "12"
 
-		filterCompareDate = (yearOfTweet+numMonth+dayofTweet)[2:]
-		print(filterCompareDate)
+		# filterCompareDate = (yearOfTweet+numMonth+dayofTweet)[2:]
+		# print(filterCompareDate)
 
 		urlvar = line.get('entities').get('urls')
 		if(urlvar):

@@ -3,11 +3,10 @@ import requests
 
 import csv
 from datetime import datetime
+from datetime import date
 from bs4 import BeautifulSoup
 import json
 import pandas as pd
-
-
 import sys
 
 def jsonToCSV1(name):
@@ -292,6 +291,15 @@ def scrape_bakkersinbedrijf(previousUrls):
                     # print(title)
                     data = articlesoup.find("span", attrs={"class":"data"})
                     dateTime = data.text
+                    if "201" in dateTime:
+                        dateTimeNew = dateTime
+                    else:
+                        # dateTimeNew = "2019"
+                        today = date.today()
+                        d2 = today.strftime("%B %d, %Y")
+                        print("d2 =", d2)
+                        dateTimeNew = d2
+                    # elif dateTime[-4:] !
                     # print(dateTime[25:40])
 
                     textData = articlesoup.find_all("p")
@@ -304,7 +312,7 @@ def scrape_bakkersinbedrijf(previousUrls):
                     dict = {}
                     dict['title'] = title
                     dict['url'] = link
-                    dict['publication date'] = dateTime
+                    dict['publication date'] = dateTimeNew
                     dict['source'] = 'bakkersinbedrijf'
                     dict['text'] = articleText
                     dict['articleID'] = hashlib.sha1(dict['title'].encode()).hexdigest()
