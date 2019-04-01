@@ -27,9 +27,12 @@ def filterFunction():
 			andVar = False 
 
 		if(request.form.get('dateS')):
+
 			if(request.form.get('dateE')):
 				startDate = request.form.get('dateS')
+				startDate = startDate[2:4]+startDate[5:7]+startDate[8:]
 				endDate = request.form.get('dateE')
+				endDate = endDate[2:4]+endDate[5:7]+endDate[8:]
 				filterDate = True
 			else:
 				filterDate = False
@@ -71,7 +74,6 @@ def filterFunction():
 
 			return render_template('handleFilterResult.html', account=sourceVar, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
 
-
 	#filter form for twitter filled out
 	else:
 		if(request.form.get('andOr')):
@@ -80,19 +82,17 @@ def filterFunction():
 			andVar = False 
 
 		if(request.form.get('dateS')):
+			# print(request.form.get('dateS'))
 			if(request.form.get('dateE')):
 				startDate = request.form.get('dateS')
+				startDate = startDate[2:4]+startDate[5:7]+startDate[8:]
 				endDate = request.form.get('dateE')
+				endDate = endDate[2:4]+endDate[5:7]+endDate[8:]
 				filterDate = True
 			else:
 				filterDate = False
 		else:
 			filterDate = False
-
-		# if(request.form.get('todayAllTime')):
-		# 	todayVar = False
-		# else:
-		# 	todayVar = True 
 
 		words = []	
 		word1 = request.form['keyword1']
@@ -127,16 +127,21 @@ def filterFunction():
 
 			return render_template('handleFilterResult.html', account=account, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
 		
-		elif request.form['filterbtn'] == 'KKM':
-			error = "hehe wassup"
-			return render_template('testing.html', error = error)
-		
+		elif request.form['filterbtn'] == 'KKMorCSK':
+			
+			accountGroup = request.form['source']
+			if(filterDate):
+				numLines, csvFileName, header, rows = handleGroupFilterWithDate(accountGroup, words, andVar, startDate, endDate)
+			else:
+				numLines, csvFileName, header, rows = handleGroupFilter(accountGroup, words, andVar)
 
-		elif request.form['filterbtn'] == 'CSK':
-			error = "hehe wassup"
-			flash("heheheh")
-			return render_template('testing.html', error = error)
+			return render_template('handleFilterResult.html', account=accountGroup, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)		
 
+		# elif request.form['filterbtn'] == 'CSK':
+		# 	error = "hehe wassup"
+		# 	flash("heheheh")
+		# 	return render_template('testing.html', error = error)
+	flash("huh...")
 	return render_template('filter.html')
 
 

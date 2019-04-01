@@ -182,24 +182,11 @@ def twitterFunctionAllKKM():
 
     for user in userArr:
         print("scraping {}".format(user))
-        with open(directoryName, 'w') as f, open(directoryName2, 'a') as f2:
+        with open(directoryName, 'w') as f:
             for page in Cursor(client.user_timeline, screen_name=user, count=200).pages(8):
                 for status in page:
                     f.write(json.dumps(status._json)+"\n")
-                    f2.write(json.dumps(status._json)+"\n")
-
-
-    handleSuf = "@KKMallTwitter" + ".csv"
-    directoryName3 = os.path.join(scrapeDate,handleSuf)
-    
-    #todays stuff
-    # chooseName = scrapeDate + "allTwitter"
-    # csvFileName = "{}.csv".format(chooseName)
-    csv_out = open(directoryName3, mode='a') #opens csv file
-    writer = csv.writer(csv_out) #create the csv writer object
-
-    fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
-    writer.writerow(fields) #writes field
+                    # f2.write(json.dumps(status._json)+"\n")
 
     tweets = []
 
@@ -209,9 +196,36 @@ def twitterFunctionAllKKM():
 
     uniqueTweets = { each['id'] : each for each in tweets }.values()
 
+    tweets2 = []
+    #only appending new stuff, thus open new json file
+    jsonFileToBeOpened = directoryName2
+    for line2 in open(jsonFileToBeOpened, 'r'):
+        tweets2.append(json.loads(line2))
 
+    uniqueTweets2 = { each['id'] : each for each in tweets2 }.values()
+
+    newTweets = []
     for line in uniqueTweets:
-        
+        checkVar = False
+        for line2 in uniqueTweets2:
+            if line.get('id') == line2.get('id'):
+                checkVar = True
+        if checkVar:
+            continue
+        else:
+            newTweets.append(line)
+
+    handleSuf = "@KKMallTwitter" + ".csv"
+    directoryName3 = os.path.join(scrapeDate,handleSuf)
+
+    csv_out = open(directoryName3, mode='a') #opens csv file
+    writer = csv.writer(csv_out) #create the csv writer object
+
+    fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
+    writer.writerow(fields) #writes field
+
+    for line in newTweets:
+        # print(line)
         urlvar = line.get('entities').get('urls')
         if(urlvar):
             urlvar = urlvar[0].get('expanded_url')
@@ -238,30 +252,35 @@ def twitterFunctionAllKKM():
             line.get('favorite_count')])
          
     csv_out.close()
+    
+    with open(directoryName, 'w') as f:
+        for line in newTweets:
+            f.write(json.dumps(line)+"\n")
 
     handleSuf = "@KKMallTwitter" + ".csv"
     directoryName4 = os.path.join("allTime",handleSuf)
     
-    #all time stuff
-    # chooseName = "allTime_" + "allTwitter"
-    # csvFileName = "{}.csv".format(chooseName)
     csv_out = open(directoryName4, mode='a') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
 
     fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
     writer.writerow(fields) #writes field
 
-    tweets = []
-    #only appending new stuff, thus open new json file
-    jsonFileToBeOpened = directoryName2
-    for line in open(jsonFileToBeOpened, 'r'):
-        tweets.append(json.loads(line))
+    # tweets = []
+    # #only appending new stuff, thus open new json file
+    # jsonFileToBeOpened = directoryName2
+    # for line in open(jsonFileToBeOpened, 'r'):
+    #     tweets.append(json.loads(line))
 
-    uniqueTweets = { each['id'] : each for each in tweets }.values()
-    
+    # uniqueTweets = { each['id'] : each for each in tweets }.values()
+    for newLine in newTweets:
+        tweets2.append(newLine)
+
+    uniqueTweets2 = { each['id'] : each for each in tweets2 }.values()
+
     with open(directoryName2, 'w') as f2:
 
-        for line in uniqueTweets:
+        for line in uniqueTweets2:
             f2.write(json.dumps(line)+"\n")
             urlvar = line.get('entities').get('urls')
             if(urlvar):
