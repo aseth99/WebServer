@@ -12,6 +12,24 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styleFilter.css') }}"/> 
 
 <style>
+input[type=date] {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #3CBC8D;
+  color: lightgrey;
+}
+input[type="date"]:before {
+    content: attr(placeholder) !important;
+    color: white;
+    margin-right: 0.5em;
+  }
+  input[type="date"]:focus:before,
+  input[type="date"]:valid:before {
+    content: "";
+  }
 .label {
   width: 50%;
   padding: 12px 20px;
@@ -107,7 +125,7 @@ input:checked + .slider:before {
     width: 90%;
     margin: 0 auto;
     max-width: 100%;
-    min-height: 1000px;
+    min-height: 1200px;
 }
 
 /*these are the forms*/
@@ -226,7 +244,6 @@ input:checked + .slider:before {
     transform: translateX(20%);
 }
 
-
 </style>
 
 </head>
@@ -274,20 +291,12 @@ input:checked + .slider:before {
             <div class="label-text">AND</div>
           </label>
 
-          <label class="label">
-            <div class="label-text">Today</div>
-            <div class="toggle">
-              <input class="toggle-state" type="checkbox" name="todayAllTime"/>
-              <div class="toggle-inner">
-                 <div class="indicator"></div>
-              </div>
-              <div class="active-bg"></div>
-            </div>
-            <div class="label-text">All Time</div>
-          </label>
+          <h2>Filter Date: (Optional) </h2>
+          <input type="text" id="dateS" placeholder="From: (YYMMDD)" name="dateS">
+          <input type="text" id="dateE" placeholder="To: (YYMMDD)" name="dateE">
           
+          <h2>Source:</h2>
           <select id="source" name="source">
-
             <option value="none">none</option>
             <option value="ACM">ACM</option>
             <option value="Bakkers">Bakkers</option>
@@ -335,27 +344,22 @@ input:checked + .slider:before {
             <div class="label-text">AND</div>
           </label>
 
-          <label class="label"> 
-            <div class="label-text">Today</div>
-            <div class="toggle">
-              <input class="toggle-state" type="checkbox" name="todayAllTime"/>
-              <div class="toggle-inner">
-                 <div class="indicator"></div>
-              </div>
-              <div class="active-bg"></div>
-            </div>
-            <div class="label-text">All Time</div>
-          </label>  
-          <br>
+          <h2>Filter Date: (Optional) </h2>
+          <input type="text" id="dateS" placeholder="From: (YYMMDD)" name="dateS">
+          <input type="text" id="dateE" placeholder="To: (YYMMDD)" name="dateE">
+          <!-- <button class="button" name="allTime" value="noFilter" style="float:left" type="button" onclick="document.getElementById('dateS').value='';">No Filter</button> -->
+
+          <h2>Source:</h2>
           <input type="text" id="handle" placeholder="type in handle @______" name="projectFilepath">
           <button class="btn btn-primary" name="filterbtn" value="input" title="Please make sure you have already scraped this handle!"type="submit">Run Filter by Input Handle</button>
           or
+
           <select id="source" name="source">
             <option value="kkm">KKM</option>
             <option value="csk">CSK</option>
           </select>
           <button class="btn btn-success" name="filterbtn" value="KKMorCSK" type="submit">Run Filter by Group</button>
-          <!-- <button class="btn btn-success" name="filterbtn" value="CSK" type="button">Run: Filter Tweets: CSK</button> -->
+
 
       </form>
     </div>
@@ -364,9 +368,6 @@ input:checked + .slider:before {
       <div class="overlay">
           <div class="overlay-panel overlay-left">
               <h1>Want to Run The Twitter Scrapers?</h1>
-              <!-- <p>
-                  To keep connected with us please login with your personal info
-              </p> -->
               <button class="button" id= "twitScrapers" type="button" onclick="document.getElementById('container').classList.remove('right-panel-active')">Click Me!</button>
           </div>
           <div class="overlay-panel overlay-right">

@@ -26,11 +26,11 @@ def filterFunction():
 		else:
 			andVar = False 
 
-		if(request.form.get('todayAllTime')):
-			#true means theyve turned it to all time
-			todayVar = False
-		else:
-			todayVar = True 
+		# if(request.form.get('todayAllTime')):
+		# 	#true means theyve turned it to all time
+		# 	todayVar = False
+		# else:
+		# 	todayVar = True 
 
 		words = []	
 		word1 = request.form['keyword5']
@@ -70,10 +70,20 @@ def filterFunction():
 		else:
 			andVar = False 
 
-		if(request.form.get('todayAllTime')):
-			todayVar = False
+		if(request.form.get('dateS')):
+			if(request.form.get('dateE')):
+				startDate = request.form.get('dateS')
+				endDate = request.form.get('dateE')
+				filterDate = True
+			else:
+				filterDate = False
 		else:
-			todayVar = True 
+			filterDate = False
+
+		# if(request.form.get('todayAllTime')):
+		# 	todayVar = False
+		# else:
+		# 	todayVar = True 
 
 		words = []	
 		word1 = request.form['keyword1']
@@ -100,8 +110,11 @@ def filterFunction():
 			if account == '':
 				flash("please input a twitter handle that you've previously scraped", "error")
 				return render_template('filter.html')
-		
-			numLines, csvFileName, header, rows = handleFilter(account, words, andVar, todayVar)
+
+			if(filterDate):
+				numLines, csvFileName, header, rows = handleFilterWithDate(account, words, andVar, startDate, endDate)
+			else:
+				numLines, csvFileName, header, rows = handleFilter(account, words, andVar)
 
 			return render_template('handleFilterResult.html', account=account, words=words, numLines=numLines, csvFileName = csvFileName, header=header, rows=rows)
 		
