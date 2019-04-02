@@ -196,6 +196,32 @@ def twitter7():
 	twitterFunctionAllKKM()
 	return render_template('scraper.html');
 
+@app.route("/ranTwitter8/", methods=['POST'])
+def twitter8():
+	twitterFunction("FoodIng1st")
+	return render_template('scraper.html');
+
+@app.route("/ranTwitter9/", methods=['POST'])
+def twitter9():
+	twitterFunction("FoodNavigator")
+	return render_template('scraper.html');
+@app.route("/ranTwitter10/", methods=['POST'])
+def twitter10():
+	twitterFunction("DairyReporter")
+	return render_template('scraper.html');
+@app.route("/ranTwitter11/", methods=['POST'])
+def twitter11():
+	twitterFunction("BakeryAndSnacks")
+	return render_template('scraper.html');
+@app.route("/ranTwitter12/", methods=['POST'])
+def twitter12():
+	twitterFunction("Boerderij_nl")
+	return render_template('scraper.html');
+@app.route("/ranTwitter13/", methods=['POST'])
+def twitter13():
+	twitterFunctionAllCSK()
+	return render_template('scraper.html');
+
 #for manually typing a twitter handle
 @app.route('/handle_data', methods=['POST'])
 def handle_data():

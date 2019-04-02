@@ -265,7 +265,7 @@ input:checked + .slider:before {
   <div class="container" id="container" align="center">
     <div class="form-container webscraper-container" align="center">
       <form action="{{ url_for('filterFunction') }}" method="post" id="test1">
-          <h1>Filter Webscraper Keywords:</h1>
+          <h2>Filter Webscraper Keywords:</h2>
           <div class="alert">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% for category, message in messages %}
@@ -321,7 +321,7 @@ input:checked + .slider:before {
 
     <div class="form-container twitter-container" align="center">
       <form action="{{ url_for('filterFunction') }}" method="post" id="test2">
-          <h1>Filter Twitter Keywords</h1>
+          <h2>Filter Twitter Keywords:</h2>
           <div class="alert">
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% for category, message in messages %}
