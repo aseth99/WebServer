@@ -6,7 +6,6 @@ from datetime import datetime
 from datetime import date
 from bs4 import BeautifulSoup
 import json
-import pandas as pd
 import sys
 
 def jsonToCSV1(name):
