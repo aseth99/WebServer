@@ -4,7 +4,9 @@ learning how to make a web server &amp; integrating python code with it
 app.py is the main file we have to run
 
 chmod a+x ClickHere.sh
+
 chmod a+x FirstTime.sh
+
 chmod a+x ClickHere2.sh
 
 to change permissions so we can run file 
