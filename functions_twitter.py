@@ -174,8 +174,8 @@ def twitterFunctionAllKKM():
     scrapeDate = dt.strftime('%y%m%d')
    
     userArr = ["bakkerswereldnl", "BakkersinB", "BakkerijCentrum", "BakeryNext", "dossche_mills", "GroupeSoufflet"]
-    fname = "KKMallTwitter" + ".json"
-    fname2 = "KKMallTwitter" + ".json"
+    fname = "@KKMallTwitter" + ".json"
+    fname2 = "@KKMallTwitter" + ".json"
 
     directoryName = os.path.join(scrapeDate,fname)
     directoryName2 = os.path.join("allTime",fname2)
@@ -333,8 +333,8 @@ def twitterFunctionAllCSK():
     scrapeDate = dt.strftime('%y%m%d')
    
     userArr = ["FoodIng1st", "FoodNavigator", "DairyReporter", "BakeryAndSnacks", "Boerderij_nl"]
-    fname = "CSKallTwitter" + ".json"
-    fname2 = "CSKallTwitter" + ".json"
+    fname = "@CSKallTwitter" + ".json"
+    fname2 = "@CSKallTwitter" + ".json"
 
     directoryName = os.path.join(scrapeDate,fname)
     directoryName2 = os.path.join("allTime",fname2)
