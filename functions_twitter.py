@@ -185,13 +185,22 @@ def twitterFunctionAllKKM():
 
     client = get_twitter_client()
 
+    tweetsAccounts = []
+
     for user in userArr:
         print("scraping {}".format(user))
-        with open(directoryName, 'w') as f:
-            for page in Cursor(client.user_timeline, screen_name=user, count=200).pages(8):
-                for status in page:
-                    f.write(json.dumps(status._json)+"\n")
-                    # f2.write(json.dumps(status._json)+"\n")
+        twitterFunction(user)
+        fnameNew = "@" + user + ".json"
+        directoryNameNew = os.path.join("allTime",fnameNew)
+        os.makedirs(os.path.dirname(directoryNameNew), exist_ok=True)
+
+        jsonFileToBeOpened = directoryNameNew
+        for line in open(jsonFileToBeOpened, 'r'):
+            tweetsAccounts.append(json.loads(line))
+
+    with open(directoryName, 'w') as f:
+        for line in tweetsAccounts:
+            f.write(json.dumps(line)+"\n")
 
     tweets = []
 
@@ -335,13 +344,22 @@ def twitterFunctionAllCSK():
 
     client = get_twitter_client()
 
+    tweetsAccounts = []
+
     for user in userArr:
         print("scraping {}".format(user))
-        with open(directoryName, 'w') as f:
-            for page in Cursor(client.user_timeline, screen_name=user, count=200).pages(8):
-                for status in page:
-                    f.write(json.dumps(status._json)+"\n")
-                    # f2.write(json.dumps(status._json)+"\n")
+        twitterFunction(user)
+        fnameNew = "@" + user + ".json"
+        directoryNameNew = os.path.join("allTime",fnameNew)
+        os.makedirs(os.path.dirname(directoryNameNew), exist_ok=True)
+
+        jsonFileToBeOpened = directoryNameNew
+        for line in open(jsonFileToBeOpened, 'r'):
+            tweetsAccounts.append(json.loads(line))
+
+    with open(directoryName, 'w') as f:
+        for line in tweetsAccounts:
+            f.write(json.dumps(line)+"\n")
 
     tweets = []
 
