@@ -39,6 +39,8 @@ def twitterFunction(handle):
 
     handleSuf = "@" + handle + ".csv"
     directoryName3 = os.path.join(scrapeDate,handleSuf)
+    os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
+
     #current dates csv file
     csv_out = open(directoryName3, mode='w') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
@@ -56,10 +58,12 @@ def twitterFunction(handle):
 
     tweets2 = []
     #only appending new stuff, thus open new json file
-    jsonFileToBeOpened = directoryName2
-    for line in open(jsonFileToBeOpened, 'r'):
-        tweets2.append(json.loads(line))
-
+    try:
+        jsonFileToBeOpened = directoryName2
+        for line in open(jsonFileToBeOpened, 'r'):
+            tweets2.append(json.loads(line))
+    except:
+        print("no all time tweets yet")
     uniqueTweets2 = { each['id'] : each for each in tweets2 }.values()
 
     newTweets = []
@@ -111,7 +115,8 @@ def twitterFunction(handle):
 
     handleSuf = "@" + handle + ".csv"
     directoryName4 = os.path.join("allTime",handleSuf)
-   
+    os.makedirs(os.path.dirname(directoryName4), exist_ok=True)
+
     #all time csv file, append data here
     # chooseName = "AllTime_" + handle
     # csvFileName = "{}.csv".format(chooseName)
@@ -198,10 +203,12 @@ def twitterFunctionAllKKM():
 
     tweets2 = []
     #only appending new stuff, thus open new json file
-    jsonFileToBeOpened = directoryName2
-    for line2 in open(jsonFileToBeOpened, 'r'):
-        tweets2.append(json.loads(line2))
-
+    try:
+        jsonFileToBeOpened = directoryName2
+        for line2 in open(jsonFileToBeOpened, 'r'):
+            tweets2.append(json.loads(line2))
+    except:
+        print("no all time tweets yet")
     uniqueTweets2 = { each['id'] : each for each in tweets2 }.values()
 
     newTweets = []
@@ -217,6 +224,7 @@ def twitterFunctionAllKKM():
 
     handleSuf = "@KKMallTwitter" + ".csv"
     directoryName3 = os.path.join(scrapeDate,handleSuf)
+    os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
 
     csv_out = open(directoryName3, mode='a') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
@@ -259,7 +267,8 @@ def twitterFunctionAllKKM():
 
     handleSuf = "@KKMallTwitter" + ".csv"
     directoryName4 = os.path.join("allTime",handleSuf)
-    
+    os.makedirs(os.path.dirname(directoryName4), exist_ok=True)
+
     csv_out = open(directoryName4, mode='a') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
 
@@ -345,12 +354,12 @@ def twitterFunctionAllCSK():
 
     tweets2 = []
     #only appending new stuff, thus open new json file
-    jsonFileToBeOpened = directoryName2
     try:
+        jsonFileToBeOpened = directoryName2
         for line2 in open(jsonFileToBeOpened, 'r'):
             tweets2.append(json.loads(line2))
     except:
-        print("no file yet")
+        print("no all time tweets yet")
 
     uniqueTweets2 = { each['id'] : each for each in tweets2 }.values()
 
@@ -367,6 +376,7 @@ def twitterFunctionAllCSK():
 
     handleSuf = "@CSKallTwitter" + ".csv"
     directoryName3 = os.path.join(scrapeDate,handleSuf)
+    os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
 
     csv_out = open(directoryName3, mode='a') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
@@ -409,7 +419,7 @@ def twitterFunctionAllCSK():
 
     handleSuf = "@CSKallTwitter" + ".csv"
     directoryName4 = os.path.join("allTime",handleSuf)
-    
+    os.makedirs(os.path.dirname(directoryName4), exist_ok=True)
     csv_out = open(directoryName4, mode='a') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
 

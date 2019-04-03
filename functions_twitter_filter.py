@@ -20,7 +20,7 @@ def deleteFile(fileName):
 	# 	print(dirs)
 		# for filename in files:
 		# 	print(filename)
-	os.remove(directoryName + '.csv')
+	os.remove(directoryName)
 
 def handleFilter(handle, words, andVar):
 	
@@ -34,11 +34,13 @@ def handleFilter(handle, words, andVar):
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
 
-	chooseName = "filterTwitter_@" + handle + "_" + scrapeDate #+ '_' + scrapeTime
+	chooseName = "filterTwitter_@" + handle + "_" + scrapeDate + ".csv" #+ '_' + scrapeTime
 
 
-	csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
-	csv_out = open(csvFileName, mode='w') #opens csv file
+	# csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
+	directoryName3 = os.path.join(scrapeDate,chooseName)
+	os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
+	csv_out = open(directoryName3, mode='w') #opens csv file
 	writer = csv.writer(csv_out) #create the csv writer object
 
 	fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'keywords', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
@@ -47,7 +49,7 @@ def handleFilter(handle, words, andVar):
 
 	tweets = []
 
-	jsonFileToBeOpened = scrapeDate + '/' + fname
+	jsonFileToBeOpened = directoryName
 	for line in open(jsonFileToBeOpened, 'r'):
 		tweets.append(json.loads(line))
 
@@ -114,7 +116,7 @@ def handleFilter(handle, words, andVar):
 				# print("or....got here..")
 	csv_out.close()
 
-	csv_out = open(csvFileName, mode='r') #opens csv file
+	csv_out = open(directoryName, mode='r') #opens csv file
 	reader = csv.reader(csv_out)
 	rows = []
 	iterReader = iter(reader)
@@ -138,11 +140,13 @@ def handleFilterWithDate(handle, words, andVar, startDate, endDate):
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
 
-	chooseName = "filterTwitter_@" + handle + "_" + scrapeDate #+ '_' + scrapeTime
+	chooseName = "filterTwitter_@" + handle + "_" + scrapeDate + ".csv" #+ '_' + scrapeTime
 
 
-	csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
-	csv_out = open(csvFileName, mode='w') #opens csv file
+	# csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
+	directoryName3 = os.path.join(scrapeDate,chooseName)
+	os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
+	csv_out = open(directoryName3, mode='w') #opens csv file
 	writer = csv.writer(csv_out) #create the csv writer object
 
 	fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'keywords', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
@@ -151,7 +155,7 @@ def handleFilterWithDate(handle, words, andVar, startDate, endDate):
 
 	tweets = []
 
-	jsonFileToBeOpened = scrapeDate + '/' + fname
+	jsonFileToBeOpened = directoryName
 	for line in open(jsonFileToBeOpened, 'r'):
 		tweets.append(json.loads(line))
 
@@ -249,7 +253,7 @@ def handleFilterWithDate(handle, words, andVar, startDate, endDate):
 				# print("or....got here..")
 	csv_out.close()
 
-	csv_out = open(csvFileName, mode='r') #opens csv file
+	csv_out = open(directoryName, mode='r') #opens csv file
 	reader = csv.reader(csv_out)
 	rows = []
 	iterReader = iter(reader)
@@ -277,11 +281,13 @@ def handleGroupFilter(groupName, words, andVar):
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
 
-	chooseName = "filterTwitter_@" + groupName + "_" + scrapeDate #+ '_' + scrapeTime
+	chooseName = "filterTwitter_@" + groupName + "_" + scrapeDate + ".csv"#+ '_' + scrapeTime
 
 
-	csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
-	csv_out = open(csvFileName, mode='w') #opens csv file
+	# csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
+	directoryName3 = os.path.join(scrapeDate,chooseName)
+	os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
+	csv_out = open(directoryName3, mode='w') #opens csv file
 	writer = csv.writer(csv_out) #create the csv writer object
 
 	fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'keywords', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
@@ -290,7 +296,7 @@ def handleGroupFilter(groupName, words, andVar):
 
 	tweets = []
 
-	jsonFileToBeOpened = "allTime" + '/' + fname
+	jsonFileToBeOpened = directoryName
 	for line in open(jsonFileToBeOpened, 'r'):
 		tweets.append(json.loads(line))
 
@@ -357,7 +363,7 @@ def handleGroupFilter(groupName, words, andVar):
 				# print("or....got here..")
 	csv_out.close()
 
-	csv_out = open(csvFileName, mode='r') #opens csv file
+	csv_out = open(directoryName, mode='r') #opens csv file
 	reader = csv.reader(csv_out)
 	rows = []
 	iterReader = iter(reader)
@@ -386,10 +392,12 @@ def handleGroupFilterWithDate(groupName, words, andVar, startDate, endDate):
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
 
-	chooseName = "filterTwitter_@" + groupName + "_" + scrapeDate #+ '_' + scrapeTime
+	chooseName = "filterTwitter_@" + groupName + "_" + scrapeDate + ".csv"#+ '_' + scrapeTime
 
-	csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
-	csv_out = open(csvFileName, mode='w') #opens csv file
+	# csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
+	directoryName3 = os.path.join(scrapeDate,chooseName)
+	os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
+	csv_out = open(directoryName3, mode='w') #opens csv file
 	writer = csv.writer(csv_out) #create the csv writer object
 
 	fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'keywords', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
@@ -496,7 +504,7 @@ def handleGroupFilterWithDate(groupName, words, andVar, startDate, endDate):
 				# print("or....got here..")
 	csv_out.close()
 
-	csv_out = open(csvFileName, mode='r') #opens csv file
+	csv_out = open(directoryName3, mode='r') #opens csv file
 	reader = csv.reader(csv_out)
 	rows = []
 	iterReader = iter(reader)

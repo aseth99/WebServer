@@ -24,11 +24,13 @@ def webFilterFunction(andVar, sourceVar, words):
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
 
-	csvName = "filter_Webscraper_" + sourceVar + "_" + scrapeDate #+ '_' + scrapeTime
+	csvName = "filter_Webscraper_" + sourceVar + "_" + scrapeDate + ".csv"#+ '_' + scrapeTime
 
-	csvFileName = scrapeDate + "/" + "{}.csv".format(csvName)
+	# csvFileName = scrapeDate + "/" + "{}.csv".format(csvName)
+	directoryName3 = os.path.join(scrapeDate,csvName)
+	os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
 
-	csv_out = open(csvFileName, mode='w') #opens csv file
+	csv_out = open(directoryName3, mode='w') #opens csv file
 	writer = csv.writer(csv_out) #create the csv writer object
 
 	fields = ['Title', 'URL', 'Text', 'Publication Date', 'Source', 'Keywords Searched', 'Keyword', 'Found in'] #field names
@@ -60,7 +62,7 @@ def webFilterFunction(andVar, sourceVar, words):
 
 	csv_out.close()
 
-	csv_out = open(csvFileName, mode='r') #opens csv file
+	csv_out = open(directoryName3, mode='r') #opens csv file
 	reader = csv.reader(csv_out)
 	rows = []
 	iterReader = iter(reader)
@@ -91,15 +93,19 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
 
-	csvName = "filter_Webscraper_" + sourceVar + "_" + scrapeDate #+ '_' + scrapeTime
+	# csvName = "filter_Webscraper_" + sourceVar + "_" + scrapeDate #+ '_' + scrapeTime
 
 	# directoryName2 = os.path.join(scrapeDate, csvName)
 	# os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
-	csvFileName = scrapeDate + "/" + "{}.csv".format(csvName)
+	# csvFileName = scrapeDate + "/" + "{}.csv".format(csvName)
+	csvName = "filter_Webscraper_" + sourceVar + "_" + scrapeDate + ".csv"#+ '_' + scrapeTime
+
+	# csvFileName = scrapeDate + "/" + "{}.csv".format(csvName)
+	directoryName3 = os.path.join(scrapeDate,csvName)
 
 
-	csv_out = open(csvFileName, mode='w') #opens csv file
+	csv_out = open(directoryName3, mode='w') #opens csv file
 	writer = csv.writer(csv_out) #create the csv writer object
 
 	# fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'keywords', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
@@ -283,7 +289,7 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 
 	csv_out.close()
 
-	csv_out = open(csvFileName, mode='r') #opens csv file
+	csv_out = open(directoryName3, mode='r') #opens csv file
 	reader = csv.reader(csv_out)
 	rows = []
 	iterReader = iter(reader)
