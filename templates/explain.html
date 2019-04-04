@@ -11,19 +11,13 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='styleExplanation.css') }}"/> 
 
-
-
-<style>
-
-</style>
-<body>
-
 <body>
 
 <div class="w3-top">
   <div class="w3-bar w3-white w3-top w3-left-align w3-large">
 <!--     <a class="w3-bar-item w3-button w3-right w3-hover-white w3-padding-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a> -->
-    <a class="w3-bar-item w3-button w3-padding-large w3-hover-white" onclick="testFxn()">Navigation Bar</a>
+    <img class="w3-bar-item w3-button w3-padding-large w3-hover-white" src="https://img.icons8.com/windows/32/000000/menu.png" onclick="testFxn()">
+    <!-- <a class="w3-bar-item w3-button w3-padding-large w3-hover-white" onclick="testFxn()">Navigation Bar</a> -->
     <a href="{{url_for('main')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Home Page</a>
     <a href="{{url_for('explain')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Explanation</a>
     <a href="{{url_for('scraper')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Scraper</a>

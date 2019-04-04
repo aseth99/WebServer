@@ -23,24 +23,7 @@ input[type=text] {
   border: none;
   background-color: #3CBC8D;
   color: white;
-  /*float: left;*/
 }
-/*.button {
-  background-color: #009900;
-  border: 1px solid green;;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s; 
-  cursor: pointer;
-  border: 2px solid #4CAF50;
-  border-radius: 50%;
-  float: left;
-}*/
 button {
     border-radius: 20px;
     border: 1px solid #ff4b2b;
@@ -72,21 +55,14 @@ button:hover {
   color: lightgrey;
  
 }
-/*
-.button:active {
-  background-color: #3e8e41;
-  transform: translateY(4px);
-}*/
 
 /* Style the content */
 .content {
   background-color: #ddd;
   padding: 10px;
-  height: 200px; /* Should be removed. Only for demonstration */
 }
 
 /* Style the footer */
 .footer {
   background-color: #f1f1f1;
-  padding: 10px;
 }

@@ -31,10 +31,18 @@
   </div>
 </div>
 
-
-<header class="w3-container w3-blue w3-center" style="padding:128px 16px">
+<header class="w3-container w3-blue w3-center" style="padding:128px 16px" id="header">
   <h1 class="w3-margin w3-jumbo">Python Web Server: Scraper Function</h1>
   <h2 style="color: white">Run the <a href="{{url_for('filter')}}">Filter Functions</a> After Scraping!<h2>
+  <p style="color: white; font-size: 16px">Navigate to:
+    <br>
+    <a href="#twitact">Twitter Account Scraper</a>
+    <br>
+    <a href="#kkm">KKM Scrapers</a>
+    <br>
+    <a href="#csk">CSK Scrapers</a>
+  </p>
+
   <br>
   <div id="div1" class="fa" style="display: none"></div>
 
@@ -54,152 +62,156 @@
   setInterval(hourglass, 3000);
   </script>
   
-  </header>
+</header>
 
-<div class="w3-container w3-teal">
 
-  <h2>Twitter Scraper</h2>
-  <p>Account Handle:</p>
-  <form action="{{ url_for('handle_data') }}" method="post">
-    <input type="text" id="keyword1" placeholder="@________" name="projectFilepath" autofocus>
-    <br>
-    <button class="button" name="filterbtn" type="submit" onclick="document.getElementById('div1').style.display='block'">Find those tweets...</button>
-  </form>
-  <br>
-</div>
-<div class="w3-container w3-cyan">
-    <h2>KKM Client</h2>
+<div class="w3-main" id ="main">
 
-    <p id="test">Website Scrapers</p>
-    
-    <form action="/ranACMscraper1/" method="post">
-      <button class="button" name="forwardBtn1" type="submit" onclick="document.getElementById('div1').style.display='block'">ACM</button>
-    </form> 
-    
-    <form action="/ranBAKKERSscraper2/" method="post">
-      <button class="button" name="forwardBtn2" type="submit" onclick="document.getElementById('div1').style.display='block'">Bakkers</button>
-    </form> 
+  <div class="w3-container w3-teal" id="twitact">
 
-    <form action="/ranBAKKERSWERELDscraper3/" method="post">
-      <button class="button" name="forwardBtn3" type="submit" onclick="document.getElementById('div1').style.display='block'">Bakkerswereld</button>
-    </form> 
-    
-    <form action="/ranCERESscraper4/" method="post">
-      <button class="button" name="forwardBtn4" type="submit" onclick="document.getElementById('div1').style.display='block'">Ceres</button>
-    </form> 
-    <form action="/ranDOSSCHEscraper5/" method="post">
-      <button class="button" name="forwardBtn5" type="submit" onclick="document.getElementById('div1').style.display='block'">Dossche</button>
-    </form> 
-    <form action="/ranSOUFFLETscraper6/" method="post">
-      <button class="button" name="forwardBtn6" type="submit" onclick="document.getElementById('div1').style.display='block'">Soufflet</button>
-    </form> 
-    <form action="/ranTIJDscraper7/" method="post">
-      <button class="button" name="forwardBtn7" type="submit" onclick="document.getElementById('div1').style.display='block'">TIJD</button>
-    </form> 
-    <form action="/ranALLscrapers/" method="post">
-      <button class="button" name="forwardBtn8" type="submit" onclick="document.getElementById('div1').style.display='block'">Run All Scrapers</button>
-    </form> 
-    <br>
-    <br>
-    <br>
-    <br>
-    <p id="test0">Twitter Scrapers</p> 
-    
-  <!--   <form action="/syncTwitterKeys/" method="post">
-      <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
-    </form> 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br> -->
-
-    <form action="/ranTwitter1/" method="post">
-      <button class="button" name="forwardBtn9" type="submit" onclick="document.getElementById('div1').style.display='block'">@bakkerswereldnl</button>
-    </form> 
-    
-    <form action="/ranTwitter2/" method="post">
-      <button class="button" name="forwardBtn10" type="submit" onclick="document.getElementById('div1').style.display='block'">@bakkersinb</button>
-    </form> 
-
-    <form action="/ranTwitter3/" method="post">
-      <button class="button" name="forwardBtn11" type="submit" onclick="document.getElementById('div1').style.display='block'">@bakkerijcentrum</button>
-    </form> 
-    
-    <form action="/ranTwitter4/" method="post">
-      <button class="button" name="forwardBtn12" type="submit" onclick="document.getElementById('div1').style.display='block'">@bakerynext</button>
-    </form> 
-     <form action="/ranTwitter5/" method="post">
-      <button class="button" name="forwardBtn13" type="submit" onclick="document.getElementById('div1').style.display='block'">@dossche_mills</button>
-    </form>  
-    <form action="/ranTwitter6/" method="post">
-      <button class="button" name="forwardBtn14" type="submit" onclick="document.getElementById('div1').style.display='block'">@groupesoufflet</button>
-    </form> 
-    <form action="/ranTwitter7/" method="post">
-      <button class="button" name="forwardBtn15" type="submit" onclick="document.getElementById('div1').style.display='block'">Run All KKM Twitter Scrapers</button>
+    <h2>Twitter Scraper</h2>
+    <p>Account Handle:</p>
+    <form action="{{ url_for('handle_data') }}" method="post">
+      <input type="text" id="keyword1" placeholder="@________" name="projectFilepath" autofocus>
+      <br>
+      <button class="button" name="filterbtn" type="submit" onclick="document.getElementById('div1').style.display='block'">Find those tweets...</button>
     </form>
-    <br> 
-</div>
-<div class="w3-container w3-teal">
-    <h2>CSK Client</h2>
-    <p id="test1">Website Scrapers</p>
-    <form action="/ranscraper1/" method="post">
-      <button class="button" name="forwardBtn1" type="submit" onclick="document.getElementById('div1').style.display='block'">Food Ingredients First</button>
-    </form> 
-    
-    <form action="/ranscraper2/" method="post">
-      <button class="button" name="forwardBtn2" type="submit" onclick="document.getElementById('div1').style.display='block'">Food Navigator</button>
-    </form> 
+    <br>
+  </div>
+  <div class="w3-container w3-cyan" id="kkm">
+      <h2>KKM Client</h2>
 
-    <form action="/ranscraper3/" method="post">
-      <button class="button" name="forwardBtn3" type="submit" onclick="document.getElementById('div1').style.display='block'">Dairy Reporter</button>
-    </form> 
-    
-    <form action="/ranscraper4/" method="post">
-      <button class="button" name="forwardBtn4" type="submit" onclick="document.getElementById('div1').style.display='block'">Bakery and Snacks</button>
-    </form> 
-    <form action="/ranscraper5/" method="post">
-      <button class="button" name="forwardBtn5" type="submit" onclick="document.getElementById('div1').style.display='block'">Boerderij</button>
-    </form> 
-    <form action="/ranscraper6/" method="post">
-      <button class="button" name="forwardBtn6" type="submit" onclick="document.getElementById('div1').style.display='block'">Run All Scrapers</button>
-    </form> 
-    <br>
-    <br>
-    <br>
-    <br>
-    <p id="test2">Twitter Scrapers</p> 
-  <!--   <form action="/syncTwitterKeys/" method="post">
-      <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
-    </form> 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br> -->
-    <form action="/ranTwitter8/" method="post">
-      <button class="button" name="forwardBtn16" type="submit" onclick="document.getElementById('div1').style.display='block'">@FoodIng1st</button>
-    </form>
-    
-    <form action="/ranTwitter9/" method="post">
-      <button class="button" name="forwardBtn17" type="submit" onclick="document.getElementById('div1').style.display='block'">@FoodNavigator</button>
-    </form> 
+      <p id="test">Website Scrapers</p>
+      
+      <form action="/ranACMscraper1/" method="post">
+        <button class="button" name="forwardBtn1" type="submit" onclick="document.getElementById('div1').style.display='block'">ACM</button>
+      </form> 
+      
+      <form action="/ranBAKKERSscraper2/" method="post">
+        <button class="button" name="forwardBtn2" type="submit" onclick="document.getElementById('div1').style.display='block'">Bakkers</button>
+      </form> 
 
-    <form action="/ranTwitter10/" method="post">
-      <button class="button" name="forwardBtn18" type="submit" onclick="document.getElementById('div1').style.display='block'">@DairyReporter</button>
-    </form> 
-    
-    <form action="/ranTwitter11/" method="post">
-      <button class="button" name="forwardBtn19" type="submit" onclick="document.getElementById('div1').style.display='block'">@BakeryAndSnacks</button>
-    </form>
-    <form action="/ranTwitter12/" method="post">
-      <button class="button" name="forwardBtn20" type="submit" onclick="document.getElementById('div1').style.display='block'">@Boerderij_nl</button>
-    </form> 
-    <form action="/ranTwitter13/" method="post">
-      <button class="button" name="forwardBtn21" type="submit" onclick="document.getElementById('div1').style.display='block'">Run all CSK twitter scrapers</button>
-    </form>
+      <form action="/ranBAKKERSWERELDscraper3/" method="post">
+        <button class="button" name="forwardBtn3" type="submit" onclick="document.getElementById('div1').style.display='block'">Bakkerswereld</button>
+      </form> 
+      
+      <form action="/ranCERESscraper4/" method="post">
+        <button class="button" name="forwardBtn4" type="submit" onclick="document.getElementById('div1').style.display='block'">Ceres</button>
+      </form> 
+      <form action="/ranDOSSCHEscraper5/" method="post">
+        <button class="button" name="forwardBtn5" type="submit" onclick="document.getElementById('div1').style.display='block'">Dossche</button>
+      </form> 
+      <form action="/ranSOUFFLETscraper6/" method="post">
+        <button class="button" name="forwardBtn6" type="submit" onclick="document.getElementById('div1').style.display='block'">Soufflet</button>
+      </form> 
+      <form action="/ranTIJDscraper7/" method="post">
+        <button class="button" name="forwardBtn7" type="submit" onclick="document.getElementById('div1').style.display='block'">TIJD</button>
+      </form> 
+      <form action="/ranALLscrapers/" method="post">
+        <button class="button" name="forwardBtn8" type="submit" onclick="document.getElementById('div1').style.display='block'">Run All Scrapers</button>
+      </form> 
+      <br>
+      <br>
+      <br>
+      <br>
+      <p id="test0">Twitter Scrapers</p> 
+      
+    <!--   <form action="/syncTwitterKeys/" method="post">
+        <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
+      </form> 
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br> -->
+
+      <form action="/ranTwitter1/" method="post">
+        <button class="button" name="forwardBtn9" type="submit" onclick="document.getElementById('div1').style.display='block'">@bakkerswereldnl</button>
+      </form> 
+      
+      <form action="/ranTwitter2/" method="post">
+        <button class="button" name="forwardBtn10" type="submit" onclick="document.getElementById('div1').style.display='block'">@bakkersinb</button>
+      </form> 
+
+      <form action="/ranTwitter3/" method="post">
+        <button class="button" name="forwardBtn11" type="submit" onclick="document.getElementById('div1').style.display='block'">@bakkerijcentrum</button>
+      </form> 
+      
+      <form action="/ranTwitter4/" method="post">
+        <button class="button" name="forwardBtn12" type="submit" onclick="document.getElementById('div1').style.display='block'">@bakerynext</button>
+      </form> 
+       <form action="/ranTwitter5/" method="post">
+        <button class="button" name="forwardBtn13" type="submit" onclick="document.getElementById('div1').style.display='block'">@dossche_mills</button>
+      </form>  
+      <form action="/ranTwitter6/" method="post">
+        <button class="button" name="forwardBtn14" type="submit" onclick="document.getElementById('div1').style.display='block'">@groupesoufflet</button>
+      </form> 
+      <form action="/ranTwitter7/" method="post">
+        <button class="button" name="forwardBtn15" type="submit" onclick="document.getElementById('div1').style.display='block'">Run All KKM Twitter Scrapers</button>
+      </form>
+      <br> 
+  </div>
+  <div class="w3-container w3-teal" id="csk">
+      <h2>CSK Client</h2>
+      <p id="test1">Website Scrapers</p>
+      <form action="/ranscraper1/" method="post">
+        <button class="button" name="forwardBtn1" type="submit" onclick="document.getElementById('div1').style.display='block'">Food Ingredients First</button>
+      </form> 
+      
+      <form action="/ranscraper2/" method="post">
+        <button class="button" name="forwardBtn2" type="submit" onclick="document.getElementById('div1').style.display='block'">Food Navigator</button>
+      </form> 
+
+      <form action="/ranscraper3/" method="post">
+        <button class="button" name="forwardBtn3" type="submit" onclick="document.getElementById('div1').style.display='block'">Dairy Reporter</button>
+      </form> 
+      
+      <form action="/ranscraper4/" method="post">
+        <button class="button" name="forwardBtn4" type="submit" onclick="document.getElementById('div1').style.display='block'">Bakery and Snacks</button>
+      </form> 
+      <form action="/ranscraper5/" method="post">
+        <button class="button" name="forwardBtn5" type="submit" onclick="document.getElementById('div1').style.display='block'">Boerderij</button>
+      </form> 
+      <form action="/ranscraper6/" method="post">
+        <button class="button" name="forwardBtn6" type="submit" onclick="document.getElementById('div1').style.display='block'">Run All Scrapers</button>
+      </form> 
+      <br>
+      <br>
+      <br>
+      <br>
+      <p id="test2">Twitter Scrapers</p> 
+    <!--   <form action="/syncTwitterKeys/" method="post">
+        <button class="button" name="twitterKeys" type="submit">Authorize Twitter API Keys</button>
+      </form> 
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br> -->
+      <form action="/ranTwitter8/" method="post">
+        <button class="button" name="forwardBtn16" type="submit" onclick="document.getElementById('div1').style.display='block'">@FoodIng1st</button>
+      </form>
+      
+      <form action="/ranTwitter9/" method="post">
+        <button class="button" name="forwardBtn17" type="submit" onclick="document.getElementById('div1').style.display='block'">@FoodNavigator</button>
+      </form> 
+
+      <form action="/ranTwitter10/" method="post">
+        <button class="button" name="forwardBtn18" type="submit" onclick="document.getElementById('div1').style.display='block'">@DairyReporter</button>
+      </form> 
+      
+      <form action="/ranTwitter11/" method="post">
+        <button class="button" name="forwardBtn19" type="submit" onclick="document.getElementById('div1').style.display='block'">@BakeryAndSnacks</button>
+      </form>
+      <form action="/ranTwitter12/" method="post">
+        <button class="button" name="forwardBtn20" type="submit" onclick="document.getElementById('div1').style.display='block'">@Boerderij_nl</button>
+      </form> 
+      <form action="/ranTwitter13/" method="post">
+        <button class="button" name="forwardBtn21" type="submit" onclick="document.getElementById('div1').style.display='block'">Run all CSK twitter scrapers</button>
+      </form>
+    </div>
   </div>
 <div class="footer w3-blue">
   <p>Still in progress...</p>
