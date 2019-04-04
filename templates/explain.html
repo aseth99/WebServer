@@ -9,37 +9,21 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 
+<link rel="stylesheet" href="{{ url_for('static', filename='styleExplanation.css') }}"/> 
+
+
+
 <style>
-* {
-  box-sizing: border-box;
-  font-family: Lato, Montserrat;
-  text-align: center;
-}
 
-body {
-  margin: 0;
-  font-family: Lato, Montserrat;
-}
-
-
-/* Style the content */
-.content {
-  background-color: #ddd;
-  padding: 10px;
-  height: 200px; /* Should be removed. Only for demonstration */
-}
-
-/* Style the footer */
-.footer {
-  background-color: #f1f1f1;
-  padding: 10px;
-}
 </style>
-</head>
+<body>
+
 <body>
 
 <div class="w3-top">
-  <div class="w3-bar w3-white w3-card w3-left-align w3-large">
+  <div class="w3-bar w3-white w3-top w3-left-align w3-large">
+<!--     <a class="w3-bar-item w3-button w3-right w3-hover-white w3-padding-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a> -->
+    <a class="w3-bar-item w3-button w3-padding-large w3-hover-white" onclick="testFxn()">Navigation Bar</a>
     <a href="{{url_for('main')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Home Page</a>
     <a href="{{url_for('explain')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Explanation</a>
     <a href="{{url_for('scraper')}}" class="w3-bar-item w3-button w3-padding-large w3-white">Scraper</a>
@@ -54,12 +38,98 @@ body {
   <p>Explains how to use the different tools of this web app</p>
 </header>
 
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-large w3-animate-left" id="mySidebar" style="display: block">
+  <h4 class="w3-bar-item"><b>Navigate To:</b></h4>
+  <a href="http://localhost:8000/explain#scraper" class="w3-bar-item w3-button w3-hover-black" href="#">Scraper Instructions</a>
+  <a href="http://localhost:8000/explain#filter" class="w3-bar-item w3-button w3-hover-black" href="#">Filter Instructions</a>
+  <a href="http://localhost:8000/explain#datast"class="w3-bar-item w3-button w3-hover-black" href="#">Where the data is stored</a>
+  <a href="http://localhost:8000/explain#howto" class="w3-bar-item w3-button w3-hover-black" href="#">How to Set Up</a>
+</nav>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function testFxn() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+
+  } else {
+    mySidebar.style.display = 'block';
+  }
+}
+
+</script>
+
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" id ="main" style="margin-left:250px">
+
+  <div class="w3-row w3-padding-64" id="scraper">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Scraper Instructions</h1>
+      <p>Run the <a href="{{url_for('scraper')}}">Scraper Functions</a> Before Filtering! You can click any of the buttons on that page to scrape the webpage or twitter handle. You can even input any twitter username to scrape those results!</p>
+    </div>
+    <div class="w3-third w3-container">
+      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
+      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
+    </div>
+  </div>
+
+  <div class="w3-row" id="filter">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Filter Instructions</h1>
+      <p>Run the <a href="{{url_for('filter')}}">Filter Functions</a> After Scraping! You can choose whether to filter a twitter account, or a web page. You also have the option to choose whether to scrape by groups or not (only for CSK & KKM)</p>
+    </div>
+    <div class="w3-third w3-container">
+      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
+      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
+    </div>
+  </div>
+  <div class="w3-row" id="datast">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">Data Storage Instructions</h1>
+      <p>Under the project folder on your computer, each scrape/filter will put a file with new information in a folder labelled as the current date (YYMMDD), and each scrape will also append any new info to the allTime folder</p>
+    </div>
+    <div class="w3-third w3-container">
+      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
+      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
+    </div>
+  </div>
+
+
+  <div class="w3-row w3-padding-64" id="howto">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-teal">How To Set Up</h1>
+      <p>1. Put project in Desktop </p>
+      <p>2. Click FirstTime.sh </p>
+      <p>3. Click ClickHere.sh </p>
+      <p>4. Click ClickHere2.sh </p>
+      <p>5. Any time you would like to run it in the future, just follow steps 3 & 4.
+    </div>
+    <div class="w3-third w3-container">
+      <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
+      <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
+    </div>
+  </div>
+
+  
+<!-- END MAIN -->
+</div>
+
+
 <div class="footer">
   <p>Still in progress...</p>
   <a href="https://facebook.com">Facebook</a>
   <a href="https://twitter.com/">Twitter</a>
   <a href="https://www.linkedin.com/">LinkedIn</a>
 </div>
-
 </body>
 </html>
+
+
+
+</head>
+

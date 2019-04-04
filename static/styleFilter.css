@@ -14,7 +14,7 @@ p {
 }
 
 span {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 button {
@@ -83,6 +83,7 @@ input[type=text] {
   border: none;
   background-color: #3CBC8D;
   color: white;
+  font-size: 16px;
 }
 
 .button:hover {
