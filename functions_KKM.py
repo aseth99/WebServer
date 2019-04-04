@@ -8,6 +8,11 @@ from bs4 import BeautifulSoup
 import json
 import sys
 
+# myclient = pymongo.MongoClient("mongodb+srv://serverUser:News@hammer4@scrapednews-3zys9.azure.mongodb.net/test?retryWrites=true")
+
+# mydb = myclient["KKMdata"]
+
+
 def jsonToCSV1(name):
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
@@ -1207,8 +1212,12 @@ def allFunctionsRan():
             output_file.write("\n")
 
         output_file2 = open(directoryName2,'a')
+
+        # mycol = mydb["KKMnews"]
         
+
         for x in dataAllTime:
+            # mycol.insert(x)
             jsonToCSVspecial2('ALLKKM', x)
             json.dump(x, output_file2)
             output_file2.write("\n")
