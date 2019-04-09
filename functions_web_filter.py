@@ -10,15 +10,10 @@ def webFilterFunction(andVar, sourceVar, words):
 
 	if sourceVar == "ACM" or "Bakkers" or "Bakkerswereld" or "Ceres" or "Tijd" or "FIF" or "FN" or "FB" or "BNS" or "DR":
 		fname =  "Results" + sourceVar +".json"
-		
-	
 	elif sourceVar == "AllCSK":
-		#..
-		return
-
+		fname =  "Results" + sourceVar +".json"
 	elif sourceVar == "AllKKM":
-		#..
-		return
+		fname =  "Results" + sourceVar +".json"
 	else:
 		print("shrug...")
 		return
@@ -82,16 +77,12 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 
 	if sourceVar == "ACM" or "Bakkers" or "Bakkerswereld" or "Ceres" or "Tijd" or "FIF" or "FN" or "FB" or "BNS" or "DR":
 		fname =  "Results" + sourceVar +".json"
-		
-	
 	elif sourceVar == "AllCSK":
-		#..
+		print("cant filter by date with group")
 		return
-
 	elif sourceVar == "AllKKM":
-		#..
+		print("cant filter by date with group")
 		return
-
 	else:
 		print("shrug...")
 		return
@@ -130,6 +121,7 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 	for lineToBeRead in open(jsonFileToBeOpened, 'r'):
 	    texts.append(json.loads(lineToBeRead))
 
+	num = 0
 	for line in texts:
 		publicationDate = line.get('publication date')
 		if sourceVar == "ACM":
@@ -140,7 +132,6 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 			print(compareDate)
 			if ((int(startDate)>int(compareDate)) or (int(endDate)<int(compareDate))):
 				continue
-
 		elif sourceVar == "Bakkers":
 			print("cant filter by date, only month & year")
 			startDateLoopVar = "20" + startDate[0:2]
@@ -188,7 +179,6 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 			compareDate = yearVar+monthVar+dateVar
 			if ((int(startDate)>int(compareDate)) or (int(endDate)<int(compareDate))):
 				continue
-
 		elif sourceVar == "Bakkerswereld":
 			yearVar = publicationDate[2:4]
 			monthVar = publicationDate[5:7]
@@ -197,7 +187,6 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 			# print(compareDate)
 			if ((int(startDate)>int(compareDate)) or (int(endDate)<int(compareDate))):
 				continue
-
 		elif sourceVar == "Ceres":
 			yearVar = publicationDate[-2:]
 			if "jan" in publicationDate:
@@ -229,10 +218,8 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 			compareDate = yearVar+monthVar+dateVar
 			if ((int(startDate)>int(compareDate)) or (int(endDate)<int(compareDate))):
 				continue
-
 		elif sourceVar == "Dossche":
 			print("no date filter possible for Dossche")
-
 		elif sourceVar == "Soufflet":
 			yearVar = publicationDate[-2:]
 			if "jan" in publicationDate:
@@ -267,7 +254,6 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 			# print(compareDate)
 			if ((int(startDate)>int(compareDate)) or (int(endDate)<int(compareDate))):
 				continue
-		
 		elif sourceVar == "Tijd":
 			print(publicationDate)
 			yearVar = publicationDate[2:4]
@@ -277,24 +263,66 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 			print(compareDate)
 			if ((int(startDate)>int(compareDate)) or (int(endDate)<int(compareDate))):
 				continue
-
-
-		for line in texts:
-			#Or/And functionality
-			if(andVar):
-				if all(x in line.get('text').lower() for x in filterArray):
-					writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, "all", 'text'])
-				elif all(x in line.get('title').lower() for x in filterArray):
-					writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, "all", 'title'])
-			else:
-				for x in filterArray:
-					if x in (line.get('text')).lower():
-						if any(y in (line.get('title')).lower() for y in filterArray):
-							writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title & text'])
-						else:
-							writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'text'])
-					elif x in (line.get('title')).lower():
-						writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title'])
+		elif sourceVar == "FB":
+			print(publicationDate)
+			print("SUP")
+			yearVar = publicationDate[2:4]
+			print(yearVar)
+			monthVar = publicationDate[5:7]
+			print(monthVar)
+			dateVar = publicationDate[8:]
+			print(dateVar)
+			compareDate = yearVar+monthVar+dateVar
+			print(compareDate)
+			if ((int(startDate)>int(compareDate)) or (int(endDate)<int(compareDate))):
+				continue
+		elif sourceVar == "DR" or "BNS" or "FN" or "FIF":
+			print(publicationDate)
+			yearVar = publicationDate[9:]
+			if "Jan" in publicationDate:
+				monthVar = "01"
+			elif "Feb" in publicationDate:
+				monthVar = "02"
+			elif "Mar" in publicationDate:
+				monthVar = "03"
+			elif "Apr" in publicationDate:
+				monthVar = "04"
+			elif "May" in publicationDate:
+				monthVar = "05"
+			elif "Jun" in publicationDate:
+				monthVar = "06"
+			elif "Jul" in publicationDate:
+				monthVar = "07"
+			elif "Aug" in publicationDate:
+				monthVar = "08"
+			elif "Sep" in publicationDate:
+				monthVar = "09"
+			elif "Oct" in publicationDate:
+				monthVar = "10"
+			elif "Nov" in publicationDate:
+				monthVar = "11"
+			elif "Dec" in publicationDate:
+				monthVar = "12"
+			else: monthVar = "00"
+			dateVar = publicationDate[:2]
+			compareDate = yearVar+monthVar+dateVar
+			print(compareDate)
+			if ((int(startDate)>int(compareDate)) or (int(endDate)<int(compareDate))):
+				continue
+		if(andVar):
+			if all(x in line.get('text').lower() for x in filterArray):
+				writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, "all", 'text'])
+			elif all(x in line.get('title').lower() for x in filterArray):
+				writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, "all", 'title'])
+		else:
+			for x in filterArray:
+				if x in (line.get('text')).lower():
+					if any(y in (line.get('title')).lower() for y in filterArray):
+						writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title & text'])
+					else:
+						writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'text'])
+				elif x in (line.get('title')).lower():
+					writer.writerow([line.get('title'), line.get('url'), line.get('text'), line.get('publication date'), line.get('source'), filterArray, x, 'title'])
 
 	csv_out.close()
 
