@@ -562,7 +562,7 @@ def fif_scrape_run():
         jsonToCSV1('fif')
         for x in uniqueLine:
             jsonToCSV('fif', x)
-
+        
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
             log.write('Scrape Date = ' + scrapeDate + '\n')
@@ -894,14 +894,14 @@ def allCSKFunctionsRan():
         jsonToCSV1('AllCSK')
         print("got here2")
 
-        output_file = open(directoryName,'a')
+        output_file = open(directoryName,'w')
         
         for x in data:
             jsonToCSVspecial('ALLCSK', x)
             json.dump(x, output_file)
             output_file.write("\n")
 
-        output_file2 = open(directoryName2,'a')
+        output_file2 = open(directoryName2,'w')
         
         for x in dataAllTime:
             jsonToCSVspecial2('ALLCSK', x)

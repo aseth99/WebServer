@@ -1204,14 +1204,14 @@ def allKKMFunctionsRan():
         jsonToCSV1('AllKKM')
         print("got here2")
 
-        output_file = open(directoryName,'a')
+        output_file = open(directoryName,'w')
         
         for x in data:
             jsonToCSVspecial('ALLKKM', x)
             json.dump(x, output_file)
             output_file.write("\n")
 
-        output_file2 = open(directoryName2,'a')
+        output_file2 = open(directoryName2,'w')
 
         # mycol = mydb["KKMnews"]
         

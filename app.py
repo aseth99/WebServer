@@ -264,6 +264,10 @@ def move_forward1():
 		acm_scrape_run()
 	except:
 		print("acm scraper is broken")
+	try:
+		allKKMFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranBAKKERSscraper2/", methods=['POST'])
@@ -272,6 +276,10 @@ def move_forward2():
 		bakkers_scrape_run()
 	except:
 		print("bakkers scraper is broken")
+	try:
+		allKKMFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranBAKKERSWERELDscraper3/", methods=['POST'])
@@ -280,6 +288,10 @@ def move_forward3():
 		bakkerswereld_scrape_run()
 	except:
 		print("bakkerswereld scraper is broken")
+	try:
+		allKKMFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranCERESscraper4/", methods=['POST'])
@@ -288,6 +300,10 @@ def move_forward4():
 		ceres_scrape_run()
 	except:
 		print("ceres scraper is broken")
+	try:
+		allKKMFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranDOSSCHEscraper5/", methods=['POST'])
@@ -296,6 +312,10 @@ def move_forward5():
 		dossche_scrape_run()
 	except:
 		print("dossche scraper is broken")
+	try:
+		allKKMFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranSOUFFLETscraper6/", methods=['POST'])
@@ -304,6 +324,10 @@ def move_forward6():
 		soufflet_scrape_run()
 	except:
 		print("soufflet scraper is broken")
+	try:
+		allKKMFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranTIJDscraper7/", methods=['POST'])
@@ -312,6 +336,10 @@ def move_forward7():
 		tijd_scrape_run()
 	except:
 		print("tijd scraper is broken")
+	try:
+		allKKMFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 
@@ -362,6 +390,10 @@ def move_forward9():
 		bns_scrape_run()
 	except:
 		print("bns scraper is broken")
+	try:
+		allCSKFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranDRscraper10/", methods=['POST'])
@@ -370,6 +402,10 @@ def move_forward10():
 		dr_scrape_run()
 	except:
 		print("dr scraper is broken")
+	try:
+		allCSKFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranFNscraper11/", methods=['POST'])
@@ -378,6 +414,10 @@ def move_forward11():
 		fn_scrape_run()
 	except:
 		print("fn scraper is broken")
+	try:
+		allCSKFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranFIFscraper12/", methods=['POST'])
@@ -386,6 +426,10 @@ def move_forward12():
 		fif_scrape_run()
 	except:
 		print("fif scraper is broken")
+	try:
+		allCSKFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 @app.route("/ranFBscraper13/", methods=['POST'])
@@ -394,6 +438,10 @@ def move_forward13():
 		foodBev_scrape_run()
 	except:
 		print("fb scraper is broken")
+	try:
+		allCSKFunctionsRan()
+	except:
+		print("something is broken")
 	return render_template('scraper.html');
 
 
@@ -423,7 +471,6 @@ def move_forward14():
 		foodBev_scrape_run()
 	except:
 		print("fb scraper is broken")
-
 
 	try:
 		allCSKFunctionsRan()
