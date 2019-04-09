@@ -11,8 +11,7 @@ import sys
 # myclient = pymongo.MongoClient("mongodb+srv://serverUser:News@hammer4@scrapednews-3zys9.azure.mongodb.net/test?retryWrites=true")
 
 # mydb = myclient["KKMdata"]
-
-
+#writes into todays csv files, appends to all time 
 def jsonToCSV1(name):
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
@@ -40,7 +39,7 @@ def jsonToCSV1(name):
     csv_out.close()
 
     return
-
+#appends stuff to csv file, line by line
 def jsonToCSV(name, line):
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
@@ -1226,7 +1225,7 @@ def allKKMFunctionsRan():
         print("somethin wrong")
 
     return
-
+#special as its for allCSK, as we run one for scrape date, one for allTime
 def jsonToCSVspecial(name, line):
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')

@@ -6,6 +6,7 @@ dt = datetime.now()
 scrapeDate = dt.strftime('%y%m%d')
 scrapeTime = dt.strftime('%H%M%S')
 
+#and/or filter used, as well as keyword search
 def webFilterFunction(andVar, sourceVar, words):
 
 	if sourceVar == "ACM" or "Bakkers" or "Bakkerswereld" or "Ceres" or "Tijd" or "FIF" or "FN" or "FB" or "BNS" or "DR":
@@ -72,7 +73,7 @@ def webFilterFunction(andVar, sourceVar, words):
 		rows.append(row)
 	return row_count, csvName, fields, rows
 
-
+#additionally to the and/or, a date functionality has been added based on the source
 def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 
 	if sourceVar == "ACM" or "Bakkers" or "Bakkerswereld" or "Ceres" or "Tijd" or "FIF" or "FN" or "FB" or "BNS" or "DR":

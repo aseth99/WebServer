@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import json
 import sys
 
+#writes into todays csv files, appends to all time 
 def jsonToCSV1(name):
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
@@ -36,6 +37,7 @@ def jsonToCSV1(name):
 
     return
 
+#appends stuff to csv file, line by line
 def jsonToCSV(name, line):
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
@@ -913,6 +915,7 @@ def allCSKFunctionsRan():
 
     return
 
+#special as its for allCSK, as we run one for scrape date, one for allTime
 def jsonToCSVspecial(name, line):
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')

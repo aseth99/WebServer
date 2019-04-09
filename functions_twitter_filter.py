@@ -15,29 +15,17 @@ def deleteFile(fileName):
 	directoryName = os.path.join(scrapeDate,fileName)
 
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-	# for root, dirs, files in os.walk("."):  
-	# 	print(root)
-	# 	print(dirs)
-		# for filename in files:
-		# 	print(filename)
 	os.remove(directoryName)
 
 def handleFilter(handle, words, andVar):
 	
 	fname =  "@" + handle +".json"
-
-	# if todayVar == True:
-	# 	directoryName = os.path.join(scrapeDate,fname)
-	# else:
 	directoryName = os.path.join("allTime", fname)
 
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
+	chooseName = "filterTwitter_@" + handle + "_" + scrapeDate + ".csv" 
 
-	chooseName = "filterTwitter_@" + handle + "_" + scrapeDate + ".csv" #+ '_' + scrapeTime
-
-
-	# csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
 	directoryName3 = os.path.join(scrapeDate,chooseName)
 	os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
 	csv_out = open(directoryName3, mode='w') #opens csv file
@@ -55,7 +43,6 @@ def handleFilter(handle, words, andVar):
 
 	for line in tweets:
 		dateOfTweet = line.get('created_at')
-		# print(dateOfTweet)
 		yearOfTweet = dateOfTweet[-4:]
 		monthOfTweet = dateOfTweet[4:7]
 		dayofTweet = dateOfTweet[8:10]
@@ -98,7 +85,6 @@ def handleFilter(handle, words, andVar):
 				line.get('retweet_count'),
 				line.get('favorite_count')])
 
-				# print("and....got here..")
 		#or search
 		else:
 			print("or var!")
@@ -115,7 +101,6 @@ def handleFilter(handle, words, andVar):
 				line.get('retweet_count'),
 				line.get('favorite_count')])
 
-				# print("or....got here..")
 	csv_out.close()
 
 	csv_out = open(directoryName3, mode='r') #opens csv file
@@ -134,18 +119,12 @@ def handleFilterWithDate(handle, words, andVar, startDate, endDate):
 	
 	fname =  "@" + handle +".json"
 
-	# if todayVar == True:
-	# 	directoryName = os.path.join(scrapeDate,fname)
-	# else:
 	directoryName = os.path.join("allTime", fname)
 
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
-
 	chooseName = "filterTwitter_@" + handle + "_" + scrapeDate + ".csv" #+ '_' + scrapeTime
 
-
-	# csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
 	directoryName3 = os.path.join(scrapeDate,chooseName)
 	os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
 	csv_out = open(directoryName3, mode='w') #opens csv file
@@ -163,7 +142,6 @@ def handleFilterWithDate(handle, words, andVar, startDate, endDate):
 
 	for line in tweets:
 		dateOfTweet = line.get('created_at')
-		# print(dateOfTweet)
 		yearOfTweet = dateOfTweet[-4:]
 		monthOfTweet = dateOfTweet[4:7]
 		dayofTweet = dateOfTweet[8:10]
@@ -195,7 +173,6 @@ def handleFilterWithDate(handle, words, andVar, startDate, endDate):
 			numMonth = "12"
 
 		filterCompareDate = (yearOfTweet+numMonth+dayofTweet)[2:]
-		# print(filterCompareDate)
 
 		if ((int(startDate)>int(filterCompareDate)) or (int(endDate)<int(filterCompareDate))):
 			continue
@@ -236,7 +213,6 @@ def handleFilterWithDate(handle, words, andVar, startDate, endDate):
 				line.get('retweet_count'),
 				line.get('favorite_count')])
 
-				# print("and....got here..")
 		#or search
 		else:
 			if any(x in line.get('text').lower() for x in filterArray):
@@ -252,7 +228,6 @@ def handleFilterWithDate(handle, words, andVar, startDate, endDate):
 				line.get('retweet_count'),
 				line.get('favorite_count')])
 
-				# print("or....got here..")
 	csv_out.close()
 
 	csv_out = open(directoryName3, mode='r') #opens csv file
@@ -275,18 +250,12 @@ def handleGroupFilter(groupName, words, andVar):
 	else: 
 		print("shrug...")
 		return 
-	# if todayVar == True:
-	# 	directoryName = os.path.join(scrapeDate,fname)
-	# else:
 	directoryName = os.path.join("allTime", fname)
 
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
 
-
 	chooseName = "filterTwitter_@" + groupName + "_" + scrapeDate + ".csv"#+ '_' + scrapeTime
 
-
-	# csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
 	directoryName3 = os.path.join(scrapeDate,chooseName)
 	os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
 	csv_out = open(directoryName3, mode='w') #opens csv file
@@ -304,7 +273,6 @@ def handleGroupFilter(groupName, words, andVar):
 
 	for line in tweets:
 		dateOfTweet = line.get('created_at')
-		# print(dateOfTweet)
 		yearOfTweet = dateOfTweet[-4:]
 		monthOfTweet = dateOfTweet[4:7]
 		dayofTweet = dateOfTweet[8:10]
@@ -346,7 +314,6 @@ def handleGroupFilter(groupName, words, andVar):
 				line.get('retweet_count'),
 				line.get('favorite_count')])
 
-				# print("and....got here..")
 		#or search
 		else:
 			if any(x in line.get('text').lower() for x in filterArray):
@@ -362,7 +329,6 @@ def handleGroupFilter(groupName, words, andVar):
 				line.get('retweet_count'),
 				line.get('favorite_count')])
 
-				# print("or....got here..")
 	csv_out.close()
 
 	csv_out = open(directoryName3, mode='r') #opens csv file
@@ -385,10 +351,7 @@ def handleGroupFilterWithDate(groupName, words, andVar, startDate, endDate):
 		fname = "KKMallTwitter.json"
 	else: 
 		print("shrug...")
-		return 
-	# if todayVar == True:
-	# 	directoryName = os.path.join(scrapeDate,fname)
-	# else:
+		return
 	directoryName = os.path.join("allTime", fname)
 
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
@@ -396,7 +359,6 @@ def handleGroupFilterWithDate(groupName, words, andVar, startDate, endDate):
 
 	chooseName = "filterTwitter_@" + groupName + "_" + scrapeDate + ".csv"#+ '_' + scrapeTime
 
-	# csvFileName = scrapeDate + "/" + "{}.csv".format(chooseName)
 	directoryName3 = os.path.join(scrapeDate,chooseName)
 	os.makedirs(os.path.dirname(directoryName3), exist_ok=True)
 	csv_out = open(directoryName3, mode='w') #opens csv file
@@ -414,7 +376,6 @@ def handleGroupFilterWithDate(groupName, words, andVar, startDate, endDate):
 
 	for line in tweets:
 		dateOfTweet = line.get('created_at')
-		# print(dateOfTweet)
 		yearOfTweet = dateOfTweet[-4:]
 		monthOfTweet = dateOfTweet[4:7]
 		dayofTweet = dateOfTweet[8:10]
@@ -446,7 +407,6 @@ def handleGroupFilterWithDate(groupName, words, andVar, startDate, endDate):
 			numMonth = "12"
 
 		filterCompareDate = (yearOfTweet+numMonth+dayofTweet)[2:]
-		# print(filterCompareDate)
 
 		if ((int(startDate)>int(filterCompareDate)) or (int(endDate)<int(filterCompareDate))):
 			continue
@@ -486,8 +446,6 @@ def handleGroupFilterWithDate(groupName, words, andVar, startDate, endDate):
 				line.get('user').get('friends_count'),
 				line.get('retweet_count'),
 				line.get('favorite_count')])
-
-				# print("and....got here..")
 		#or search
 		else:
 			if any(x in line.get('text').lower() for x in filterArray):
@@ -503,7 +461,6 @@ def handleGroupFilterWithDate(groupName, words, andVar, startDate, endDate):
 				line.get('retweet_count'),
 				line.get('favorite_count')])
 
-				# print("or....got here..")
 	csv_out.close()
 
 	csv_out = open(directoryName3, mode='r') #opens csv file

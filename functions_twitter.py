@@ -12,7 +12,7 @@ from tweepy import API
 from tweepy import OAuthHandler
 from tweepy import Cursor
 
-
+#twitter scraper for input handle
 def twitterFunction(handle):
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
@@ -168,7 +168,7 @@ def twitterFunction(handle):
              
     csv_out.close()
     return True
-
+#twitter scraper for allKKM input handles
 def twitterFunctionAllKKM():
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
@@ -327,7 +327,7 @@ def twitterFunctionAllKKM():
              
     csv_out.close()
     return True
-
+#twitter scraper for allCSK input handles
 def twitterFunctionAllCSK():
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')

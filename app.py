@@ -14,8 +14,8 @@ app.secret_key = 'random string'
 dataset = tablib.Dataset()
 
 
-#filter functions
-
+#filter function: checks if its web or twitter filter, extracts keywords, source, date, and and/or 
+#and feeds correct inputs to correct filter functions
 @app.route("/filter", methods=['POST'])
 def filterFunction():
 	#filter form for webscrapers was filled out
@@ -146,18 +146,12 @@ def filterFunction():
 	return render_template('filter.html')
 
 
-
-@app.route("/runfilter/", methods=['POST'])
-def move_forward100():
-	forward_message = "Running Filter..."
-	return render_template('filter.html');
-
-
-
+#main page for handling filter, used input variables from filter functions to convey account name,rows,etc.
 @app.route("/handleFilterResult")
 def handleFilterResult():
 	return render_template('handleFilterResult.html')
 
+#if redirected here, provides delete button functionality
 @app.route("/handleFilterResult", methods=['POST'])
 def deleteBtnFilter():
 	# deleteFunction()
@@ -166,7 +160,7 @@ def deleteBtnFilter():
 	return render_template('handleFilterResult.html', deletedFile=varTextFileName)
 
 
-#TWITTER
+#TWITTER functions from buttons
 @app.route("/ranTwitter1/", methods=['POST'])
 def twitter1():
 	twitterFunction("bakkerswereldnl")
@@ -257,7 +251,7 @@ def testing():
 	# scrape_run()
 	return render_template('testing.html')
 
-# scraper functions...
+# scraper functions... each scraper function also funs the all functions ran to append correct info into allKKM/allCSK files
 @app.route("/ranACMscraper1/", methods=['POST'])
 def move_forward1():
 	try:
@@ -478,12 +472,6 @@ def move_forward14():
 		print("something is broken")
 	
 	return render_template('scraper.html');
-
-
-
-@app.route("/test")
-def test():
-	return render_template('indexOld.html')
 
 if __name__ == "__main__":
 	app.run(debug=True, host="0.0.0.0", port=8000)
