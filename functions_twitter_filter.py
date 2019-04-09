@@ -84,6 +84,7 @@ def handleFilter(handle, words, andVar):
  
 		#And search
 		if(andVar):
+			print("and var!")
 			if all(x in line.get('text').lower() for x in filterArray):
 
 				writer.writerow([line.get('user').get('screen_name')+" , "+line.get('user').get('name'), 
@@ -100,6 +101,7 @@ def handleFilter(handle, words, andVar):
 				# print("and....got here..")
 		#or search
 		else:
+			print("or var!")
 			if any(x in line.get('text').lower() for x in filterArray):
 
 				writer.writerow([line.get('user').get('screen_name')+" , "+line.get('user').get('name'), 
@@ -116,7 +118,7 @@ def handleFilter(handle, words, andVar):
 				# print("or....got here..")
 	csv_out.close()
 
-	csv_out = open(directoryName, mode='r') #opens csv file
+	csv_out = open(directoryName3, mode='r') #opens csv file
 	reader = csv.reader(csv_out)
 	rows = []
 	iterReader = iter(reader)
@@ -253,7 +255,7 @@ def handleFilterWithDate(handle, words, andVar, startDate, endDate):
 				# print("or....got here..")
 	csv_out.close()
 
-	csv_out = open(directoryName, mode='r') #opens csv file
+	csv_out = open(directoryName3, mode='r') #opens csv file
 	reader = csv.reader(csv_out)
 	rows = []
 	iterReader = iter(reader)
@@ -363,7 +365,7 @@ def handleGroupFilter(groupName, words, andVar):
 				# print("or....got here..")
 	csv_out.close()
 
-	csv_out = open(directoryName, mode='r') #opens csv file
+	csv_out = open(directoryName3, mode='r') #opens csv file
 	reader = csv.reader(csv_out)
 	rows = []
 	iterReader = iter(reader)
