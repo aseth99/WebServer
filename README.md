@@ -27,3 +27,14 @@ click Scraper, it'll run the scraper functions currently written in functions_[.
 
 click Filter, it'll run the filter functions currently writtern in functions_twitter_filter.py or functions_web_filter.py
     running the filter runs algorithms locally, searches under the allTime folder files, saves resulting file under current       date subdirectory
+
+
+Functionality Needed:
+-Database Sync
+-Explanation Page
+
+done:
+-Filter Date
+-Only new tweets saved for date scraped
+-Finish OR/AND
+-Add CSK webscrapers
