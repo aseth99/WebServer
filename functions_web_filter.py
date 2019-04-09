@@ -8,11 +8,15 @@ scrapeTime = dt.strftime('%H%M%S')
 
 def webFilterFunction(andVar, sourceVar, words):
 
-	if sourceVar == "ACM" or "Bakkers" or "Bakkerswereld" or "Ceres" or "Tijd":
+	if sourceVar == "ACM" or "Bakkers" or "Bakkerswereld" or "Ceres" or "Tijd" or "FIF" or "FN" or "FB" or "BNS" or "DR":
 		fname =  "Results" + sourceVar +".json"
 		
 	
-	elif sourceVar == "all":
+	elif sourceVar == "AllCSK":
+		#..
+		return
+
+	elif sourceVar == "AllKKM":
 		#..
 		return
 	else:
@@ -76,13 +80,18 @@ def webFilterFunction(andVar, sourceVar, words):
 
 def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 
-	if sourceVar == "ACM" or "Bakkers" or "Bakkerswereld" or "Ceres" or "Tijd" or "Dossche" or "Soufflet":
+	if sourceVar == "ACM" or "Bakkers" or "Bakkerswereld" or "Ceres" or "Tijd" or "FIF" or "FN" or "FB" or "BNS" or "DR":
 		fname =  "Results" + sourceVar +".json"
 		
-
-	elif sourceVar == "all":
+	
+	elif sourceVar == "AllCSK":
 		#..
 		return
+
+	elif sourceVar == "AllKKM":
+		#..
+		return
+
 	else:
 		print("shrug...")
 		return

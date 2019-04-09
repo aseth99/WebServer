@@ -1022,7 +1022,7 @@ def scrape_tijd(previousUrls):
             
     return documents, linksArr
 
-def allFunctionsRan():
+def allKKMFunctionsRan():
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
     

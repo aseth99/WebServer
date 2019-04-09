@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, flash
 from functions_KKM import *
+from functions_CSK import *
 from functions_twitter import *
 from functions_twitter_filter import *
 from functions_web_filter import *
@@ -147,7 +148,7 @@ def filterFunction():
 
 
 @app.route("/runfilter/", methods=['POST'])
-def move_forward10():
+def move_forward100():
 	forward_message = "Running Filter..."
 	return render_template('filter.html');
 
@@ -348,11 +349,89 @@ def move_forward8():
 		print("tijd scraper is broken")
 
 	try:
-		allFunctionsRan()
+		allKKMFunctionsRan()
 	except:
 		print("something is broken")
 	
 	return render_template('scraper.html');
+
+
+@app.route("/ranBNSscraper9/", methods=['POST'])
+def move_forward9():
+	try:
+		bns_scrape_run()
+	except:
+		print("bns scraper is broken")
+	return render_template('scraper.html');
+
+@app.route("/ranDRscraper10/", methods=['POST'])
+def move_forward10():
+	try:
+		dr_scrape_run()
+	except:
+		print("dr scraper is broken")
+	return render_template('scraper.html');
+
+@app.route("/ranFNscraper11/", methods=['POST'])
+def move_forward11():
+	try:
+		fn_scrape_run()
+	except:
+		print("fn scraper is broken")
+	return render_template('scraper.html');
+
+@app.route("/ranFIFscraper12/", methods=['POST'])
+def move_forward12():
+	try:
+		fif_scrape_run()
+	except:
+		print("fif scraper is broken")
+	return render_template('scraper.html');
+
+@app.route("/ranFBscraper13/", methods=['POST'])
+def move_forward13():
+	try:
+		foodBev_scrape_run()
+	except:
+		print("fb scraper is broken")
+	return render_template('scraper.html');
+
+
+@app.route("/ranALLCSKscrapers/", methods=['POST'])
+def move_forward14():
+	try:
+		bns_scrape_run()
+	except:
+		print("bns scraper is broken")
+
+	try:
+		dr_scrape_run()
+	except:
+		print("dr scraper is broken")
+
+	try:
+		fn_scrape_run()
+	except:
+		print("fn scraper is broken")
+
+	try:
+		fif_scrape_run()
+	except:
+		print("fif scraper is broken")
+
+	try:
+		foodBev_scrape_run()
+	except:
+		print("fb scraper is broken")
+
+
+	try:
+		allCSKFunctionsRan()
+	except:
+		print("something is broken")
+	
+	return render_template('scraper.html');
+
 
 
 @app.route("/test")
