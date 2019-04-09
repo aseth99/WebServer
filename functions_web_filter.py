@@ -91,31 +91,17 @@ def webFilterFunctionWithDate(andVar, sourceVar, words, startDate, endDate):
 	directoryName = os.path.join("allTime", fname)
 
 	os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-
-
-	# csvName = "filter_Webscraper_" + sourceVar + "_" + scrapeDate #+ '_' + scrapeTime
-
-	# directoryName2 = os.path.join(scrapeDate, csvName)
-	# os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
-
-	# csvFileName = scrapeDate + "/" + "{}.csv".format(csvName)
 	csvName = "filter_Webscraper_" + sourceVar + "_" + scrapeDate + ".csv"#+ '_' + scrapeTime
-
-	# csvFileName = scrapeDate + "/" + "{}.csv".format(csvName)
 	directoryName3 = os.path.join(scrapeDate,csvName)
-
 
 	csv_out = open(directoryName3, mode='w') #opens csv file
 	writer = csv.writer(csv_out) #create the csv writer object
-
-	# fields = ['Twitter Handle & User Name', 'Tweet', ' external URL', 'Hashtags', 'keywords', 'Date of Tweet', 'Followers', 'Following', 'RT', 'FAV'] #field names
 
 	fields = ['Title', 'URL', 'Text', 'Publication Date', 'Source', 'Keywords Searched', 'Keyword', 'Found in'] #field names
 	writer.writerow(fields) #writes field
 	filterArray = words
 
 	texts = []
-	# filterArray = ['dossche', 'ceres', 'soufflet', 'meneba', 'overname']
 
 	jsonFileToBeOpened = directoryName
 	for lineToBeRead in open(jsonFileToBeOpened, 'r'):
