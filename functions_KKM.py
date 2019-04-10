@@ -31,7 +31,7 @@ def jsonToCSV1(name):
     writer.writerow(fields) #writes field
     csv_out.close()
 
-    csv_out = open(directoryName2, mode='a') #opens csv file
+    csv_out = open(directoryName2, mode='w') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
 
     fields = ['Title', 'URL', 'Text', 'Publication Date', 'Source'] #field names
@@ -39,16 +39,15 @@ def jsonToCSV1(name):
     csv_out.close()
 
     return
+
 #appends stuff to csv file, line by line
 def jsonToCSV(name, line):
     dt = datetime.now()
     scrapeDate = dt.strftime('%y%m%d')
     name = name + ".csv"
     directoryName = os.path.join(scrapeDate,name)
-    directoryName2 = os.path.join("allTime",name)
 
     os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-    os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
     csv_out = open(directoryName, mode='a') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
@@ -56,6 +55,16 @@ def jsonToCSV(name, line):
     urlvar = line.get('url')
     writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
     csv_out.close()
+
+    return
+
+def jsonToCSVallTime(name, line):
+    dt = datetime.now()
+    scrapeDate = dt.strftime('%y%m%d')
+    name = name + ".csv"
+    directoryName2 = os.path.join("allTime",name)
+
+    os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
 
     csv_out = open(directoryName2, mode='a') #opens csv file
     writer = csv.writer(csv_out) #create the csv writer object
@@ -132,6 +141,8 @@ def acm_scrape_run():
         jsonToCSV1('acm')
         for x in uniqueLine:
             jsonToCSV('acm', x)
+        for y in uniqueLine2:
+            jsonToCSVallTime('acm', y)
 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
@@ -260,6 +271,8 @@ def bakkers_scrape_run():
         jsonToCSV1('bakkers')
         for x in uniqueLine:
             jsonToCSV('bakkers', x)
+        for y in uniqueLine2:
+            jsonToCSVallTime('bakkers', y)
 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
@@ -401,6 +414,8 @@ def bakkerswereld_scrape_run():
         jsonToCSV1('bakkerswereld')
         for x in uniqueLine:
             jsonToCSV('bakkerswereld', x)
+        for y in uniqueLine2:
+            jsonToCSVallTime('bakkerswereld', y)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -540,6 +555,8 @@ def ceres_scrape_run():
         jsonToCSV1('ceres')
         for x in uniqueLine:
             jsonToCSV('ceres', x)
+        for y in uniqueLine2:
+            jsonToCSVallTime('ceres', y)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -686,6 +703,8 @@ def dossche_scrape_run():
         jsonToCSV1('dossche')
         for x in uniqueLine:
             jsonToCSV('dossche', x)
+        for y in uniqueLine2:
+            jsonToCSVallTime('dossche', y)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -829,6 +848,8 @@ def soufflet_scrape_run():
         jsonToCSV1('soufflet')
         for x in uniqueLine:
             jsonToCSV('soufflet', x)
+        for y in uniqueLine2:
+            jsonToCSVallTime('soufflet', y)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a') as log:
@@ -964,6 +985,8 @@ def tijd_scrape_run():
         jsonToCSV1('tijd')
         for x in uniqueLine:
             jsonToCSV('tijd', x)
+        for y in uniqueLine2:
+            jsonToCSVallTime('tijd', y)
                 
         # Write all urls to log file te check next time which articles have already been scraped
         with open('ScrapeLog.txt','a', encoding='utf-8') as log:
@@ -1206,7 +1229,7 @@ def allKKMFunctionsRan():
         output_file = open(directoryName,'w')
         
         for x in data:
-            jsonToCSVspecial('ALLKKM', x)
+            jsonToCSV('ALLKKM', x)
             json.dump(x, output_file)
             output_file.write("\n")
 
@@ -1217,63 +1240,11 @@ def allKKMFunctionsRan():
 
         for x in dataAllTime:
             # mycol.insert(x)
-            jsonToCSVspecial2('ALLKKM', x)
+            jsonToCSVallTime('ALLKKM', x)
             json.dump(x, output_file2)
             output_file2.write("\n")
     
     except:
         print("somethin wrong")
-
-    return
-#special as its for allCSK, as we run one for scrape date, one for allTime
-def jsonToCSVspecial(name, line):
-    dt = datetime.now()
-    scrapeDate = dt.strftime('%y%m%d')
-    name = name + ".csv"
-    directoryName = os.path.join(scrapeDate,name)
-    # directoryName2 = os.path.join("allTime",name)
-
-    os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-    # os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
-
-    csv_out = open(directoryName, mode='a') #opens csv file
-    writer = csv.writer(csv_out) #create the csv writer object
-
-    urlvar = line.get('url')
-    writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
-    csv_out.close()
-
-    # csv_out = open(directoryName2, mode='a') #opens csv file
-    # writer = csv.writer(csv_out) #create the csv writer object
-
-    # urlvar = line.get('url')
-    # writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
-    # csv_out.close()
-
-    return
-
-def jsonToCSVspecial2(name, line):
-    dt = datetime.now()
-    scrapeDate = dt.strftime('%y%m%d')
-    name = name + ".csv"
-    # directoryName = os.path.join(scrapeDate,name)
-    directoryName2 = os.path.join("allTime",name)
-
-    # os.makedirs(os.path.dirname(directoryName), exist_ok=True)
-    os.makedirs(os.path.dirname(directoryName2), exist_ok=True)
-
-    # csv_out = open(directoryName, mode='a') #opens csv file
-    # writer = csv.writer(csv_out) #create the csv writer object
-
-    # urlvar = line.get('url')
-    # writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
-    # csv_out.close()
-
-    csv_out = open(directoryName2, mode='a') #opens csv file
-    writer = csv.writer(csv_out) #create the csv writer object
-
-    urlvar = line.get('url')
-    writer.writerow([line.get('title'),urlvar,line.get('text').encode('unicode_escape'),line.get('publication date'),line.get('source')])
-    csv_out.close()
 
     return
