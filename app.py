@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template, request, flash
 from functions_KKM import *
 from functions_CSK import *
