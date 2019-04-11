@@ -1,3 +1,3 @@
 #!/bin/bash
-cd Desktop/Hammer/WebServer
+cd Desktop/test/WebServer
 python3 app.py
