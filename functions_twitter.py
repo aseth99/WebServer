@@ -57,7 +57,7 @@ def twitterFunction(handle):
     uniqueTweets = { each['id'] : each for each in tweets }.values()
 
     tweets2 = []
-    #only appending new stuff, thus open new json file
+    #only appending new stuff, thus open new json file, makes sure they don't exist already
     try:
         jsonFileToBeOpened = directoryName2
         for line in open(jsonFileToBeOpened, 'r'):
